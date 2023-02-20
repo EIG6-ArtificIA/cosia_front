@@ -1,9 +1,8 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { ROUTES } from "..";
-import { Home as CommonHome } from "geocommuns-core";
-
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
+import { ROUTES } from "..";
+import { Home as CommonHome } from "geocommuns-core";
 
 const useStyles = makeStyles()({
   iconButton: {
