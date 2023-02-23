@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Slider } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useMap } from "geocommuns-core";
 
@@ -6,21 +6,19 @@ import { City, getCities } from "../api/geoApiGouv";
 import { Legend } from "../components/Legend";
 import TextFieldWithOptions from "../components/TextFieldWithOptions";
 import { makeStyles } from "tss-react/dsfr";
+import { OpacitySlider } from "../components/OpacitySlider";
+import { fr } from "@codegouvfr/react-dsfr";
 
 const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
 const ORIGINAL_ZOOM = 5;
 
 const useStyles = makeStyles()({
-  sliderValue: {
-    width: "3rem",
-    display: "inline-block",
-    textAlign: "end",
-    paddingTop: "3px",
-  },
   title: {
-    marginBottom: 0,
+    // marginBottom: fr.spacing("4w"),
   },
-  layerLabel: {},
+  layers: {
+    marginBottom: fr.spacing("4w"),
+  },
 });
 
 // TODO : debounce à mettre en place
@@ -29,7 +27,6 @@ const MapExtentSelector = () => {
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [cityPropositions, setCityPropositions] = useState<City[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [orthoOpacity, setOrthoOpacity] = useState(100);
 
   const { classes } = useStyles();
 
@@ -39,15 +36,6 @@ const MapExtentSelector = () => {
     ORIGINAL_ZOOM,
     ["ortho", "admin", "aiPrediction"]
   );
-
-  const onSliderChange = (_event: Event, value: number | number[]) => {
-    if (typeof value === "object") {
-      console.error("onSliderChange got number[] as value arg");
-      return;
-    }
-
-    setOrthoOpacity(value);
-  };
 
   useEffect(() => {
     if (inputText.length <= 3 || selectedCity !== null) return;
@@ -69,10 +57,6 @@ const MapExtentSelector = () => {
 
     fitViewToPolygon(selectedCity.contour.coordinates);
   }, [selectedCity]);
-
-  useEffect(() => {
-    setLayerOpacity("ortho", orthoOpacity / 100);
-  }, [orthoOpacity]);
 
   return (
     <Box
@@ -121,24 +105,20 @@ const MapExtentSelector = () => {
             Extraire
           </Button>
 
-          <h6 className={classes.title}>Calques</h6>
-          <span className={classes.layerLabel}>Prise de vues aériennes</span>
-          <Grid container spacing={2}>
-            <Grid item xs>
-              <Slider
-                aria-label="Opacité de la couche ortho"
-                defaultValue={100}
-                min={0}
-                max={100}
-                value={orthoOpacity}
-                onChange={onSliderChange}
-              />
-            </Grid>
-            <Grid item>
-              <span className={classes.sliderValue}>{orthoOpacity} %</span>
-            </Grid>
-          </Grid>
-
+          <div className={classes.layers}>
+            <h6 className={classes.title}>Calques</h6>
+            <OpacitySlider label="COSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
+            <OpacitySlider
+              label="Prise de vues aériennes"
+              layer="ortho"
+              setLayerOpacity={setLayerOpacity}
+            />
+            <OpacitySlider
+              label="Limites administratives"
+              layer="admin"
+              setLayerOpacity={setLayerOpacity}
+            />
+          </div>
           <Legend />
         </Grid>
       </Grid>
