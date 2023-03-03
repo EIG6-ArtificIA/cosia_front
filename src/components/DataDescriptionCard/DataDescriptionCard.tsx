@@ -1,7 +1,8 @@
 import { fr } from "@codegouvfr/react-dsfr";
+import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Grid } from "@mui/material";
+import { useCallback } from "react";
 import { makeStyles } from "tss-react/dsfr";
-import { ButtonsBlock } from "./ButtonsBlock";
 import { InfoBlock } from "./InfoBlock";
 
 const useStyles = makeStyles()(() => ({
@@ -22,10 +23,20 @@ const useStyles = makeStyles()(() => ({
       width: 180,
     },
   },
+  button: {
+    [fr.breakpoints.down("sm")]: {
+      width: "100%",
+      justifyContent: "center",
+    },
+  },
 }));
 
 export const DataDescriptionCard = () => {
   const { classes } = useStyles();
+
+  const copyUrlToClipboard = useCallback(async () => {
+    await navigator.clipboard.writeText(window.location.href);
+  }, []);
 
   return (
     <Grid container className={classes.container} spacing={3}>
@@ -41,8 +52,26 @@ export const DataDescriptionCard = () => {
         <InfoBlock />
       </Grid>
 
-      <Grid item xs={12} md alignSelf="flex-start">
-        <ButtonsBlock />
+      <Grid
+        item
+        xs={12}
+        md
+        alignSelf="flex-start"
+        container
+        spacing={2}
+        justifyContent={{ xs: "flex-start", md: "flex-end" }}
+      >
+        <Grid item xs={12} sm="auto">
+          <Button iconId="fr-icon-star-line" className={classes.button}>
+            Ajouter à mes favoris
+          </Button>
+        </Grid>
+
+        <Grid item xs={12} sm="auto">
+          <Button iconId="fr-icon-link" className={classes.button} onClick={copyUrlToClipboard}>
+            Copier l'url
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
