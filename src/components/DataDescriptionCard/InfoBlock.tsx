@@ -40,7 +40,7 @@ export const InfoBlock = () => {
 
   const getCounter = ({ icon, count, description }: CounterT) => {
     return (
-      <Grid item xs={12} sm="auto">
+      <Grid item xs={12} sm="auto" key={description}>
         <span className={cx(fr.cx(icon, "fr-icon--xs"), classes.icon)} />
         {count} {description}
       </Grid>
