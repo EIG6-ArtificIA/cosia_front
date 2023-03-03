@@ -1,4 +1,5 @@
 import { fr, FrCxArg } from "@codegouvfr/react-dsfr";
+import Button from "@codegouvfr/react-dsfr/Button";
 import { Divider, Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
@@ -15,11 +16,9 @@ const useStyles = makeStyles()((theme) => ({
     borderRadius: 8,
     [fr.breakpoints.down("md")]: {
       width: "100%",
-      marginBottom: fr.spacing("3w"),
     },
     [fr.breakpoints.up("md")]: {
       width: 180,
-      marginRight: fr.spacing("3w"),
     },
   },
   titleContainer: {
@@ -37,6 +36,12 @@ const useStyles = makeStyles()((theme) => ({
   },
   icon: {
     marginRight: fr.spacing("1w"),
+  },
+  button: {
+    [fr.breakpoints.down("sm")]: {
+      width: "100%",
+      justifyContent: "center",
+    },
   },
 }));
 
@@ -67,12 +72,16 @@ export const DataDescriptionCard = () => {
   };
 
   return (
-    <Grid container className={classes.container}>
+    <Grid container className={classes.container} spacing={3}>
       <Grid item xs={12} md="auto">
-        <img src={require("../assets/img/carte_de_predictions_2.png")} className={classes.image} />
+        <img
+          src={require("../assets/img/carte_de_predictions_2.png")}
+          className={classes.image}
+          alt="Vignette donnant un aperçu des données COSIA"
+        />
       </Grid>
 
-      <Grid item xs container justifyContent="space-between" flexDirection="column">
+      <Grid item xs="auto" container justifyContent="space-between" flexDirection="column">
         <Grid item className={classes.titleContainer}>
           <h1 className={classes.title}>{dataName}</h1>
           <div>
@@ -86,8 +95,8 @@ export const DataDescriptionCard = () => {
           <Grid
             container
             columnSpacing={fr.spacing("3v")}
-            mb={fr.spacing("1v")}
             rowSpacing={fr.spacing("1v")}
+            mb={fr.spacing("1v")}
           >
             <Grid item xs={12} sm="auto">
               Création : <time dateTime="2022-08-04">04 août 2022</time>
@@ -103,6 +112,28 @@ export const DataDescriptionCard = () => {
           <Grid container columnSpacing={fr.spacing("3v")} rowSpacing={fr.spacing("1v")}>
             {counts.map((count) => getCounter(count))}
           </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        md
+        alignSelf="flex-start"
+        container
+        spacing={2}
+        justifyContent={{ xs: "flex-start", md: "flex-end" }}
+      >
+        <Grid item xs={12} sm="auto">
+          <Button iconId="fr-icon-star-line" className={classes.button}>
+            Ajouter à mes favoris
+          </Button>
+        </Grid>
+
+        <Grid item xs={12} sm="auto">
+          <Button iconId="fr-icon-link" className={classes.button}>
+            Copier l'url
+          </Button>
         </Grid>
       </Grid>
     </Grid>
