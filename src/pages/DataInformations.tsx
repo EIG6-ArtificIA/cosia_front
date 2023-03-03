@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { DataDescriptionCard } from "../components/DataDescriptionCard";
+import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 
 const useStyles = makeStyles()({
   container: {
