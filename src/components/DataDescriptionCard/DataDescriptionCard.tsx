@@ -1,7 +1,8 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { Grid } from "@mui/material";
-import { useCallback } from "react";
+import { Alert } from "@codegouvfr/react-dsfr/Alert";
+import { Grid, Snackbar } from "@mui/material";
+import { useCallback, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { InfoBlock } from "./InfoBlock";
 
@@ -32,47 +33,62 @@ const useStyles = makeStyles()(() => ({
 }));
 
 export const DataDescriptionCard = () => {
+  // TODO Optimize all
   const { classes } = useStyles();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const copyUrlToClipboard = useCallback(async () => {
     await navigator.clipboard.writeText(window.location.href);
+    setSnackbarOpen(true);
   }, []);
 
+  const handleClose = useCallback(() => setSnackbarOpen(false), []);
+
   return (
-    <Grid container className={classes.container} spacing={3}>
-      <Grid item xs={12} md="auto">
-        <img
-          src={require("../../assets/img/carte_de_predictions_2.png")}
-          className={classes.image}
-          alt="Vignette donnant un aperçu des données COSIA"
+    <>
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          description="L'URL a bien été copié !"
+          small={false}
         />
-      </Grid>
-
-      <Grid item xs="auto" container>
-        <InfoBlock />
-      </Grid>
-
-      <Grid
-        item
-        xs={12}
-        md
-        alignSelf="flex-start"
-        container
-        spacing={2}
-        justifyContent={{ xs: "flex-start", md: "flex-end" }}
-      >
-        <Grid item xs={12} sm="auto">
-          <Button iconId="fr-icon-star-line" className={classes.button}>
-            Ajouter à mes favoris
-          </Button>
+      </Snackbar>
+      <Grid container className={classes.container} spacing={3}>
+        <Grid item xs={12} md="auto">
+          <img
+            src={require("../../assets/img/carte_de_predictions_2.png")}
+            className={classes.image}
+            alt="Vignette donnant un aperçu des données COSIA"
+          />
         </Grid>
 
-        <Grid item xs={12} sm="auto">
-          <Button iconId="fr-icon-link" className={classes.button} onClick={copyUrlToClipboard}>
-            Copier l'url
-          </Button>
+        <Grid item xs="auto" container>
+          <InfoBlock />
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          md
+          alignSelf="flex-start"
+          container
+          spacing={2}
+          justifyContent={{ xs: "flex-start", md: "flex-end" }}
+        >
+          <Grid item xs={12} sm="auto">
+            <Button iconId="fr-icon-star-line" className={classes.button}>
+              Ajouter à mes favoris
+            </Button>
+          </Grid>
+
+          <Grid item xs={12} sm="auto">
+            <Button iconId="fr-icon-link" className={classes.button} onClick={copyUrlToClipboard}>
+              Copier l'url
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
