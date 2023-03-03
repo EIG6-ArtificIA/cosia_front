@@ -46,12 +46,18 @@ export const DataDescriptionCard = () => {
 
   return (
     <>
-      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
         <Alert
           onClose={handleClose}
           severity="success"
           description="L'URL a bien été copié !"
-          small={false}
+          closable
+          small
         />
       </Snackbar>
       <Grid container className={classes.container} spacing={3}>
