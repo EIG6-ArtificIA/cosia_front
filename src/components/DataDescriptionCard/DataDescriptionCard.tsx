@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { InfoBlock } from "./InfoBlock";
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     display: "flex",
     [fr.breakpoints.down("md")]: {
@@ -30,10 +30,12 @@ const useStyles = makeStyles()(() => ({
       justifyContent: "center",
     },
   },
+  alert: {
+    backgroundColor: theme.decisions.background.default.grey.default,
+  },
 }));
 
 export const DataDescriptionCard = () => {
-  // TODO Optimize all
   const { classes } = useStyles();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -53,6 +55,7 @@ export const DataDescriptionCard = () => {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
+          className={classes.alert}
           onClose={handleClose}
           severity="success"
           description="L'URL a bien été copié !"
