@@ -66,7 +66,7 @@ export const DataDescriptionCard = () => {
       <Grid container className={classes.container} spacing={3}>
         <Grid item xs={12} md="auto">
           <img
-            src={require("../../assets/img/carte_de_predictions_2.png")}
+            src={require("../../assets/img/carte_de_predictions_small.png")}
             className={classes.image}
             alt="Vignette donnant un aperçu des données COSIA"
           />
