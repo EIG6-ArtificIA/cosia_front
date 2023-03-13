@@ -1,17 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
-import MapExtentSelector from "./pages/MapExtentSelector";
-
 import { startReactDsfr } from "@codegouvfr/react-dsfr/spa";
 import { MuiDsfrThemeProvider } from "@codegouvfr/react-dsfr/mui";
-import { Home } from "./pages/Home";
 import { Root, ErrorPage } from "geocommuns-core";
+
+import { Home } from "./pages/Home";
+import { DataInformations } from "./pages/DataInformations";
+import MapExtentSelector from "./pages/MapExtentSelector";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
 export enum ROUTES {
   Home = "/",
+  DataInfo = "/info",
   MapExtentSelector = "/definition-emprise",
 }
 
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: ROUTES.Home, element: <Home /> },
+      { path: ROUTES.DataInfo, element: <DataInformations /> },
       { path: ROUTES.MapExtentSelector, element: <MapExtentSelector /> },
     ],
   },
