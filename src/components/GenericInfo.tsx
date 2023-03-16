@@ -1,17 +1,31 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { Grid } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
   subtitle: {
     marginBottom: fr.spacing("2w"),
+  },
+  card: {
+    padding: fr.spacing("3w"),
+    backgroundColor: theme.decisions.background.alt.grey.default,
+    display: "flex",
+    alignItems: "center",
+    marginBottom: fr.spacing("4w"),
+  },
+  logo: {
+    height: 48,
+    marginRight: fr.spacing("3w"),
+  },
+  divider: {
+    marginBottom: fr.spacing("1w"),
   },
 }));
 
 export const GenericInfo = () => {
   const { classes } = useStyles();
   return (
-    <Grid container>
+    <Grid container columnSpacing={{ md: 10 }}>
       <Grid item md={12} lg>
         <h4>Informations</h4>
         <p className={classes.subtitle}>
@@ -39,10 +53,28 @@ export const GenericInfo = () => {
           chaque département et chaque classe (voir ressources).
         </p>
       </Grid>
-      <Grid item xs="auto">
+      <Grid item xs={12} lg={5}>
         <p className={classes.subtitle}>
           <b>Producteur</b>
         </p>
+        <div className={classes.card}>
+          <img src={require("../assets/img/ign_logo.png")} className={classes.logo} />
+          <span>
+            <b>Institut National de l’Information Géographique et Forestière</b>
+            <br />
+            https://www.ign.fr/
+          </span>
+        </div>
+
+        <hr className={classes.divider} />
+
+        <p className={classes.subtitle}>
+          <b>Ressources</b>
+        </p>
+
+        <Link href="#">
+          Descriptif <span className="fr-icon-checkbox-circle-line" />
+        </Link>
       </Grid>
     </Grid>
   );
