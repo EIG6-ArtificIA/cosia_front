@@ -4,6 +4,7 @@ import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()((theme) => ({
   subtitle: {
+    marginTop: fr.spacing("1w"),
     marginBottom: fr.spacing("2w"),
   },
   card: {
@@ -17,12 +18,6 @@ const useStyles = makeStyles()((theme) => ({
     height: 48,
     marginRight: fr.spacing("3w"),
   },
-  divider: {
-    marginBottom: fr.spacing("1w"),
-  },
-  link: {
-    paddingTop: fr.spacing("3w"),
-  },
   infoDoc: {
     fontSize: 12,
     color: theme.decisions.text.mention.grey.default,
@@ -30,10 +25,10 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export const GenericInfo = () => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const generateLink = (text: string) => (
     <>
-      <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
+      <a className="fr-link fr-icon-download-line fr-link--icon-right" href="#">
         {text}
       </a>
       <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
@@ -81,11 +76,18 @@ export const GenericInfo = () => {
           <span>
             <b>Institut National de l’Information Géographique et Forestière</b>
             <br />
-            https://www.ign.fr/
+            <a
+              title="lien vers le site de l'IGN - ouvre une nouvelle fenêtre"
+              href=" https://www.ign.fr/"
+              target="_blank"
+              rel="noopener"
+            >
+              https://www.ign.fr/
+            </a>
           </span>
         </div>
 
-        <hr className={classes.divider} />
+        <hr />
 
         <p className={classes.subtitle}>
           <b>Ressources</b>
