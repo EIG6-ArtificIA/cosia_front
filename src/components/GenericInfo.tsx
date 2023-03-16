@@ -1,5 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { Grid, Link } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()((theme) => ({
@@ -20,10 +20,17 @@ const useStyles = makeStyles()((theme) => ({
   divider: {
     marginBottom: fr.spacing("1w"),
   },
+  link: {
+    paddingTop: fr.spacing("3w"),
+  },
+  infoDoc: {
+    fontSize: 12,
+    color: theme.decisions.text.mention.grey.default,
+  },
 }));
 
 export const GenericInfo = () => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   return (
     <Grid container columnSpacing={{ md: 10 }}>
       <Grid item md={12} lg>
@@ -53,6 +60,9 @@ export const GenericInfo = () => {
           chaque département et chaque classe (voir ressources).
         </p>
       </Grid>
+      <Box component={Grid} item xs={12} display={{ xs: "block", lg: "none" }}>
+        <hr />
+      </Box>
       <Grid item xs={12} lg={5}>
         <p className={classes.subtitle}>
           <b>Producteur</b>
@@ -72,9 +82,20 @@ export const GenericInfo = () => {
           <b>Ressources</b>
         </p>
 
-        <Link href="#">
-          Descriptif <span className="fr-icon-checkbox-circle-line" />
-        </Link>
+        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
+          Descriptif
+        </a>
+        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
+
+        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
+          Nomenclature des classes
+        </a>
+        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
+
+        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
+          Documentation technique
+        </a>
+        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
       </Grid>
     </Grid>
   );
