@@ -31,6 +31,15 @@ const useStyles = makeStyles()((theme) => ({
 
 export const GenericInfo = () => {
   const { classes, cx } = useStyles();
+  const generateLink = (text: string) => (
+    <>
+      <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
+        {text}
+      </a>
+      <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
+    </>
+  );
+
   return (
     <Grid container columnSpacing={{ md: 10 }}>
       <Grid item md={12} lg>
@@ -82,20 +91,9 @@ export const GenericInfo = () => {
           <b>Ressources</b>
         </p>
 
-        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
-          Descriptif
-        </a>
-        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
-
-        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
-          Nomenclature des classes
-        </a>
-        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
-
-        <a className={cx("fr-link fr-icon-download-line fr-link--icon-right", classes.link)} href="#">
-          Documentation technique
-        </a>
-        <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
+        {generateLink("Description")}
+        {generateLink("Nomenclature des classes")}
+        {generateLink("Documentation technique")}
       </Grid>
     </Grid>
   );
