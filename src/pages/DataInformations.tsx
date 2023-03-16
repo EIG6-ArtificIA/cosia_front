@@ -3,6 +3,7 @@ import { makeStyles } from "tss-react/dsfr";
 import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useEffect, useState } from "react";
+import { GenericInfo } from "../components/GenericInfo";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -56,7 +57,11 @@ export const DataInformations = () => {
             ]}
             onTabChange={setSelectedTabId}
           >
-            <p key={selectedTabId}>Content of {selectedTabId}</p>
+            {selectedTabId === "info" ? (
+              <GenericInfo />
+            ) : (
+              <p key={selectedTabId}>Content of {selectedTabId}</p>
+            )}
           </Tabs>
         </div>
       </div>
