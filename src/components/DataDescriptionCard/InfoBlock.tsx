@@ -35,7 +35,7 @@ const counts: CounterT[] = [
 
 export const InfoBlock = () => {
   const { classes, cx } = useStyles();
-  const dataName = "COSIA";
+  const dataName = "CoSIA";
   const dataDescription = "COuverture du Sol par Intelligence Artificielle";
 
   const getCounter = ({ icon, count, description }: CounterT) => {

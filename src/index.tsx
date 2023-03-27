@@ -26,7 +26,7 @@ declare module "@codegouvfr/react-dsfr/spa" {
 const router = createBrowserRouter([
   {
     path: ROUTES.Home,
-    element: <Root title="COSIA" />,
+    element: <Root title="CoSIA" />,
     errorElement: <ErrorPage />,
     children: [
       { path: ROUTES.Home, element: <Home /> },

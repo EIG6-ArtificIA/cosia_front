@@ -107,7 +107,7 @@ const MapExtentSelector = () => {
 
           <div className={classes.layers}>
             <h6 className={classes.title}>Calques</h6>
-            <OpacitySlider label="COSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
+            <OpacitySlider label="CoSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
             <OpacitySlider
               label="Prise de vues aériennes"
               layer="ortho"

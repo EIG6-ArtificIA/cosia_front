@@ -68,7 +68,7 @@ export const DataDescriptionCard = () => {
           <img
             src={require("../../assets/img/carte_de_predictions_small.png")}
             className={classes.image}
-            alt="Vignette donnant un aperçu des données COSIA"
+            alt="Vignette donnant un aperçu des données CoSIA"
           />
         </Grid>
 
