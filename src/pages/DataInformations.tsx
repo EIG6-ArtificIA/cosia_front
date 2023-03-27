@@ -29,6 +29,15 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
+const TABS = [
+  { tabId: "info", label: "Informations" },
+  { tabId: "visualisation", label: "Visualisation" },
+  { tabId: "export-&-apis", label: "Export & APIs" },
+  { tabId: "cas-usages", label: "Cas d'usage" },
+  { tabId: "communaute", label: "Communauté" },
+  { tabId: "metadonnees", label: "Métadonnées" },
+];
+
 export const DataInformations = () => {
   const { classes } = useStyles();
 
@@ -36,6 +45,8 @@ export const DataInformations = () => {
 
   useEffect(() => {
     window.location.hash = `#${selectedTabId}`;
+    const label = TABS.find((t) => t.tabId === selectedTabId)?.label;
+    document.title = label ? `CoSIA - ${label}` : `CoSIA - Informations`;
   }, [selectedTabId]);
 
   return (
@@ -45,18 +56,7 @@ export const DataInformations = () => {
       </div>
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
-          <Tabs
-            selectedTabId={selectedTabId}
-            tabs={[
-              { tabId: "info", label: "Informations" },
-              { tabId: "visualisation", label: "Visualisation" },
-              { tabId: "export-&-apis", label: "Export & APIs" },
-              { tabId: "cas-usages", label: "Cas d'usage" },
-              { tabId: "communaute", label: "Communauté" },
-              { tabId: "metadonnees", label: "Métadonnées" },
-            ]}
-            onTabChange={setSelectedTabId}
-          >
+          <Tabs selectedTabId={selectedTabId} tabs={TABS} onTabChange={setSelectedTabId}>
             {selectedTabId === "info" ? (
               <GenericInfo />
             ) : (
