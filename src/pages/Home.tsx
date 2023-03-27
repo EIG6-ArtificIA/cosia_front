@@ -36,7 +36,7 @@ const DESCRIPTION = [
 export const Home = () => {
   const { cx, classes } = useStyles();
   const CTA = (
-    <Button linkProps={{ to: ROUTES.MapExtentSelector }} priority="secondary">
+    <Button linkProps={{ to: ROUTES.DataInfo }} priority="secondary">
       Accéder au prototype
       <span className={cx("fr-icon-arrow-right-line", classes.iconButton)} aria-hidden="true"></span>
     </Button>
@@ -45,7 +45,7 @@ export const Home = () => {
   return (
     <CommonHome
       title="CoSIA"
-      subtitle="Les cartes de COuverture du Sol par Intelligence Artificielle"
+      subtitle="Les cartes de Couverture du Sol par Intelligence Artificielle"
       titleInfo="Prototype de démonstration"
       cover={require("../assets/img/carte_de_predictions.png")}
       description={DESCRIPTION}

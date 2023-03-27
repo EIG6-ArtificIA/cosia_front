@@ -2,8 +2,9 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { GenericInfo } from "../components/GenericInfo";
+import { MapVisualization } from "../components/MapVisualization";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -49,6 +50,23 @@ export const DataInformations = () => {
     document.title = label ? `CoSIA - ${label}` : `CoSIA - Informations`;
   }, [selectedTabId]);
 
+  const map = useMemo(() => <MapVisualization />, []);
+
+  const renderContent = useCallback(
+    (tabId: string) => {
+      switch (tabId) {
+        case "info":
+          return <GenericInfo />;
+        case "visualisation":
+          return map;
+
+        default:
+          return <p key={selectedTabId}>Content of {selectedTabId}</p>;
+      }
+    },
+    [map]
+  );
+
   return (
     <main className={classes.container}>
       <div className={classes.header}>
@@ -57,11 +75,7 @@ export const DataInformations = () => {
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
           <Tabs selectedTabId={selectedTabId} tabs={TABS} onTabChange={setSelectedTabId}>
-            {selectedTabId === "info" ? (
-              <GenericInfo />
-            ) : (
-              <p key={selectedTabId}>Content of {selectedTabId}</p>
-            )}
+            {renderContent(selectedTabId)}
           </Tabs>
         </div>
       </div>

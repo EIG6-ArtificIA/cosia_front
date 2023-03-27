@@ -3,26 +3,23 @@ import { useEffect, useState } from "react";
 import { useMap } from "geocommuns-core";
 
 import { City, getCities } from "../api/geoApiGouv";
-import { Legend } from "../components/Legend";
-import TextFieldWithOptions from "../components/TextFieldWithOptions";
+import { Legend } from "./Legend";
+import TextFieldWithOptions from "./TextFieldWithOptions";
 import { makeStyles } from "tss-react/dsfr";
-import { OpacitySlider } from "../components/OpacitySlider";
+import { OpacitySlider } from "./OpacitySlider";
 import { fr } from "@codegouvfr/react-dsfr";
 
 const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
 const ORIGINAL_ZOOM = 5;
 
 const useStyles = makeStyles()({
-  title: {
-    // marginBottom: fr.spacing("4w"),
-  },
   layers: {
     marginBottom: fr.spacing("4w"),
   },
 });
 
 // TODO : debounce à mettre en place
-const MapExtentSelector = () => {
+export const MapVisualization = () => {
   const [inputText, setInputText] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [cityPropositions, setCityPropositions] = useState<City[]>([]);
@@ -66,16 +63,7 @@ const MapExtentSelector = () => {
         alignItems: "center",
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          mt: 2,
-          mb: 2,
-          width: "90%",
-          maxWidth: 1200,
-        }}
-      >
+      <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Box id="map" sx={{ height: "100%", minHeight: 800, maxHeight: 1000 }} />
         </Grid>
@@ -106,7 +94,7 @@ const MapExtentSelector = () => {
           </Button>
 
           <div className={classes.layers}>
-            <h6 className={classes.title}>Calques</h6>
+            <h6>Calques</h6>
             <OpacitySlider label="CoSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
             <OpacitySlider
               label="Prise de vues aériennes"
@@ -125,5 +113,3 @@ const MapExtentSelector = () => {
     </Box>
   );
 };
-
-export default MapExtentSelector;

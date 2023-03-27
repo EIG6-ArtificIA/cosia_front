@@ -7,14 +7,12 @@ import { Root, ErrorPage } from "geocommuns-core";
 
 import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
-import MapExtentSelector from "./pages/MapExtentSelector";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
 export enum ROUTES {
   Home = "/",
   DataInfo = "/info",
-  MapExtentSelector = "/definition-emprise",
 }
 
 declare module "@codegouvfr/react-dsfr/spa" {
@@ -31,7 +29,6 @@ const router = createBrowserRouter([
     children: [
       { path: ROUTES.Home, element: <Home /> },
       { path: ROUTES.DataInfo, element: <DataInformations /> },
-      { path: ROUTES.MapExtentSelector, element: <MapExtentSelector /> },
     ],
   },
 ]);
