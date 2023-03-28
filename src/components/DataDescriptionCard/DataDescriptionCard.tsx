@@ -1,6 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { Alert } from "@codegouvfr/react-dsfr/Alert";
 import { Grid, Snackbar } from "@mui/material";
 import { useCallback, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
@@ -36,7 +35,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export const DataDescriptionCard = () => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const copyUrlToClipboard = useCallback(async () => {
@@ -50,18 +49,16 @@ export const DataDescriptionCard = () => {
     <>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={60000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
-          className={classes.alert}
-          onClose={handleClose}
-          severity="success"
-          description="L'URL a bien été copié !"
-          closable
-          small
-        />
+        <div className={cx("fr-alert fr-alert--success", classes.alert)}>
+          <p>L'URL a bien été copié !</p>
+          <button className="fr-btn--close fr-btn" title="Masquer le message" onClick={handleClose}>
+            Masquer le message
+          </button>
+        </div>
       </Snackbar>
       <Grid container className={classes.container} spacing={3}>
         <Grid item xs={12} md="auto">
