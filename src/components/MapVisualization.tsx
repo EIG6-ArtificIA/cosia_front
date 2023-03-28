@@ -12,11 +12,19 @@ import { fr } from "@codegouvfr/react-dsfr";
 const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
 const ORIGINAL_ZOOM = 5;
 
-const useStyles = makeStyles()({
+const useStyles = makeStyles()((theme) => ({
   layers: {
     marginBottom: fr.spacing("4w"),
   },
-});
+  mapContainer: {
+    height: "100%",
+    minHeight: 800,
+    maxHeight: 1000,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: theme.decisions.artwork.motif.grey.default,
+  },
+}));
 
 // TODO : debounce à mettre en place
 export const MapVisualization = () => {
@@ -65,7 +73,7 @@ export const MapVisualization = () => {
     >
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          <Box id="map" sx={{ height: "100%", minHeight: 800, maxHeight: 1000 }} />
+          <Box id="map" className={classes.mapContainer} />
         </Grid>
 
         <Grid item xs={12} md={4}>

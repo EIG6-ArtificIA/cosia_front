@@ -9,7 +9,6 @@ import { MapVisualization } from "../components/MapVisualization";
 const useStyles = makeStyles()((theme) => ({
   container: {
     paddingTop: fr.spacing("10w"),
-    paddingBottom: fr.spacing("10w"),
   },
   header: {
     margin: "auto",
@@ -27,6 +26,11 @@ const useStyles = makeStyles()((theme) => ({
     maxWidth: 1200,
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
+  },
+  tabs: {
+    "& .fr-tabs__list": {
+      backgroundColor: theme.decisions.artwork.background.grey.default,
+    },
   },
 }));
 
@@ -74,7 +78,12 @@ export const DataInformations = () => {
       </div>
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
-          <Tabs selectedTabId={selectedTabId} tabs={TABS} onTabChange={setSelectedTabId}>
+          <Tabs
+            selectedTabId={selectedTabId}
+            tabs={TABS}
+            onTabChange={setSelectedTabId}
+            className={classes.tabs}
+          >
             {renderContent(selectedTabId)}
           </Tabs>
         </div>

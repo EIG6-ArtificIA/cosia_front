@@ -21,10 +21,13 @@ declare module "@codegouvfr/react-dsfr/spa" {
   }
 }
 
+const contentDescription =
+  "Ce site est un prototype est à destination de tous les utilisateurs des services IGN pour qu’ils découvrent CoSIA, les cartes de Couvertures du Sol par Intelligence Artificielle.";
+
 const router = createBrowserRouter([
   {
     path: ROUTES.Home,
-    element: <Root title="CoSIA" />,
+    element: <Root title="CoSIA" contactMail="cosia@ign.fr" contentDescription={contentDescription} />,
     errorElement: <ErrorPage />,
     children: [
       { path: ROUTES.Home, element: <Home /> },
