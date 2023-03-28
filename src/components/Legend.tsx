@@ -3,19 +3,23 @@ import { List, ListItem } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
 const CLASS_TO_COLOR = {
-  Batiment: "#DB0E9A",
-  "Zone imperméable": "#F9352B",
-  "Zone perméable": "#A9A595",
-  "Surface d'eau": "#3B6FBB",
-  Feuillus: "#64E897",
-  Conifères: "#3E6749",
-  Broussaille: "#F5B32F",
-  Vigne: "#7F2996",
-  "Herbacés/Cultures": "#FFF52F",
-  "Terre labourée": "#E8E491",
-  Piscine: "#3DE6EB",
-  Coupe: "#8AB3A0",
-  Autre: "#FFFFFF",
+  Batiment: "#ce7079",
+  "Zone imperméable": "#a6aab7",
+  "Zone perméable": "#987752",
+  Piscine: "#62d0ff",
+  Serre: "#b9e2d4",
+  "Sol nu": "#BBB096",
+  "Surface eau": "#3375a1",
+  Neige: "#e9effe",
+  Conifère: "#126421",
+  Feuillu: "#4c9129",
+  Coupe: "#e48e4d",
+  Brousaille: "#b5c335",
+  Pelouse: "#8cd76a",
+  Culture: "#decf55",
+  "Terre labourée": "#d0a349",
+  Vigne: "#b08290",
+  Autre: "#222222",
 };
 
 const useStyles = makeStyles()(() => ({
@@ -27,12 +31,11 @@ const useStyles = makeStyles()(() => ({
     paddingBottom: fr.spacing("1v"),
   },
   cercle: {
-    width: fr.spacing("3v"),
-    height: fr.spacing("3v"),
+    width: "0.8rem",
+    height: "0.8rem",
     marginRight: fr.spacing("1w"),
-    borderRadius: "8px",
+    borderRadius: 16,
     display: "inline-block",
-    border: "1px solid grey",
   },
 }));
 

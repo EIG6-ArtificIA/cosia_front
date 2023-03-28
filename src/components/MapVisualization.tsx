@@ -1,19 +1,19 @@
-import { Box, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Grid } from "@mui/material";
 import { useMap } from "geocommuns-core";
+import { useEffect, useState } from "react";
 
+import { fr } from "@codegouvfr/react-dsfr";
+import { makeStyles } from "tss-react/dsfr";
 import { City, getCities } from "../api/geoApiGouv";
 import { Legend } from "./Legend";
-import TextFieldWithOptions from "./TextFieldWithOptions";
-import { makeStyles } from "tss-react/dsfr";
 import { OpacitySlider } from "./OpacitySlider";
-import { fr } from "@codegouvfr/react-dsfr";
+import TextFieldWithOptions from "./TextFieldWithOptions";
 
 const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
 const ORIGINAL_ZOOM = 5;
 
 const useStyles = makeStyles()((theme) => ({
-  layers: {
+  block: {
     marginBottom: fr.spacing("4w"),
   },
   mapContainer: {
@@ -77,44 +77,38 @@ export const MapVisualization = () => {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <TextFieldWithOptions<City>
-            value={selectedCity}
-            setValue={setSelectedCity}
-            inputValue={inputText}
-            setInputValue={setInputText}
-            options={cityPropositions}
-            isLoading={isLoading}
-            getOptionLabel={(option: City) => {
-              const label = option.nom;
-              if (option.codesPostaux.length === 1) return label + ", " + option.codesPostaux[0];
-              return label;
-            }}
-          />
+          <div className={classes.block}>
+            <h6>Territoire</h6>
+            <TextFieldWithOptions<City>
+              value={selectedCity}
+              setValue={setSelectedCity}
+              inputValue={inputText}
+              setInputValue={setInputText}
+              options={cityPropositions}
+              isLoading={isLoading}
+              getOptionLabel={(option: City) => {
+                const label = option.nom;
+                if (option.codesPostaux.length === 1) return label + ", " + option.codesPostaux[0];
+                return label;
+              }}
+            />
+          </div>
 
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{ mt: 1, p: 2, mb: 3 }}
-            onClick={() => console.log("click")}
-            disabled={selectedCity === null}
-          >
-            Extraire
-          </Button>
-
-          <div className={classes.layers}>
+          <div className={classes.block}>
             <h6>Calques</h6>
-            <OpacitySlider label="CoSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
             <OpacitySlider
               label="Prise de vues aériennes"
               layer="ortho"
               setLayerOpacity={setLayerOpacity}
             />
+            <OpacitySlider label="CoSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
             <OpacitySlider
               label="Limites administratives"
               layer="admin"
               setLayerOpacity={setLayerOpacity}
             />
           </div>
+
           <Legend />
         </Grid>
       </Grid>
