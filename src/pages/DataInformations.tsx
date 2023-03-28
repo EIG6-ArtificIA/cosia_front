@@ -5,6 +5,7 @@ import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { GenericInfo } from "../components/GenericInfo";
 import { MapVisualization } from "../components/MapVisualization";
+import { ScrollRestoration } from "react-router-dom";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -49,9 +50,11 @@ export const DataInformations = () => {
   const [selectedTabId, setSelectedTabId] = useState(window.location.hash.replace("#", "") || "info");
 
   useEffect(() => {
-    window.location.hash = `#${selectedTabId}`;
     const label = TABS.find((t) => t.tabId === selectedTabId)?.label;
     document.title = label ? `CoSIA - ${label}` : `CoSIA - Informations`;
+
+    if (window.location.hash === "" && selectedTabId === "info") return;
+    window.location.hash = `#${selectedTabId}`;
   }, [selectedTabId]);
 
   const map = useMemo(() => <MapVisualization />, []);
@@ -73,6 +76,7 @@ export const DataInformations = () => {
 
   return (
     <main className={classes.container}>
+      <ScrollRestoration />
       <div className={classes.header}>
         <DataDescriptionCard />
       </div>
