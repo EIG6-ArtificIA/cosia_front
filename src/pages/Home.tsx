@@ -45,7 +45,7 @@ export const Home = () => {
   return (
     <CommonHome
       title="CoSIA"
-      subtitle="Les cartes de Couverture du Sol par Intelligence Artificielle"
+      subtitle="La Couverture du Sol par Intelligence Artificielle"
       titleInfo="Prototype de démonstration"
       cover={require("../assets/img/carte_de_predictions.png")}
       description={DESCRIPTION}
