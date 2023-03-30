@@ -7,6 +7,7 @@ import { GenericInfo } from "../components/GenericInfo";
 import { MapVisualization } from "../components/MapVisualization";
 import { ScrollRestoration } from "react-router-dom";
 import { ExportAndApis } from "../components/ExportAndApis";
+import { UseCases } from "../components/UseCases";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -69,9 +70,11 @@ export const DataInformations = () => {
           return map;
         case "export-&-apis":
           return <ExportAndApis />;
+        case "cas-usages":
+          return <UseCases />;
 
         default:
-          return <p key={selectedTabId}>Content of {selectedTabId}</p>;
+          return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
       }
     },
     [map]
