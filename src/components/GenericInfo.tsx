@@ -24,16 +24,31 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
+type Doc = { name: string; link?: string; size?: string };
+const DOCS: Doc[] = [
+  { name: "Description", link: "/pdf/cosia-descriptif-ign.pdf", size: "1,2 Mo" },
+  { name: "Nomenclature des classes", link: "/pdf/cosia-nomenclature-ign.pdf", size: "907 Ko" },
+  { name: "Documentation technique" },
+];
+
 export const GenericInfo = () => {
   const { classes } = useStyles();
-  const generateLink = (text: string) => (
-    <>
-      <a className="fr-link fr-icon-download-line fr-link--icon-right" href="#">
-        {text}
-      </a>
-      <p className={classes.infoDoc}>PDF - 61,88 Ko</p>
-    </>
-  );
+  const generateLink = (doc: Doc) => {
+    const docInfo = doc.size ? `PDF - ${doc.size}` : "PDF";
+    return (
+      <>
+        <a
+          className="fr-link fr-icon-download-line fr-link--icon-right"
+          href={doc.link || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {doc.name}
+        </a>
+        <p className={classes.infoDoc}>{docInfo}</p>
+      </>
+    );
+  };
 
   return (
     <Grid container columnSpacing={{ md: 10 }}>
@@ -93,9 +108,7 @@ export const GenericInfo = () => {
           <b>Ressources</b>
         </p>
 
-        {generateLink("Description")}
-        {generateLink("Nomenclature des classes")}
-        {generateLink("Documentation technique")}
+        {DOCS.map((doc) => generateLink(doc))}
       </Grid>
     </Grid>
   );

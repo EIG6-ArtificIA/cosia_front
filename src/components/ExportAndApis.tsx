@@ -16,18 +16,25 @@ export const ExportAndApis = () => {
     <section>
       <h4>Export & APIs</h4>
       <h6>Dalles disponibles</h6>
-      <div className={classes.list}>
-        <ul>
-          <li>37 - Tours Métropole - 2021</li>
-          <li>40 - Landes - 2021</li>
-        </ul>
-      </div>
+      <p>
+        L'IGN est en train de produire la donnée CoSIA au cas par cas pour les utilisateurs qui en font
+        la demande. Cette démarche a pour but de tester et d'itérer sur la donnée afin de concevoir un
+        produit qui répond aux besoins et aux usages des utilisateurs.
+        <br />
+        Les données déjà disponibles sont :
+      </p>
+
+      <ul className={classes.list}>
+        <li>37 Indre-et-Loire - Tours Métropole - 2021</li>
+        <li>
+          40 Landes - Communes d'Azure, Soustons, Messanges, Seignosse et Vieux-Boucau-les-Bains - 2021
+        </li>
+      </ul>
 
       <div className={classes.contactUs}>
         <p>
-          Vous souhaitez vous souhaitez mettre en place ou enrichir un cas d’usage à partir des données
-          CoSIA ? Répondez directement à notre questionnaire et nous vous recontacterons rapidement pour
-          vous accompagner dans votre démarche.
+          Vous êtes intéressé(e) par les données CoSIA ? Contactez-nous pour recevoir les dalles déjà
+          disponibles.
         </p>
         <Button
           iconId="fr-icon-mail-line"
@@ -38,10 +45,14 @@ export const ExportAndApis = () => {
         </Button>
       </div>
       <p>
-        Vous êtes intéressé par la donnée ? Vous pouvez nous contactez pour nous demander les dalles déjà
-        disponibles.
+        Vous souhaitez mettre en place un cas d'usage à partir des données CoSIA ?<br />
+        Répondez directement à notre questionnaire et nous vous recontacterons rapidement pour vous
+        accompagner dans votre démarche.
       </p>
-      <Button iconId="fr-icon-lightbulb-line" onClick={() => console.log("click")}>
+      <Button
+        iconId="fr-icon-lightbulb-line"
+        linkProps={{ to: "https://forms.office.com/e/bLTb4d6iR8 " }}
+      >
         Proposer un cas d'usage
       </Button>
     </section>
