@@ -53,7 +53,7 @@ export const DataDescriptionCard = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <div className={cx("fr-alert fr-alert--success", classes.alert)}>
+        <div className={cx(fr.cx("fr-alert", "fr-alert--success"), classes.alert)}>
           <p>L'URL a bien été copié !</p>
           <button className="fr-btn--close fr-btn" title="Masquer le message" onClick={handleClose}>
             Masquer le message

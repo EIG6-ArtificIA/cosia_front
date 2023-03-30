@@ -38,7 +38,10 @@ export const Home = () => {
   const CTA = (
     <Button linkProps={{ to: ROUTES.DataInfo }} priority="secondary">
       Accéder au prototype
-      <span className={cx("fr-icon-arrow-right-line", classes.iconButton)} aria-hidden="true"></span>
+      <span
+        className={cx(fr.cx("fr-icon-arrow-right-line"), classes.iconButton)}
+        aria-hidden="true"
+      ></span>
     </Button>
   );
 
