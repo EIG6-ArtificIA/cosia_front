@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { GenericInfo } from "../components/GenericInfo";
 import { MapVisualization } from "../components/MapVisualization";
 import { ScrollRestoration } from "react-router-dom";
+import { ExportAndApis } from "../components/ExportAndApis";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -66,6 +67,8 @@ export const DataInformations = () => {
           return <GenericInfo />;
         case "visualisation":
           return map;
+        case "export-&-apis":
+          return <ExportAndApis />;
 
         default:
           return <p key={selectedTabId}>Content of {selectedTabId}</p>;
