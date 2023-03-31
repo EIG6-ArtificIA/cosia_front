@@ -1,8 +1,16 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
+import { makeStyles } from "tss-react/dsfr";
+
+const useStyles = makeStyles()(() => ({
+  container: {
+    maxWidth: 650,
+  },
+}));
 
 export const UseCases = () => {
+  const { classes } = useStyles();
   return (
-    <section>
+    <section className={classes.container}>
       <h4>Cas d'usage</h4>
       <h6>Proposer un cas d'usage</h6>
       <p>

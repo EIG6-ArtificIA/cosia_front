@@ -36,7 +36,7 @@ export const GenericInfo = () => {
   const generateLink = (doc: Doc) => {
     const docInfo = doc.size ? `PDF - ${doc.size}` : "PDF";
     return (
-      <>
+      <div key={doc.name}>
         <a
           className="fr-link fr-icon-download-line fr-link--icon-right"
           href={doc.link || "#"}
@@ -46,7 +46,7 @@ export const GenericInfo = () => {
           {doc.name}
         </a>
         <p className={classes.infoDoc}>{docInfo}</p>
-      </>
+      </div>
     );
   };
 
@@ -64,11 +64,11 @@ export const GenericInfo = () => {
           de 20 cm par pixel.
         </p>
         <p>
-          Les cartes CoSIA sont un produit de l’IGN qui interviennent dans la conception de l’OCS-GE ou
-          de la BD Forêt par exemple. Leur résolution spatiale et leur finesse sémantique peuvent
-          également aider dans la production d’autres cartographies et au calcul d’autres indicateurs
-          comme la végétation en ville, les haies & bocages, les trames vertes & bleues ou encore
-          intervenir dans la réalisation de MOS locaux ou d’un OCS GE plus fin.
+          Les cartes CoSIA sont un produit de l’IGN qui interviennent actuellement dans la conception de
+          l'OCS-GE. Leur résolution spatiale et leur finesse sémantique peuvent également aider dans la
+          production d’autres cartographies et au calcul d’autres indicateurs comme la végétation en
+          ville, les haies & bocages, les trames vertes & bleues ou encore intervenir dans la réalisation
+          de MOS locaux ou d’un OCS GE plus fin.
         </p>
         <p>
           Pour produire ces cartes, on utilise des processus d’intelligence artificielle dont des

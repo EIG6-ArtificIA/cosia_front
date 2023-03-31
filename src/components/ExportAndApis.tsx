@@ -8,12 +8,15 @@ const useStyles = makeStyles()(() => ({
   contactUs: {
     marginBottom: 32,
   },
+  container: {
+    maxWidth: 650,
+  },
 }));
 
 export const ExportAndApis = () => {
   const { classes } = useStyles();
   return (
-    <section>
+    <section className={classes.container}>
       <h4>Export & APIs</h4>
       <h6>Dalles disponibles</h6>
       <p>

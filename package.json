@@ -26,6 +26,7 @@
     "axios": "^1.2.1",
     "geocommuns-core": "^0.4.2",
     "ol": "^7.1.0",
+    "powerhooks": "^0.26.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",

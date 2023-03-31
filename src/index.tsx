@@ -27,7 +27,14 @@ const contentDescription =
 const router = createBrowserRouter([
   {
     path: ROUTES.Home,
-    element: <Root title="CoSIA" contactMail="cosia@ign.fr" contentDescription={contentDescription} />,
+    element: (
+      <Root
+        title="CoSIA"
+        contactMail="cosia@ign.fr"
+        feedbackLink="https://forms.office.com/e/MVeBMBdusst"
+        contentDescription={contentDescription}
+      />
+    ),
     errorElement: <ErrorPage />,
     children: [
       { path: ROUTES.Home, element: <Home /> },

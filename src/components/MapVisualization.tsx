@@ -1,9 +1,10 @@
+import { fr } from "@codegouvfr/react-dsfr";
 import { Box, Grid } from "@mui/material";
 import { useMap } from "geocommuns-core";
 import { useEffect, useState } from "react";
-
-import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
+import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
+
 import { City, getCities } from "../api/geoApiGouv";
 import { Legend } from "./Legend";
 import { OpacitySlider } from "./OpacitySlider";
@@ -18,11 +19,18 @@ const useStyles = makeStyles()((theme) => ({
   },
   mapContainer: {
     height: "100%",
-    minHeight: 800,
-    maxHeight: 1000,
+    minHeight: 500,
+    maxHeight: 640,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: theme.decisions.artwork.motif.grey.default,
+  },
+  parametersContainer: {
+    [fr.breakpoints.up("md")]: {
+      minHeight: 500,
+      maxHeight: 640,
+      overflowY: "scroll",
+    },
   },
 }));
 
@@ -71,12 +79,18 @@ export const MapVisualization = () => {
         alignItems: "center",
       }}
     >
+      <CallOut colorVariant="brown-caramel">
+        <span className={fr.cx("fr-icon-info-line")} /> Les données affichées sont des <b>flux raster</b>{" "}
+        et ont été produits pour le département du Gers. D'autres données CoSIA sont disponibles et
+        téléchargeables depuis l'onglet <a href="/info#export-&-apis">Export et APIs</a>.
+      </CallOut>
+
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Box id="map" className={classes.mapContainer} />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={4} className={classes.parametersContainer}>
           <div className={classes.block}>
             <h6>Territoire</h6>
             <TextFieldWithOptions<City>

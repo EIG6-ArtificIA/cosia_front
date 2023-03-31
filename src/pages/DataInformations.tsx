@@ -1,8 +1,10 @@
+import { useEffect, useMemo, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useConstCallback } from "powerhooks";
+
+import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { GenericInfo } from "../components/GenericInfo";
 import { MapVisualization } from "../components/MapVisualization";
 import { ScrollRestoration } from "react-router-dom";
@@ -45,6 +47,7 @@ const TABS = [
   { tabId: "communaute", label: "Communauté" },
   { tabId: "metadonnees", label: "Métadonnées" },
 ];
+const TAB_IDS = TABS.map((t) => t.tabId);
 
 export const DataInformations = () => {
   const { classes } = useStyles();
@@ -59,26 +62,37 @@ export const DataInformations = () => {
     window.location.hash = `#${selectedTabId}`;
   }, [selectedTabId]);
 
+  const updateSelectedTabId = useConstCallback(() => {
+    const actualHash = window.location.hash.slice(1);
+    if (!TAB_IDS.includes(actualHash) || actualHash === selectedTabId) return;
+
+    setSelectedTabId(actualHash);
+  });
+
+  useEffect(() => {
+    window.addEventListener("hashchange", updateSelectedTabId);
+    return () => {
+      window.removeEventListener("hashchange", updateSelectedTabId);
+    };
+  }, []);
+
   const map = useMemo(() => <MapVisualization />, []);
 
-  const renderContent = useCallback(
-    (tabId: string) => {
-      switch (tabId) {
-        case "info":
-          return <GenericInfo />;
-        case "visualisation":
-          return map;
-        case "export-&-apis":
-          return <ExportAndApis />;
-        case "cas-usages":
-          return <UseCases />;
+  const renderContent = useConstCallback((tabId: string) => {
+    switch (tabId) {
+      case "info":
+        return <GenericInfo />;
+      case "visualisation":
+        return map;
+      case "export-&-apis":
+        return <ExportAndApis />;
+      case "cas-usages":
+        return <UseCases />;
 
-        default:
-          return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
-      }
-    },
-    [map]
-  );
+      default:
+        return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
+    }
+  });
 
   return (
     <main className={classes.container}>
