@@ -87,7 +87,7 @@ export const GenericInfo = () => {
           <b>Producteur</b>
         </p>
         <div className={classes.card}>
-          <img src={require("../assets/img/ign_logo.png")} className={classes.logo} />
+          <img src={require("../../assets/img/ign_logo.png")} className={classes.logo} />
           <span>
             <b>Institut National de l’Information Géographique et Forestière</b>
             <br />

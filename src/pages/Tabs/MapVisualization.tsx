@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
 
-import { City, getCities } from "../api/geoApiGouv";
-import { Legend } from "./Legend";
-import { OpacitySlider } from "./OpacitySlider";
-import TextFieldWithOptions from "./TextFieldWithOptions";
+import { City, getCities } from "../../api/geoApiGouv";
+import { Legend } from "../../components/Legend";
+import { OpacitySlider } from "../../components/OpacitySlider";
+import TextFieldWithOptions from "../../components/TextFieldWithOptions";
 
 const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
 const ORIGINAL_ZOOM = 5;

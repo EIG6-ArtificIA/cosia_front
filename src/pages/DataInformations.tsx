@@ -1,15 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useConstCallback } from "powerhooks";
+import { ScrollRestoration } from "react-router-dom";
 
 import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
-import { GenericInfo } from "../components/GenericInfo";
-import { MapVisualization } from "../components/MapVisualization";
-import { ScrollRestoration } from "react-router-dom";
-import { ExportAndApis } from "../components/ExportAndApis";
-import { UseCases } from "../components/UseCases";
+import { GenericInfo } from "./Tabs/GenericInfo";
+import { MapVisualization } from "./Tabs/MapVisualization";
+import { ExportAndApis } from "./Tabs/ExportAndApis";
+import { UseCases } from "./Tabs/UseCases";
+import { Metadata } from "./Tabs/Metadata";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -76,18 +77,18 @@ export const DataInformations = () => {
     };
   }, []);
 
-  const map = useMemo(() => <MapVisualization />, []);
-
   const renderContent = useConstCallback((tabId: string) => {
     switch (tabId) {
       case "info":
         return <GenericInfo />;
       case "visualisation":
-        return map;
+        return <MapVisualization />;
       case "export-&-apis":
         return <ExportAndApis />;
       case "cas-usages":
         return <UseCases />;
+      case "metadonnees":
+        return <Metadata />;
 
       default:
         return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
