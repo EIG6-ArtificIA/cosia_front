@@ -74,9 +74,9 @@ export const GenericInfo = () => {
           Pour produire ces cartes, on utilise des processus d’intelligence artificielle dont des
           méthodes d’apprentissage profond (deep learning). Ces cartes sont alors dites de “prédiction”
           car elles sont obtenues à partir d’un modèle numérique d’IA qui estime statistiquement pour
-          chaque pixel son appartenance à une classe, et peuvent ne pas refléter pas de manière
-          exhaustive la réalité du terrain. Il existe des marges d’erreurs qui sont référencées pour
-          chaque département et chaque classe (voir ressources).
+          chaque pixel son appartenance à une classe, et peuvent ne pas refléter de manière exhaustive la
+          réalité du terrain. Il existe des marges d’erreurs qui sont référencées pour chaque département
+          et chaque classe (voir ressources).
         </p>
       </Grid>
       <Box component={Grid} item xs={12} display={{ xs: "block", lg: "none" }}>
