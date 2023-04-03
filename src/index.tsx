@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       <Root
         title="CoSIA"
         contactMail="cosia@ign.fr"
-        feedbackLink="https://forms.office.com/e/MVeBMBdusst"
+        feedbackLink="https://forms.office.com/e/MVeBMBdusY"
         contentDescription={contentDescription}
       />
     ),

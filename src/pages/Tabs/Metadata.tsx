@@ -1,7 +1,8 @@
-import Grid from "@mui/material/Grid";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
+import { Grid } from "@mui/material";
+import { CompletionBar } from "../../components/CompletionBar";
 
 const useStyles = makeStyles()(() => ({
   container: {},
@@ -24,19 +25,20 @@ const generateTagsList = (words: string[]) =>
     </Tag>
   ));
 
+const completionItems: BlockItem[] = [
+  {
+    title: "Complétion des métadonnées",
+    child: <CompletionBar value={85} />,
+  },
+];
+
 const genericInfoItems: BlockItem[] = [
-  {
-    title: "Titre du jeu de données",
-    child: "CoSIA",
-  },
-  {
-    title: "Identifiant unique",
-    child: "CoSIA",
-  },
+  { title: "Titre du jeu de données", child: "CoSIA" },
+  { title: "Identifiant unique", child: "CoSIA" },
   {
     title: "Résumé",
     child:
-      "Les cartes COSIA décrivent la couverture du sol, soit la nature du sol, selon 17 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution de 20 cm par pixel.",
+      "Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 17 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution de 20 cm par pixel.",
   },
   {
     title: "Thème",
@@ -44,14 +46,25 @@ const genericInfoItems: BlockItem[] = [
   },
   {
     title: "Mots-clefs",
-    child: <>{generateTagsList(["Couvertuse du sol", "NAF", "IA", "Télédétection", "Segmentation"])}</>,
+    child: (
+      <>
+        {generateTagsList([
+          "Couverture du sol",
+          "NAF",
+          "IA",
+          "Télédétection",
+          "Segmentation",
+          "Urbanisme",
+        ])}
+      </>
+    ),
   },
   {
     title: "Date de création",
     child: (
       <>
         <span className={fr.cx("fr-icon-calendar-2-fill", "fr-mr-1w")} />
-        <time dateTime="2022-08">Août 2022</time>
+        <time dateTime="2023-04">Avril 2023</time>
       </>
     ),
   },
@@ -74,10 +87,10 @@ const regionalInfoItem: BlockItem[] = [
 
 const technicalInfoItem: BlockItem[] = [
   { title: "Type de représentation géographique", child: "Vecteur" },
-  { title: "Formats du fichier", child: "Shapefile, Géopackage, GeoJson" },
+  { title: "Formats du fichier", child: "Shapefile" },
+  { title: "Système de projection", child: "EPSG:2154" },
   { title: "Encodage du fichier", child: "Unit8" },
   { title: "Encodage des caractères", child: "UTF-8" },
-  { title: "Résolution par dalle", child: "2km²" },
   { title: "Lissage vecteur", child: "0,5m" },
   { title: "Nombre de classes", child: "17" },
 ];
@@ -89,6 +102,7 @@ const licenceItem: BlockItem[] = [
 ];
 
 const blocks: Block[] = [
+  { title: "Complétion", children: completionItems },
   { title: "Informations générales", children: genericInfoItems },
   { title: "Informations régionales", children: regionalInfoItem },
   { title: "Informations techniques", children: technicalInfoItem },
