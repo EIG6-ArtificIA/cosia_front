@@ -1,5 +1,6 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { makeStyles } from "tss-react/dsfr";
+import { UseCaseCard } from "../../components/UseCaseCard";
 
 const useStyles = makeStyles()(() => ({
   container: {
@@ -12,6 +13,7 @@ export const UseCases = () => {
   return (
     <section className={classes.container}>
       <h4>Cas d'usage</h4>
+      <UseCaseCard />
       <h6>Proposer un cas d'usage</h6>
       <p>
         Si vous souhaitez mettre en place ou enrichir un cas d'usage à partir des données CoSIA et que
