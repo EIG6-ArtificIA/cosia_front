@@ -80,9 +80,9 @@ export const MapVisualization = () => {
       }}
     >
       <CallOut colorVariant="brown-caramel">
-        <span className={fr.cx("fr-icon-info-line")} /> Les données affichées sont des <b>flux raster</b>{" "}
-        et ont été produits pour le département du Gers. D'autres données CoSIA sont disponibles et
-        téléchargeables depuis l'onglet <a href="/info#export-&-apis">Export et APIs</a>.
+        <span className={fr.cx("fr-icon-info-line")} /> Les données affichées ont été produits pour le
+        département du Rhône. D'autres données CoSIA sont disponibles et téléchargeables depuis l'onglet{" "}
+        <a href="/info#export-&-apis">Export et APIs</a>.
       </CallOut>
 
       <Grid container spacing={2}>
