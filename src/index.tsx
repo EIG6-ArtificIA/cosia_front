@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import { startReactDsfr } from "@codegouvfr/react-dsfr/spa";
 import { MuiDsfrThemeProvider } from "@codegouvfr/react-dsfr/mui";
+import { Badge } from "@codegouvfr/react-dsfr/Badge";
 import { Root, ErrorPage } from "geocommuns-core";
 
 import { Home } from "./pages/Home";
@@ -29,7 +30,14 @@ const router = createBrowserRouter([
     path: ROUTES.Home,
     element: (
       <Root
-        title="CoSIA"
+        title={
+          <>
+            CoSIA{" "}
+            <Badge severity="success" noIcon>
+              Bêta
+            </Badge>
+          </>
+        }
         contactMail="cosia@ign.fr"
         feedbackLink="https://forms.office.com/e/MVeBMBdusY"
         contentDescription={contentDescription}

@@ -4,11 +4,20 @@ import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()((theme) => ({
-  container: { width: 360, marginBottom: fr.spacing("3w") },
+  container: {
+    width: 360,
+    marginBottom: fr.spacing("3w"),
+  },
   source: {
     color: theme.decisions.text.mention.grey.default,
     fontSize: 14,
     marginBottom: 0,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  detail: {
+    width: "100%",
   },
 }));
 
@@ -17,15 +26,13 @@ export const UseCaseCard = () => {
   return (
     <div className={classes.container}>
       <Card
-        desc="Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et"
         detail={
-          <div>
+          <div className={classes.detail}>
             <ul className={fr.cx("fr-tags-group")}>
-              <Tag>Artificialisation</Tag>
-              <Tag>Urbanisme</Tag>
               <Tag>Biodiversité</Tag>
+              <Tag>Agriculture</Tag>
             </ul>
-            <p className={classes.source}>DDT 37</p>
+            <p className={classes.source}>OFB & IGN</p>
           </div>
         }
         enlargeLink
@@ -33,8 +40,10 @@ export const UseCaseCard = () => {
           to: "#cas-usages",
         }}
         imageAlt="Visuel de carte de prédiction de Tours"
-        imageUrl={require("../assets/img/use_case_1.png")}
-        title="Aménager avec les sols vivants en Touraine"
+        imageUrl={require("../assets/gif/use_case_1.gif")}
+        title="Paysages arborés hors forêt et urbain"
+        desc="Caractérisation des zone arborées hors forêt et hors  urbain dans le cadre du suivi de
+        l’Anthropocène. Notre cas d’usage est en cours de test."
       />
     </div>
   );

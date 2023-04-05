@@ -46,7 +46,7 @@ const SLABS_ON_DEMAND = [
   },
   {
     title: "35 Ille-et-Vilaine",
-    vintage: [2017, 2021],
+    vintage: [2017, 2020],
   },
   {
     title: "37 Indre-et-Loire",
@@ -86,7 +86,7 @@ const SLABS_ON_DEMAND = [
   },
   {
     title: "83 Var",
-    vintage: [2017, 2021],
+    vintage: [2017, 2020],
   },
   {
     title: "84 Vaucluse",
