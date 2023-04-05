@@ -32,14 +32,14 @@ export const UseCaseCard = () => {
               <Tag>Biodiversité</Tag>
               <Tag>Agriculture</Tag>
             </ul>
-            <p className={classes.source}>OFB & IGN</p>
+            <p className={classes.source}>IGN & OFB</p>
           </div>
         }
         enlargeLink
         linkProps={{
           to: "#cas-usages",
         }}
-        imageAlt="Visuel de carte de prédiction de Tours"
+        imageAlt="Test de détection des zones arborées dans le Gers en 2019"
         imageUrl={require("../assets/gif/use_case_1.gif")}
         title="Paysages arborés hors forêt et urbain"
         desc="Caractérisation des zone arborées hors forêt et hors  urbain dans le cadre du suivi de

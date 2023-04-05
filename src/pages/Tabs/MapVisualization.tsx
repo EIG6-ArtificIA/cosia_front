@@ -10,8 +10,8 @@ import { Legend } from "../../components/Legend";
 import { OpacitySlider } from "../../components/OpacitySlider";
 import TextFieldWithOptions from "../../components/TextFieldWithOptions";
 
-const ORIGINAL_CENTER: [number, number] = [2.5764414841767787, 46.51407673990174];
-const ORIGINAL_ZOOM = 5;
+const ORIGINAL_CENTER: [number, number] = [4.855906, 45.845433];
+const ORIGINAL_ZOOM = 16;
 
 const useStyles = makeStyles()((theme) => ({
   block: {
@@ -47,7 +47,7 @@ export const MapVisualization = () => {
     "map",
     ORIGINAL_CENTER,
     ORIGINAL_ZOOM,
-    ["ortho", "admin", "aiPrediction"]
+    ["ortho", "aiPrediction", "admin"]
   );
 
   useEffect(() => {

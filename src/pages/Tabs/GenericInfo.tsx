@@ -26,9 +26,13 @@ const useStyles = makeStyles()((theme) => ({
 
 type Doc = { name: string; link?: string; size?: string };
 const DOCS: Doc[] = [
-  { name: "Description", link: "/pdf/cosia-descriptif-ign.pdf", size: "1,2 Mo" },
-  { name: "Nomenclature des classes", link: "/pdf/cosia-nomenclature-ign.pdf", size: "907 Ko" },
-  { name: "Documentation technique" },
+  { name: "Description", link: "/pdf/Cosia_Descriptif_IGN_2023.pdf", size: "1,2 Mo" },
+  { name: "Nomenclature des classes", link: "/pdf/Cosia_Nomenclature_IGN_2023.pdf", size: "969 Ko" },
+  {
+    name: "Documentation technique",
+    link: "/pdf/Cosia_Documentation_Technique_IGN_2023.pdf",
+    size: "7,4 Mo",
+  },
 ];
 
 export const GenericInfo = () => {
@@ -58,7 +62,7 @@ export const GenericInfo = () => {
           <b>Descriptif</b>
         </p>
         <p>
-          Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 17 classes
+          Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 16 classes
           (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est
           produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution
           de 20 cm par pixel.

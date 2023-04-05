@@ -38,7 +38,7 @@ const genericInfoItems: BlockItem[] = [
   {
     title: "Résumé",
     child:
-      "Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 17 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution de 20 cm par pixel.",
+      "Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 16 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution de 20 cm par pixel.",
   },
   {
     title: "Thème",
@@ -92,7 +92,7 @@ const technicalInfoItem: BlockItem[] = [
   { title: "Encodage du fichier", child: "Unit8" },
   { title: "Encodage des caractères", child: "UTF-8" },
   { title: "Lissage vecteur", child: "0,5m" },
-  { title: "Nombre de classes", child: "17" },
+  { title: "Nombre de classes", child: "16" },
 ];
 
 const licenceItem: BlockItem[] = [

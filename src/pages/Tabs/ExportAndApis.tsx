@@ -1,29 +1,20 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
+import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()((theme) => ({
-  list: {
-    marginBottom: 32,
-  },
   contactUs: {
     marginBottom: 32,
   },
   container: {
     maxWidth: 850,
   },
-  dataDetails: {
+  ftpDetails: {
     color: theme.decisions.text.mention.grey.default,
   },
   vintage: {
     color: theme.decisions.text.mention.grey.default,
     fontSize: 12,
-  },
-  slabsList: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  slab: {
-    flex: 1,
   },
 }));
 
@@ -123,45 +114,37 @@ export const ExportAndApis = () => {
         L'IGN est en train de produire la donnée CoSIA au cas par cas pour les utilisateurs qui en font
         la demande. Cette démarche a pour but de tester et d'itérer sur la donnée afin de concevoir un
         produit qui répond aux besoins et aux usages des utilisateurs.
-        <br />
-        Les données déjà disponibles sont :
       </p>
 
       <h6>Dalles disponibles</h6>
-      <p>Télécharger directement les données CoSIA :</p>
-      <ul className={classes.list}>
-        <li>
-          37 Indre-et-Loire - Tours Métropole - Millésime 2021
-          <br />
-          <span className={classes.dataDetails}>Lien : </span>{" "}
-          <a
-            title="lien de téléchargement France Transfert des données de Tours Métropole"
-            target="_blank"
-            rel="noopener"
-            href="https://francetransfert.numerique.gouv.fr/download/?enclosure=5e1439e2-45c7-4c84-9194-44ee14c114c8&recipient=Ym9yaXMud2F0dHJlbG9zQGdtYWlsLmNvbQ==&token=29a59bef-e53e-401f-a8c5-a5303ea40f47&lang=fr-FR"
-          >
-            COSIA_37_2021_Tours
-          </a>
-          <br />
-          <span className={classes.dataDetails}>Mot de passe : USp:4^%2hMy0W1R#8XS</span>
-        </li>
-        <li>
-          40 Landes - Communes d'Azure, Soustons, Messanges, Seignosse et Vieux-Boucau-les-Bains -
-          Millésime 2021
-          <br />
-          <span className={classes.dataDetails}>Lien :</span>
-          <a
-            title="lien de téléchargement France Transfert des données des Landes"
-            target="_blank"
-            rel="noopener"
-            href=""
-          >
-            Cosia_40_2021_MACS
-          </a>
-          <br />
-          <span className={classes.dataDetails}>Mot de passe : </span>
-        </li>
-      </ul>
+      <p>
+        Télécharger directement les données CoSIA :
+        <ul>
+          <li>37 Indre-et-Loire - Tours Métropole - Millésime 2021</li>
+          <li>
+            40 Landes - Communes d'Azure, Soustons, Messanges, Seignosse et Vieux-Boucau-les-Bains -
+            Millésime 2021
+          </li>
+        </ul>
+      </p>
+      <p>
+        Par SFTP à l'adresse suivante (utilisation de FileZilla préconnisée) :
+        <ul>
+          <li>
+            <span className={classes.ftpDetails}>Hôte : </span> sftp://sftp-public.ign.fr
+          </li>
+          <li>
+            <span className={classes.ftpDetails}>Port : </span> 2200
+          </li>
+          <li>
+            <span className={classes.ftpDetails}>Identifiant : </span> COSIA_LS
+          </li>
+          <li>
+            <span className={classes.ftpDetails}>Mot de passe : </span> envoyer une demande de mot de
+            passe à cosia@ign.fr
+          </li>
+        </ul>
+      </p>
 
       <h6>Dalles à la demande</h6>
 
@@ -170,15 +153,21 @@ export const ExportAndApis = () => {
           Vous êtes intéressé(e) par les données CoSIA ? Contactez-nous pour recevoir les dalles déjà
           disponibles.
         </p>
+
         <ul>
-          {SLABS_ON_DEMAND.map((slab) => (
-            <li key={slab.title} className={classes.slab}>
-              {slab.title}
-              <br />
-              <span className={classes.vintage}>Millésime {slab.vintage.join(" & ")}</span>
-            </li>
-          ))}
+          <Grid container>
+            {SLABS_ON_DEMAND.map((slab) => (
+              <Grid item key={slab.title} xs={12} sm={6} md={4}>
+                <li>
+                  {slab.title}
+                  <br />
+                  <span className={classes.vintage}>Millésime {slab.vintage.join(" & ")}</span>
+                </li>
+              </Grid>
+            ))}
+          </Grid>
         </ul>
+
         <Button iconId="fr-icon-mail-line" linkProps={{ to: "mailto:cosia@ign.fr" }}>
           Nous contacter
         </Button>

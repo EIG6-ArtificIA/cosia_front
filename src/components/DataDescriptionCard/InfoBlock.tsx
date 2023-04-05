@@ -1,4 +1,4 @@
-import { fr, FrCxArg } from "@codegouvfr/react-dsfr";
+import { fr } from "@codegouvfr/react-dsfr";
 import { Divider, Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 
@@ -21,31 +21,10 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-type CounterT = { icon: FrCxArg; count: number; description: string };
-
-const counts: CounterT[] = [
-  {
-    icon: "fr-icon-eye-line",
-    count: 177,
-    description: "Vues",
-  },
-  { icon: "fr-icon-download-fill", count: 82, description: "Téléchargements" },
-  { icon: "fr-icon-send-plane-fill", count: 35, description: "Partages" },
-];
-
 export const InfoBlock = () => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const dataName = "CoSIA";
   const dataDescription = "Couverture du Sol par Intelligence Artificielle";
-
-  const getCounter = ({ icon, count, description }: CounterT) => {
-    return (
-      <Grid item xs={12} sm="auto" key={description}>
-        <span className={cx(fr.cx(icon, "fr-icon--xs"), classes.icon)} />
-        {count} {description}
-      </Grid>
-    );
-  };
 
   return (
     <Grid container justifyContent="space-between" flexDirection="column">
@@ -66,18 +45,14 @@ export const InfoBlock = () => {
           mb={fr.spacing("1v")}
         >
           <Grid item xs={12} sm="auto">
-            Création : <time dateTime="2022-08-04">04 août 2022</time>
+            Création : <time dateTime="2023-04-04">04 avril 2023</time>
           </Grid>
           <Grid item xs={0} sm="auto" sx={{ display: { xs: "none", sm: "block" } }}>
             <Divider orientation="vertical" />
           </Grid>
           <Grid item xs={12} sm="auto">
-            Mise à jour : <time dateTime="2023-03-02">02 mars 2022</time>
+            Mise à jour : <time dateTime="2023-04-05">05 avril 2023</time>
           </Grid>
-        </Grid>
-
-        <Grid container columnSpacing={fr.spacing("3v")} rowSpacing={fr.spacing("1v")}>
-          {counts.map((count) => getCounter(count))}
         </Grid>
       </Grid>
     </Grid>
