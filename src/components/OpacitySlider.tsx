@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Grid, Slider } from "@mui/material";
 import { AvailableLayer } from "geocommuns-core";
 import { makeStyles } from "tss-react/dsfr";
+import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
+import { useConstCallback } from "powerhooks";
+import { fr } from "@codegouvfr/react-dsfr";
 
 const useStyles = makeStyles()({
   sliderValue: {
@@ -10,18 +13,42 @@ const useStyles = makeStyles()({
     textAlign: "end",
     paddingTop: "3px",
   },
-  layerLabel: {},
+  checkbox: {
+    margin: 0,
+    marginLeft: `-${fr.spacing("3v")}`,
+  },
+  slider: {
+    width: "100%",
+    marginBottom: fr.spacing("3w"),
+  },
 });
 
 type Props = {
   label: string;
   layer: AvailableLayer;
   setLayerOpacity(layer: AvailableLayer, opacity: number): void;
+  setLayerVisibility(layer: AvailableLayer, visible: boolean): void;
+  defaultVisibility?: boolean;
 };
 
-export const OpacitySlider = ({ label, layer, setLayerOpacity }: Props) => {
+export const OpacitySlider = ({
+  label,
+  layer,
+  setLayerOpacity,
+  setLayerVisibility,
+  defaultVisibility = true,
+}: Props) => {
   const { classes } = useStyles();
   const [opacity, setOpacity] = useState(100);
+  const [isVisible, setIsVisible] = useState(defaultVisibility);
+
+  const handleVisibilityUpdate = useConstCallback(() => {
+    setIsVisible(!isVisible);
+  });
+
+  useEffect(() => {
+    setLayerVisibility(layer, isVisible);
+  }, [isVisible]);
 
   useEffect(() => {
     setLayerOpacity(layer, opacity / 100);
@@ -38,20 +65,32 @@ export const OpacitySlider = ({ label, layer, setLayerOpacity }: Props) => {
 
   return (
     <>
-      <span className={classes.layerLabel}>{label}</span>
-      <Grid container spacing={2}>
+      <Checkbox
+        className={classes.checkbox}
+        options={[
+          {
+            label,
+            nativeInputProps: {
+              checked: isVisible,
+              onChange: handleVisibilityUpdate,
+            },
+          },
+        ]}
+      />
+      <Grid container spacing={2} className={classes.slider}>
         <Grid item xs>
           <Slider
-            aria-label="Opacité de la couche ortho"
+            aria-label={`Opacité de la couche ${layer}`}
             defaultValue={100}
             min={0}
             max={100}
-            value={opacity}
+            value={isVisible ? opacity : 0}
             onChange={onSliderChange}
+            disabled={!isVisible}
           />
         </Grid>
         <Grid item>
-          <span className={classes.sliderValue}>{opacity} %</span>
+          <span className={classes.sliderValue}>{isVisible ? opacity : 0} %</span>
         </Grid>
       </Grid>
     </>

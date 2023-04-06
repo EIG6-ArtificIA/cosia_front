@@ -43,11 +43,11 @@ export const MapVisualization = () => {
 
   const { classes } = useStyles();
 
-  const { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity } = useMap(
+  const { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility } = useMap(
     "map",
     ORIGINAL_CENTER,
     ORIGINAL_ZOOM,
-    ["ortho", "aiPrediction", "admin"]
+    ["ortho", "planIGN", "aiPrediction", "admin"]
   );
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const MapVisualization = () => {
       }}
     >
       <CallOut colorVariant="brown-caramel">
-        <span className={fr.cx("fr-icon-info-line")} /> Les données affichées ont été produits pour le
+        <span className={fr.cx("fr-icon-info-line")} /> Les données affichées ont été produites pour le
         département du Rhône. D'autres données CoSIA sont disponibles et téléchargeables depuis l'onglet{" "}
         <a href="/info#export-&-apis">Export et APIs</a>.
       </CallOut>
@@ -114,12 +114,26 @@ export const MapVisualization = () => {
               label="Prise de vues aériennes"
               layer="ortho"
               setLayerOpacity={setLayerOpacity}
+              setLayerVisibility={setLayerVisibility}
             />
-            <OpacitySlider label="CoSIA" layer="aiPrediction" setLayerOpacity={setLayerOpacity} />
+            <OpacitySlider
+              label="Plan IGN"
+              layer="planIGN"
+              setLayerOpacity={setLayerOpacity}
+              setLayerVisibility={setLayerVisibility}
+              defaultVisibility={false}
+            />
+            <OpacitySlider
+              label="CoSIA"
+              layer="aiPrediction"
+              setLayerOpacity={setLayerOpacity}
+              setLayerVisibility={setLayerVisibility}
+            />
             <OpacitySlider
               label="Limites administratives"
               layer="admin"
               setLayerOpacity={setLayerOpacity}
+              setLayerVisibility={setLayerVisibility}
             />
           </div>
 
