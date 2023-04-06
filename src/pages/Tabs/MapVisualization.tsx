@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Box, Grid } from "@mui/material";
-import { useMap } from "geocommuns-core";
+import { AvailableLayer, useMap } from "geocommuns-core";
 import { useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
@@ -33,6 +33,18 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
 }));
+type LayerSetter = {
+  label: string;
+  layer: AvailableLayer;
+  defaultVisibility: boolean;
+};
+
+const LAYERS_SETTERS: LayerSetter[] = [
+  { label: "Limites administratives", layer: "admin", defaultVisibility: true },
+  { label: "CoSIA", layer: "aiPrediction", defaultVisibility: true },
+  { label: "Plan IGN", layer: "planIGN", defaultVisibility: false },
+  { label: "Prise de vues aériennes", layer: "ortho", defaultVisibility: true },
+];
 
 // TODO : debounce à mettre en place
 export const MapVisualization = () => {
@@ -110,31 +122,16 @@ export const MapVisualization = () => {
 
           <div className={classes.block}>
             <h6>Calques</h6>
-            <OpacitySlider
-              label="Prise de vues aériennes"
-              layer="ortho"
-              setLayerOpacity={setLayerOpacity}
-              setLayerVisibility={setLayerVisibility}
-            />
-            <OpacitySlider
-              label="Plan IGN"
-              layer="planIGN"
-              setLayerOpacity={setLayerOpacity}
-              setLayerVisibility={setLayerVisibility}
-              defaultVisibility={false}
-            />
-            <OpacitySlider
-              label="CoSIA"
-              layer="aiPrediction"
-              setLayerOpacity={setLayerOpacity}
-              setLayerVisibility={setLayerVisibility}
-            />
-            <OpacitySlider
-              label="Limites administratives"
-              layer="admin"
-              setLayerOpacity={setLayerOpacity}
-              setLayerVisibility={setLayerVisibility}
-            />
+            {LAYERS_SETTERS.map((ls) => (
+              <OpacitySlider
+                key={ls.layer}
+                label={ls.label}
+                layer={ls.layer}
+                setLayerOpacity={setLayerOpacity}
+                setLayerVisibility={setLayerVisibility}
+                defaultVisibility={ls.defaultVisibility}
+              />
+            ))}
           </div>
 
           <Legend />
