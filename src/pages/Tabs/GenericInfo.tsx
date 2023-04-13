@@ -1,6 +1,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Grid, Box } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
+import { Doc, MemoizedDownladLink as DownloadLink } from "../../components/DownloadLink";
 
 const useStyles = makeStyles()((theme) => ({
   subtitle: {
@@ -18,13 +19,8 @@ const useStyles = makeStyles()((theme) => ({
     height: 48,
     marginRight: fr.spacing("3w"),
   },
-  infoDoc: {
-    fontSize: 12,
-    color: theme.decisions.text.mention.grey.default,
-  },
 }));
 
-type Doc = { name: string; link?: string; size?: string };
 const DOCS: Doc[] = [
   { name: "Description", link: "/pdf/Cosia_Descriptif_IGN_2023.pdf", size: "1,2 Mo" },
   { name: "Nomenclature des classes", link: "/pdf/Cosia_Nomenclature_IGN_2023.pdf", size: "969 Ko" },
@@ -37,22 +33,6 @@ const DOCS: Doc[] = [
 
 export const GenericInfo = () => {
   const { classes } = useStyles();
-  const generateLink = (doc: Doc) => {
-    const docInfo = doc.size ? `PDF - ${doc.size}` : "PDF";
-    return (
-      <div key={doc.name}>
-        <a
-          className="fr-link fr-icon-download-line fr-link--icon-right"
-          href={doc.link || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {doc.name}
-        </a>
-        <p className={classes.infoDoc}>{docInfo}</p>
-      </div>
-    );
-  };
 
   return (
     <Grid container columnSpacing={{ md: 10 }}>
@@ -112,7 +92,9 @@ export const GenericInfo = () => {
           <b>Ressources</b>
         </p>
 
-        {DOCS.map((doc) => generateLink(doc))}
+        {DOCS.map((doc) => (
+          <DownloadLink doc={doc} />
+        ))}
       </Grid>
     </Grid>
   );

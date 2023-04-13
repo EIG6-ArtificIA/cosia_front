@@ -1,6 +1,8 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
+import { Download } from "@codegouvfr/react-dsfr/Download";
+import { SLABS_ON_DEMAND } from "../../data/availableSlabs";
 
 const useStyles = makeStyles()((theme) => ({
   contactUs: {
@@ -18,93 +20,6 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const SLABS_ON_DEMAND = [
-  {
-    title: "06 Alpes Maritimes",
-    vintage: [2017, 2020],
-  },
-  {
-    title: "11 Aude",
-    vintage: [2021],
-  },
-  {
-    title: "29 Finistère",
-    vintage: [2021],
-  },
-  {
-    title: "33 Gironde",
-    vintage: [2021],
-  },
-  {
-    title: "35 Ille-et-Vilaine",
-    vintage: [2017, 2020],
-  },
-  {
-    title: "37 Indre-et-Loire",
-    vintage: [2021],
-  },
-  {
-    title: "38 Isère",
-    vintage: [2018, 2021],
-  },
-  {
-    title: "40 Landes",
-    vintage: [2018, 2021],
-  },
-  {
-    title: "62 Pas-de-Calais",
-    vintage: [2018, 2021],
-  },
-  {
-    title: "66 Pyrénées-Orientales",
-    vintage: [2021],
-  },
-  {
-    title: "67 Bas-Rhin",
-    vintage: [2018, 2021],
-  },
-  {
-    title: "69 Rhône",
-    vintage: [2017, 2020],
-  },
-  {
-    title: "75 Paris",
-    vintage: [2021],
-  },
-  {
-    title: "78 Yvelines",
-    vintage: [2021],
-  },
-  {
-    title: "83 Var",
-    vintage: [2017, 2020],
-  },
-  {
-    title: "84 Vaucluse",
-    vintage: [2021],
-  },
-  {
-    title: "91 Essone",
-    vintage: [2018, 2021],
-  },
-  {
-    title: "92 Hauts-de-Seine",
-    vintage: [2021],
-  },
-  {
-    title: "93 Seine-Saint-Denis",
-    vintage: [2021],
-  },
-  {
-    title: "94 Val-de-Marne",
-    vintage: [2021],
-  },
-  {
-    title: "95 Val-d'Oise",
-    vintage: [2018, 2021],
-  },
-];
-
 export const ExportAndApis = () => {
   const { classes } = useStyles();
   return (
@@ -116,42 +31,42 @@ export const ExportAndApis = () => {
         produit qui répond aux besoins et aux usages des utilisateurs.
       </p>
 
-      <h6>Dalles disponibles</h6>
+      <h5>Données de couverture du sol par IA (CoSIA) disponibles</h5>
+
+      <h6>En téléchargement</h6>
       <p>
-        Télécharger directement les données CoSIA :
         <ul>
-          <li>37 Indre-et-Loire - Tours Métropole - Millésime 2021</li>
           <li>
-            40 Landes - Communes d'Azure, Soustons, Messanges, Seignosse et Vieux-Boucau-les-Bains -
-            Millésime 2021
+            <Download
+              label="40 Landes - Soustons - Millésime 2021"
+              linkProps={{ to: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/40/Soustons%202021.zip" }}
+              details="ZIP - 74,2 Mo"
+            />
+          </li>
+          <li>
+            <Download
+              label="37 Indre-et-Loire - Tours Métropole - Millésime 2021"
+              linkProps={{ to: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/37/Tours%202021.zip" }}
+              details="ZIP - 76,2 Mo"
+            />
           </li>
         </ul>
       </p>
+
+      <h6> Via un flux WMS</h6>
       <p>
-        Par SFTP à l'adresse suivante (utilisation de FileZilla préconnisée) :
         <ul>
           <li>
-            <span className={classes.ftpDetails}>Hôte : </span> sftp://sftp-public.ign.fr
-          </li>
-          <li>
-            <span className={classes.ftpDetails}>Port : </span> 2200
-          </li>
-          <li>
-            <span className={classes.ftpDetails}>Identifiant : </span> COSIA_LS
-          </li>
-          <li>
-            <span className={classes.ftpDetails}>Mot de passe : </span> envoyer une demande de mot de
-            passe à cosia@ign.fr
+            Fontaines Saint-Martin (69) : https://wxs.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/v/wms?
           </li>
         </ul>
       </p>
 
       <h6>Dalles à la demande</h6>
-
       <div className={classes.contactUs}>
         <p>
           Vous êtes intéressé(e) par les données CoSIA ? Contactez-nous pour recevoir les dalles déjà
-          disponibles.
+          disponibles. Emprise de 10km sur 10km maximum avec un délai de 2 semaines minimum.
         </p>
 
         <ul>
