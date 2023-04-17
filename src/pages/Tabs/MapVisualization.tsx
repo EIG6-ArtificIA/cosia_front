@@ -1,14 +1,14 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Box, Grid } from "@mui/material";
-import { AvailableLayer, useMap } from "geocommuns-core";
+import { AvailableLayer, useMap, OpacitySlider } from "geocommuns-core";
 import { useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
 
 import { City, getCities } from "../../api/geoApiGouv";
 import { Legend } from "../../components/Legend";
-import { OpacitySlider } from "../../components/OpacitySlider";
 import TextFieldWithOptions from "../../components/TextFieldWithOptions";
+import { useConstCallback } from "powerhooks";
 
 const ORIGINAL_CENTER: [number, number] = [4.855906, 45.845433];
 const ORIGINAL_ZOOM = 16;
@@ -61,6 +61,24 @@ export const MapVisualization = () => {
     ORIGINAL_ZOOM,
     ["ortho", "planIGN", "aiPrediction", "admin"]
   );
+
+  const generateOpacitySlider = useConstCallback((ls: LayerSetter) => {
+    const setCurrentLayerOpacity = (opacity: number): void => {
+      setLayerOpacity(ls.layer, opacity);
+    };
+    const setCurrentLayerVisibility = (visibility: boolean): void => {
+      setLayerVisibility(ls.layer, visibility);
+    };
+    return (
+      <OpacitySlider
+        key={ls.layer}
+        label={ls.label}
+        setLayerOpacity={setCurrentLayerOpacity}
+        setLayerVisibility={setCurrentLayerVisibility}
+        defaultVisibility={ls.defaultVisibility}
+      />
+    );
+  });
 
   useEffect(() => {
     if (inputText.length <= 3 || selectedCity !== null) return;
@@ -122,16 +140,7 @@ export const MapVisualization = () => {
 
           <div className={classes.block}>
             <h6>Calques</h6>
-            {LAYERS_SETTERS.map((ls) => (
-              <OpacitySlider
-                key={ls.layer}
-                label={ls.label}
-                layer={ls.layer}
-                setLayerOpacity={setLayerOpacity}
-                setLayerVisibility={setLayerVisibility}
-                defaultVisibility={ls.defaultVisibility}
-              />
-            ))}
+            {LAYERS_SETTERS.map((ls) => generateOpacitySlider(ls))}
           </div>
 
           <Legend />
