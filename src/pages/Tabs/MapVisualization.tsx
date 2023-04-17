@@ -32,6 +32,9 @@ const useStyles = makeStyles()((theme) => ({
       overflowY: "scroll",
     },
   },
+  sliderOpacity: {
+    marginBottom: fr.spacing("3v"),
+  },
 }));
 type LayerSetter = {
   label: string;
@@ -75,6 +78,7 @@ export const MapVisualization = () => {
         label={ls.label}
         setLayerOpacity={setCurrentLayerOpacity}
         setLayerVisibility={setCurrentLayerVisibility}
+        className={classes.sliderOpacity}
         defaultVisibility={ls.defaultVisibility}
       />
     );
