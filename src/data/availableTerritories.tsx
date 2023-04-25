@@ -1,4 +1,6 @@
-export const SLABS_ON_DEMAND = [
+export type TerritoryOnDemand = { title: string; vintage: number[] };
+
+export const TERRITORIES_ON_DEMAND: TerritoryOnDemand[] = [
   {
     title: "06 Alpes Maritimes",
     vintage: [2017, 2020],
@@ -32,6 +34,14 @@ export const SLABS_ON_DEMAND = [
     vintage: [2018, 2021],
   },
   {
+    title: "47 Lot-et-Garonne",
+    vintage: [2021],
+  },
+  {
+    title: "60 Oise",
+    vintage: [2021],
+  },
+  {
     title: "62 Pas-de-Calais",
     vintage: [2018, 2021],
   },
@@ -50,6 +60,10 @@ export const SLABS_ON_DEMAND = [
   {
     title: "75 Paris",
     vintage: [2021],
+  },
+  {
+    title: "77 Seine-et-Marne",
+    vintage: [2017, 2021],
   },
   {
     title: "78 Yvelines",

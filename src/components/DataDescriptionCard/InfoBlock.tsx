@@ -51,7 +51,7 @@ export const InfoBlock = () => {
             <Divider orientation="vertical" />
           </Grid>
           <Grid item xs={12} sm="auto">
-            Mise à jour : <time dateTime="2023-04-05">05 avril 2023</time>
+            Mise à jour : <time dateTime="2023-04-25">25 avril 2023</time>
           </Grid>
         </Grid>
       </Grid>

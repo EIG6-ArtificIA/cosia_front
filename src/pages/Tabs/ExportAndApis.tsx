@@ -2,7 +2,10 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 import { Download } from "@codegouvfr/react-dsfr/Download";
-import { SLABS_ON_DEMAND } from "../../data/availableSlabs";
+import { TERRITORIES_ON_DEMAND, TerritoryOnDemand } from "../../data/availableTerritories";
+import { DOWNLOADABLE_TERRITORIES, DownloadableTerritory } from "../../data/downloadableTerritories";
+import { fr } from "@codegouvfr/react-dsfr";
+import { useCallback, useMemo } from "react";
 
 const useStyles = makeStyles()((theme) => ({
   contactUs: {
@@ -18,10 +21,58 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.decisions.text.mention.grey.default,
     fontSize: 12,
   },
+  h5: {
+    fontSize: "1.25rem",
+    marginBottom: fr.spacing("4w"),
+  },
+  h6: {
+    fontSize: "1rem",
+    marginBottom: fr.spacing("1w"),
+  },
 }));
 
 export const ExportAndApis = () => {
   const { classes } = useStyles();
+
+  const generateDownloadLink = useCallback((territory: DownloadableTerritory) => {
+    return (
+      <li>
+        <Download
+          label={territory.label}
+          linkProps={{ to: territory.link }}
+          details={`ZIP - ${territory.size}`}
+        />
+      </li>
+    );
+  }, []);
+
+  const downloadLinksList = useMemo(() => {
+    return (
+      <Grid container>
+        <Grid item xs={12} lg={6}>
+          {DOWNLOADABLE_TERRITORIES.slice(0, Math.ceil(DOWNLOADABLE_TERRITORIES.length / 2)).map(
+            (territory) => generateDownloadLink(territory)
+          )}
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          {DOWNLOADABLE_TERRITORIES.slice(Math.ceil(DOWNLOADABLE_TERRITORIES.length / 2)).map(
+            (territory) => generateDownloadLink(territory)
+          )}
+        </Grid>
+      </Grid>
+    );
+  }, [DOWNLOADABLE_TERRITORIES, generateDownloadLink]);
+
+  const generateAvailableTerritoryItem = useCallback((territory: TerritoryOnDemand) => {
+    return (
+      <li>
+        {territory.title}
+        <br />
+        <span className={classes.vintage}>Millésime {territory.vintage.join(" & ")}</span>
+      </li>
+    );
+  }, []);
+
   return (
     <section className={classes.container}>
       <h4>Export & APIs</h4>
@@ -31,29 +82,13 @@ export const ExportAndApis = () => {
         produit qui répond aux besoins et aux usages des utilisateurs.
       </p>
 
-      <h5>Données de couverture du sol par IA (CoSIA) disponibles</h5>
+      <h5 className={classes.h5}>Données CoSIA disponibles</h5>
 
-      <h6>En téléchargement</h6>
-      <p>
-        <ul>
-          <li>
-            <Download
-              label="40 Landes - Soustons - Millésime 2021"
-              linkProps={{ to: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/40/Soustons%202021.zip" }}
-              details="ZIP - 74,2 Mo"
-            />
-          </li>
-          <li>
-            <Download
-              label="37 Indre-et-Loire - Tours Métropole - Millésime 2021"
-              linkProps={{ to: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/37/Tours%202021.zip" }}
-              details="ZIP - 76,2 Mo"
-            />
-          </li>
-        </ul>
-      </p>
+      <h6 className={classes.h6}>En téléchargement</h6>
 
-      <h6> Via un flux WMS</h6>
+      <ul>{downloadLinksList}</ul>
+
+      <h6 className={classes.h6}> Via un flux WMS</h6>
       <p>
         <ul>
           <li>
@@ -62,22 +97,18 @@ export const ExportAndApis = () => {
         </ul>
       </p>
 
-      <h6>Dalles à la demande</h6>
+      <h5 className={classes.h5}>Données CoSIA à la demande</h5>
       <div className={classes.contactUs}>
         <p>
-          Vous êtes intéressé(e) par les données CoSIA ? Contactez-nous pour recevoir les dalles déjà
-          disponibles. Emprise de 10km sur 10km maximum avec un délai de 2 semaines minimum.
+          Vous êtes intéressé.e par les données CoSIA ? Contactez-nous pour recevoir des dalles de 10 km2
+          au sein de ces départements.
         </p>
 
         <ul>
           <Grid container>
-            {SLABS_ON_DEMAND.map((slab) => (
-              <Grid item key={slab.title} xs={12} sm={6} md={4}>
-                <li>
-                  {slab.title}
-                  <br />
-                  <span className={classes.vintage}>Millésime {slab.vintage.join(" & ")}</span>
-                </li>
+            {TERRITORIES_ON_DEMAND.map((territory) => (
+              <Grid item key={territory.title} xs={12} sm={6} md={4}>
+                {generateAvailableTerritoryItem(territory)}
               </Grid>
             ))}
           </Grid>
