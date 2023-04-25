@@ -84,6 +84,7 @@ export const MapVisualization = () => {
         className={classes.sliderOpacity}
         defaultVisibility={ls.defaultVisibility}
         defaultOpacity={ls.defaultOpacity}
+        maxWidth={250}
       />
     );
   });
