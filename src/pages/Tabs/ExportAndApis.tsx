@@ -1,11 +1,10 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 import { Download } from "@codegouvfr/react-dsfr/Download";
 import { TERRITORIES_ON_DEMAND, TerritoryOnDemand } from "../../data/availableTerritories";
 import { DOWNLOADABLE_TERRITORIES, DownloadableTerritory } from "../../data/downloadableTerritories";
 import { fr } from "@codegouvfr/react-dsfr";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 const useStyles = makeStyles()((theme) => ({
   contactUs: {
@@ -29,6 +28,25 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: "1rem",
     marginBottom: fr.spacing("1w"),
   },
+  availableList: {
+    [fr.breakpoints.down("md")]: {
+      columns: 1,
+    },
+    [fr.breakpoints.up("md")]: {
+      columns: 2,
+    },
+    [fr.breakpoints.up("lg")]: {
+      columns: 3,
+    },
+  },
+  downloadableList: {
+    [fr.breakpoints.down("lg")]: {
+      columns: 1,
+    },
+    [fr.breakpoints.up("lg")]: {
+      columns: 2,
+    },
+  },
 }));
 
 export const ExportAndApis = () => {
@@ -45,23 +63,6 @@ export const ExportAndApis = () => {
       </li>
     );
   }, []);
-
-  const downloadLinksList = useMemo(() => {
-    return (
-      <Grid container>
-        <Grid item xs={12} lg={6}>
-          {DOWNLOADABLE_TERRITORIES.slice(0, Math.ceil(DOWNLOADABLE_TERRITORIES.length / 2)).map(
-            (territory) => generateDownloadLink(territory)
-          )}
-        </Grid>
-        <Grid item xs={12} lg={6}>
-          {DOWNLOADABLE_TERRITORIES.slice(Math.ceil(DOWNLOADABLE_TERRITORIES.length / 2)).map(
-            (territory) => generateDownloadLink(territory)
-          )}
-        </Grid>
-      </Grid>
-    );
-  }, [DOWNLOADABLE_TERRITORIES, generateDownloadLink]);
 
   const generateAvailableTerritoryItem = useCallback((territory: TerritoryOnDemand) => {
     return (
@@ -86,7 +87,9 @@ export const ExportAndApis = () => {
 
       <h6 className={classes.h6}>En téléchargement</h6>
 
-      <ul>{downloadLinksList}</ul>
+      <ul className={classes.downloadableList}>
+        {DOWNLOADABLE_TERRITORIES.map((territory) => generateDownloadLink(territory))}
+      </ul>
 
       <h6 className={classes.h6}> Via un flux WMS</h6>
       <p>
@@ -104,14 +107,8 @@ export const ExportAndApis = () => {
           au sein de ces départements.
         </p>
 
-        <ul>
-          <Grid container>
-            {TERRITORIES_ON_DEMAND.map((territory) => (
-              <Grid item key={territory.title} xs={12} sm={6} md={4}>
-                {generateAvailableTerritoryItem(territory)}
-              </Grid>
-            ))}
-          </Grid>
+        <ul className={classes.availableList}>
+          {TERRITORIES_ON_DEMAND.map((territory) => generateAvailableTerritoryItem(territory))}
         </ul>
 
         <Button iconId="fr-icon-mail-line" linkProps={{ to: "mailto:cosia@ign.fr" }}>
