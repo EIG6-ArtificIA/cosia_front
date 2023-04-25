@@ -60,6 +60,7 @@ export const DataDescriptionCard = () => {
           </button>
         </div>
       </Snackbar>
+
       <Grid container className={classes.container} spacing={3}>
         <Grid item xs={12} md="auto">
           <img

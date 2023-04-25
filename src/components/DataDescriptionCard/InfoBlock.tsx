@@ -27,7 +27,7 @@ export const InfoBlock = () => {
   const dataDescription = "Couverture du Sol par Intelligence Artificielle";
 
   return (
-    <Grid container justifyContent="space-between" flexDirection="column">
+    <Grid container flexDirection="column">
       <Grid item className={classes.titleContainer}>
         <h1 className={classes.title}>{dataName}</h1>
         <div>
