@@ -40,13 +40,14 @@ type LayerSetter = {
   label: string;
   layer: AvailableLayer;
   defaultVisibility: boolean;
+  defaultOpacity: number;
 };
 
 const LAYERS_SETTERS: LayerSetter[] = [
-  { label: "Limites administratives", layer: "admin", defaultVisibility: true },
-  { label: "CoSIA", layer: "aiPrediction", defaultVisibility: true },
-  { label: "Plan IGN", layer: "planIGN", defaultVisibility: false },
-  { label: "Prise de vues aériennes", layer: "ortho", defaultVisibility: true },
+  { label: "Limites administratives", layer: "admin", defaultVisibility: true, defaultOpacity: 100 },
+  { label: "CoSIA", layer: "aiPrediction", defaultVisibility: true, defaultOpacity: 70 },
+  { label: "Plan IGN", layer: "planIGN", defaultVisibility: false, defaultOpacity: 100 },
+  { label: "Prise de vues aériennes", layer: "ortho", defaultVisibility: true, defaultOpacity: 100 },
 ];
 
 // TODO : debounce à mettre en place
@@ -69,9 +70,11 @@ export const MapVisualization = () => {
     const setCurrentLayerOpacity = (opacity: number): void => {
       setLayerOpacity(ls.layer, opacity);
     };
+
     const setCurrentLayerVisibility = (visibility: boolean): void => {
       setLayerVisibility(ls.layer, visibility);
     };
+
     return (
       <OpacitySlider
         key={ls.layer}
@@ -80,6 +83,7 @@ export const MapVisualization = () => {
         setLayerVisibility={setCurrentLayerVisibility}
         className={classes.sliderOpacity}
         defaultVisibility={ls.defaultVisibility}
+        defaultOpacity={ls.defaultOpacity}
       />
     );
   });
