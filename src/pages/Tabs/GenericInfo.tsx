@@ -44,12 +44,12 @@ export const GenericInfo = () => {
         <p>
           Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 16 classes
           (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est
-          produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution
-          de 20 cm par pixel.
+          produite pour tout le territoire français (métropole et DROM) et avec une haute résolution de
+          20 cm par pixel.
         </p>
         <p>
           Les cartes CoSIA sont un produit de l’IGN qui interviennent actuellement dans la conception de
-          l'OCS-GE. Leur résolution spatiale et leur finesse sémantique peuvent également aider dans la
+          l'OCSGE. Leur résolution spatiale et leur finesse sémantique peuvent également aider dans la
           production d’autres cartographies et au calcul d’autres indicateurs comme la végétation en
           ville, les haies & bocages, les trames vertes & bleues ou encore intervenir dans la réalisation
           de MOS locaux ou d’un OCS GE plus fin.
@@ -93,7 +93,7 @@ export const GenericInfo = () => {
         </p>
 
         {DOCS.map((doc) => (
-          <DownloadLink doc={doc} />
+          <DownloadLink doc={doc} key={doc.name} />
         ))}
       </Grid>
     </Grid>

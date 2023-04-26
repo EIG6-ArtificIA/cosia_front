@@ -8,12 +8,14 @@ import { Root, ErrorPage } from "geocommuns-core";
 
 import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
+import { SiteMap } from "./pages/SiteMap";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
 export enum ROUTES {
   Home = "/",
   DataInfo = "/info",
+  SiteMap = "/plan-du-site",
 }
 
 declare module "@codegouvfr/react-dsfr/spa" {
@@ -41,12 +43,14 @@ const router = createBrowserRouter([
         contactMail="cosia@ign.fr"
         feedbackLink="https://forms.office.com/e/MVeBMBdusY"
         contentDescription={contentDescription}
+        websiteMapLinkProps={{ to: ROUTES.SiteMap }}
       />
     ),
     errorElement: <ErrorPage />,
     children: [
       { path: ROUTES.Home, element: <Home /> },
       { path: ROUTES.DataInfo, element: <DataInformations /> },
+      { path: ROUTES.SiteMap, element: <SiteMap /> },
     ],
   },
 ]);

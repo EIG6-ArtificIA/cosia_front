@@ -27,7 +27,7 @@ export const InfoBlock = () => {
   const dataDescription = "Couverture du Sol par Intelligence Artificielle";
 
   return (
-    <Grid container justifyContent="space-between" flexDirection="column">
+    <Grid container flexDirection="column">
       <Grid item className={classes.titleContainer}>
         <h1 className={classes.title}>{dataName}</h1>
         <div>
@@ -51,7 +51,7 @@ export const InfoBlock = () => {
             <Divider orientation="vertical" />
           </Grid>
           <Grid item xs={12} sm="auto">
-            Mise à jour : <time dateTime="2023-04-05">05 avril 2023</time>
+            Mise à jour : <time dateTime="2023-04-25">25 avril 2023</time>
           </Grid>
         </Grid>
       </Grid>
