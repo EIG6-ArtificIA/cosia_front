@@ -38,7 +38,7 @@ const genericInfoItems: BlockItem[] = [
   {
     title: "Résumé",
     child:
-      "Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 16 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM-TOM) et avec une haute résolution de 20 cm par pixel.",
+      "Les cartes CoSIA décrivent la couverture du sol, soit la nature du sol, selon 16 classes (bâtiment, surface d’eau, conifère, culture, broussaille...). Cette description du sol est produite pour tout le territoire français (métropole et DROM) et avec une haute résolution de 20 cm par pixel.",
   },
   {
     title: "Thème",
@@ -80,7 +80,7 @@ const genericInfoItems: BlockItem[] = [
 ];
 
 const regionalInfoItem: BlockItem[] = [
-  { title: "Emprise géographique", child: "France métropolitaine et DROM-TOM" },
+  { title: "Emprise géographique", child: "France métropolitaine et DROM" },
   { title: "Résolution spatiale", child: "20 cm" },
   { title: "Langue", child: "Français" },
 ];
@@ -97,7 +97,7 @@ const technicalInfoItem: BlockItem[] = [
 
 const licenceItem: BlockItem[] = [
   { title: "Licence", child: "Etalab 2.0" },
-  { title: "Producteur", child: "IGN - Institut nationale de l’information géographique et forestière" },
+  { title: "Producteur", child: "IGN - Institut national de l’information géographique et forestière" },
   { title: "Référence", child: "URL à pourvoir" },
 ];
 
