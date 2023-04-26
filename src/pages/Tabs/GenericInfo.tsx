@@ -93,7 +93,7 @@ export const GenericInfo = () => {
         </p>
 
         {DOCS.map((doc) => (
-          <DownloadLink doc={doc} />
+          <DownloadLink doc={doc} key={doc.name} />
         ))}
       </Grid>
     </Grid>

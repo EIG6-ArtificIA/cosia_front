@@ -1,5 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { Box, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import { AvailableLayer, useMap, OpacitySlider } from "geocommuns-core";
 import { useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
@@ -35,7 +35,16 @@ const useStyles = makeStyles()((theme) => ({
   sliderOpacity: {
     marginBottom: fr.spacing("3v"),
   },
+  loader: {
+    position: "absolute",
+  },
+  layerTitle: {
+    alignItems: "center",
+    display: "flex",
+    gap: 10,
+  },
 }));
+
 type LayerSetter = {
   label: string;
   layer: AvailableLayer;
@@ -59,12 +68,13 @@ export const MapVisualization = () => {
 
   const { classes } = useStyles();
 
-  const { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility } = useMap(
-    "map",
-    ORIGINAL_CENTER,
-    ORIGINAL_ZOOM,
-    ["ortho", "planIGN", "aiPrediction", "admin"]
-  );
+  const {
+    setNewCenterAndNewZoom,
+    fitViewToPolygon,
+    setLayerOpacity,
+    setLayerVisibility,
+    isLoading: isMapLoading,
+  } = useMap("map", ORIGINAL_CENTER, ORIGINAL_ZOOM, ["ortho", "planIGN", "aiPrediction", "admin"]);
 
   const generateOpacitySlider = useConstCallback((ls: LayerSetter) => {
     const setCurrentLayerOpacity = (opacity: number): void => {
@@ -148,7 +158,9 @@ export const MapVisualization = () => {
           </div>
 
           <div className={classes.block}>
-            <h6>Calques</h6>
+            <h6 className={classes.layerTitle}>
+              Calques {isMapLoading && <CircularProgress size={20} />}
+            </h6>
             {LAYERS_SETTERS.map((ls) => generateOpacitySlider(ls))}
           </div>
 

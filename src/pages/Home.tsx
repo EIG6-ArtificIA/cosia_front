@@ -11,23 +11,23 @@ const useStyles = makeStyles()({
 });
 
 const DESCRIPTION = [
-  <p>
+  <p key={1}>
     Ce prototype est à destination de tous les utilisateurs des services IGN pour qu’ils découvrent
     CoSIA,
     <b> les cartes de couvertures du sol directement obtenues par intelligence artificielle</b>, et qui
     interviennent par exemple dans la fabrication de l’OCSGE.
   </p>,
-  <p>
+  <p key={2}>
     Ces données ne sont pas encore publiées sur les sites de l’IGN (à l’exception du Gers). Ce prototype
     fonctionne comme <b>un outil de co-construction</b> pour tester et valider les besoins et les usages
     possibles autour de ces cartes avant leur publication.
     <b> Les fonctionnalités et terminologies ne sont pas figées et peuvent faire l’objet de retours. </b>
   </p>,
-  <p>
+  <p key={3}>
     En tant que testeur, nous vous invitons à naviguer dans cette première version et
     <b> à nous faire parvenir vos retours</b> sur les données et les interfaces.
   </p>,
-  <p>
+  <p key={4}>
     Vous pouvez partager ce prototype à votre entourage professionnel mais nous vous demandons de ne pas
     communiquer publiquement dessus.
   </p>,
