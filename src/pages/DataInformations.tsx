@@ -4,8 +4,8 @@ import { makeStyles } from "tss-react/dsfr";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useConstCallback } from "powerhooks";
 import { ScrollRestoration } from "react-router-dom";
+import { MemoizedDataDescriptionCard as DataDescriptionCard } from "geocommuns-core";
 
-import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { GenericInfo } from "./Tabs/GenericInfo";
 import { MapVisualization } from "./Tabs/MapVisualization";
 import { ExportAndApis } from "./Tabs/ExportAndApis";
@@ -99,7 +99,14 @@ export const DataInformations = () => {
     <main className={classes.container}>
       <ScrollRestoration />
       <div className={classes.header}>
-        <DataDescriptionCard />
+        <DataDescriptionCard
+          title="CoSIA"
+          subtitle="Couverture du Sol par Intelligence Artificielle"
+          creationDate={new Date("2023-04-04")}
+          updateDate={new Date("2023-04-25")}
+          image={require("../assets/img/carte_de_predictions_small.png")}
+          altImage="Vignette donnant un aperçu des données CoSIA"
+        />
       </div>
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
