@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
