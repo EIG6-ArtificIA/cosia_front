@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
@@ -11,6 +10,7 @@ import { MapVisualization } from "./Tabs/MapVisualization";
 import { ExportAndApis } from "./Tabs/ExportAndApis";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
+import { Tab, useTabs } from "../hooks/useTabs";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -40,7 +40,16 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const TABS = [
+type AvailableTabs = [
+  "info",
+  "visualisation",
+  "export-&-apis",
+  "cas-usages",
+  "communaute",
+  "metadonnees"
+];
+
+const TABS: Tab<AvailableTabs>[] = [
   { tabId: "info", label: "Informations" },
   { tabId: "visualisation", label: "Visualisation" },
   { tabId: "export-&-apis", label: "Export & APIs" },
@@ -48,36 +57,17 @@ const TABS = [
   { tabId: "communaute", label: "Communauté" },
   { tabId: "metadonnees", label: "Métadonnées" },
 ];
-const TAB_IDS = TABS.map((t) => t.tabId);
 
 export const DataInformations = () => {
   const { classes } = useStyles();
 
-  const [selectedTabId, setSelectedTabId] = useState(window.location.hash.replace("#", "") || "info");
-
-  useEffect(() => {
-    const label = TABS.find((t) => t.tabId === selectedTabId)?.label;
-    document.title = label ? `CoSIA - ${label}` : `CoSIA - Informations`;
-
-    if (window.location.hash === "" && selectedTabId === "info") return;
-    window.location.hash = `#${selectedTabId}`;
-  }, [selectedTabId]);
-
-  const updateSelectedTabId = useConstCallback(() => {
-    const actualHash = window.location.hash.slice(1);
-    if (!TAB_IDS.includes(actualHash) || actualHash === selectedTabId) return;
-
-    setSelectedTabId(actualHash);
+  const { selectedTabId, setSelectedTabId } = useTabs<AvailableTabs, typeof TABS>({
+    tabs: TABS,
+    defaultTabId: "info",
+    pageTitle: "CoSIA",
   });
 
-  useEffect(() => {
-    window.addEventListener("hashchange", updateSelectedTabId);
-    return () => {
-      window.removeEventListener("hashchange", updateSelectedTabId);
-    };
-  }, []);
-
-  const renderContent = useConstCallback((tabId: string) => {
+  const renderContent = useConstCallback((tabId: AvailableTabs[number]) => {
     switch (tabId) {
       case "info":
         return <GenericInfo />;
@@ -89,7 +79,6 @@ export const DataInformations = () => {
         return <UseCases />;
       case "metadonnees":
         return <Metadata />;
-
       default:
         return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
     }
