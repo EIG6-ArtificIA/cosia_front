@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
@@ -10,7 +11,7 @@ import { MapVisualization } from "./Tabs/MapVisualization";
 import { ExportAndApis } from "./Tabs/ExportAndApis";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
-import { Tab, useTabs } from "../hooks/useTabs";
+import { useTabs } from "../hooks/useTabs";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -40,17 +41,9 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-type AvailableTabs = [
-  "info",
-  "visualisation",
-  "export-&-apis",
-  "cas-usages",
-  "communaute",
-  "metadonnees"
-];
-
-const TABS: Tab<AvailableTabs>[] = [
-  { tabId: "info", label: "Informations" },
+const DEFAULT_TAB = { tabId: "info", label: "Informations" };
+const TABS = [
+  DEFAULT_TAB,
   { tabId: "visualisation", label: "Visualisation" },
   { tabId: "export-&-apis", label: "Export & APIs" },
   { tabId: "cas-usages", label: "Cas d'usage" },
@@ -61,13 +54,13 @@ const TABS: Tab<AvailableTabs>[] = [
 export const DataInformations = () => {
   const { classes } = useStyles();
 
-  const { selectedTabId, setSelectedTabId } = useTabs<AvailableTabs, typeof TABS>({
+  const { selectedTabId, setSelectedTabId } = useTabs({
     tabs: TABS,
-    defaultTabId: "info",
+    defaultTab: DEFAULT_TAB,
     pageTitle: "CoSIA",
   });
 
-  const renderContent = useConstCallback((tabId: AvailableTabs[number]) => {
+  const renderContent = useConstCallback((tabId: string) => {
     switch (tabId) {
       case "info":
         return <GenericInfo />;
