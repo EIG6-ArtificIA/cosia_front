@@ -1,16 +1,14 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useConstCallback } from "powerhooks";
 import { ScrollRestoration } from "react-router-dom";
-import { MemoizedDataDescriptionCard as DataDescriptionCard } from "geocommuns-core";
+import { MemoizedDataDescriptionCard as DataDescriptionCard, useTabs } from "geocommuns-core";
 
 import { GenericInfo } from "./Tabs/GenericInfo";
 import { MapVisualization } from "./Tabs/MapVisualization";
 import { ExportAndApis } from "./Tabs/ExportAndApis";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
-import { useTabs } from "../hooks/useTabs";
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -33,11 +31,6 @@ const useStyles = makeStyles()((theme) => ({
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
   },
-  tabs: {
-    "& .fr-tabs__list": {
-      backgroundColor: theme.decisions.artwork.background.grey.default,
-    },
-  },
 }));
 
 const DEFAULT_TAB = { tabId: "info", label: "Informations" };
@@ -53,7 +46,7 @@ const TABS = [
 export const DataInformations = () => {
   const { classes } = useStyles();
 
-  const { selectedTabId, setSelectedTabId } = useTabs({
+  const { selectedTabId, TabsSystem } = useTabs({
     tabs: TABS,
     defaultTab: DEFAULT_TAB,
     pageTitle: "CoSIA",
@@ -91,14 +84,7 @@ export const DataInformations = () => {
       </div>
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
-          <Tabs
-            selectedTabId={selectedTabId}
-            tabs={TABS}
-            onTabChange={setSelectedTabId}
-            className={classes.tabs}
-          >
-            {renderContent(selectedTabId)}
-          </Tabs>
+          <TabsSystem renderContent={renderContent} />
         </div>
       </div>
     </main>
