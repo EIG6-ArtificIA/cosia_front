@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import { useConstCallback } from "powerhooks";
 import { ScrollRestoration } from "react-router-dom";
+import { MemoizedDataDescriptionCard as DataDescriptionCard, useTabs } from "geocommuns-core";
 
-import { DataDescriptionCard } from "../components/DataDescriptionCard/DataDescriptionCard";
 import { GenericInfo } from "./Tabs/GenericInfo";
 import { MapVisualization } from "./Tabs/MapVisualization";
 import { ExportAndApis } from "./Tabs/ExportAndApis";
@@ -33,49 +31,26 @@ const useStyles = makeStyles()((theme) => ({
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
   },
-  tabs: {
-    "& .fr-tabs__list": {
-      backgroundColor: theme.decisions.artwork.background.grey.default,
-    },
-  },
 }));
 
+const DEFAULT_TAB = { tabId: "info", label: "Informations" };
 const TABS = [
-  { tabId: "info", label: "Informations" },
+  DEFAULT_TAB,
   { tabId: "visualisation", label: "Visualisation" },
   { tabId: "export-&-apis", label: "Export & APIs" },
   { tabId: "cas-usages", label: "Cas d'usage" },
   { tabId: "communaute", label: "Communauté" },
   { tabId: "metadonnees", label: "Métadonnées" },
 ];
-const TAB_IDS = TABS.map((t) => t.tabId);
 
 export const DataInformations = () => {
   const { classes } = useStyles();
 
-  const [selectedTabId, setSelectedTabId] = useState(window.location.hash.replace("#", "") || "info");
-
-  useEffect(() => {
-    const label = TABS.find((t) => t.tabId === selectedTabId)?.label;
-    document.title = label ? `CoSIA - ${label}` : `CoSIA - Informations`;
-
-    if (window.location.hash === "" && selectedTabId === "info") return;
-    window.location.hash = `#${selectedTabId}`;
-  }, [selectedTabId]);
-
-  const updateSelectedTabId = useConstCallback(() => {
-    const actualHash = window.location.hash.slice(1);
-    if (!TAB_IDS.includes(actualHash) || actualHash === selectedTabId) return;
-
-    setSelectedTabId(actualHash);
+  const { selectedTabId, TabsSystem } = useTabs({
+    tabs: TABS,
+    defaultTab: DEFAULT_TAB,
+    pageTitle: "CoSIA",
   });
-
-  useEffect(() => {
-    window.addEventListener("hashchange", updateSelectedTabId);
-    return () => {
-      window.removeEventListener("hashchange", updateSelectedTabId);
-    };
-  }, []);
 
   const renderContent = useConstCallback((tabId: string) => {
     switch (tabId) {
@@ -89,7 +64,6 @@ export const DataInformations = () => {
         return <UseCases />;
       case "metadonnees":
         return <Metadata />;
-
       default:
         return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
     }
@@ -99,18 +73,18 @@ export const DataInformations = () => {
     <main className={classes.container}>
       <ScrollRestoration />
       <div className={classes.header}>
-        <DataDescriptionCard />
+        <DataDescriptionCard
+          title="CoSIA"
+          subtitle="Couverture du Sol par Intelligence Artificielle"
+          creationDate={new Date("2023-04-04")}
+          updateDate={new Date("2023-04-25")}
+          image={require("../assets/img/carte_de_predictions_small.png")}
+          altImage="Vignette donnant un aperçu des données CoSIA"
+        />
       </div>
       <div className={classes.bodyBackground}>
         <div className={classes.body}>
-          <Tabs
-            selectedTabId={selectedTabId}
-            tabs={TABS}
-            onTabChange={setSelectedTabId}
-            className={classes.tabs}
-          >
-            {renderContent(selectedTabId)}
-          </Tabs>
+          <TabsSystem renderContent={renderContent} />
         </div>
       </div>
     </main>

@@ -16,6 +16,11 @@ export const DOWNLOADABLE_TERRITORIES: DownloadableTerritory[] = [
     size: "7,3 Mo",
   },
   {
+    label: "11 Aude - Castelnaudary - 2021",
+    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/11/D011_2_Castelnaudary.zip",
+    size: "158,0 Mo",
+  },
+  {
     label: "35 Ille-et-Vilaine - Rennes - 2020",
     link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/35/D035_1_PayDeRennes.zip",
     size: "985,4 Mo",
