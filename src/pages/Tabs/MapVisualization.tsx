@@ -10,8 +10,8 @@ import { Legend } from "../../components/Legend";
 import TextFieldWithOptions from "../../components/TextFieldWithOptions";
 import { useConstCallback } from "powerhooks";
 
-const ORIGINAL_CENTER: [number, number] = [4.855906, 45.845433];
-const ORIGINAL_ZOOM = 16;
+const ORIGINAL_CENTER: [number, number] = [-1.677, 48.1];
+const ORIGINAL_ZOOM = 14;
 
 const useStyles = makeStyles()((theme) => ({
   block: {
