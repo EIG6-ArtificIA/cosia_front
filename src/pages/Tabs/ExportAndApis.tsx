@@ -94,7 +94,7 @@ export const ExportAndApis = () => {
       <h6 className={classes.h6}> Via un flux WMS</h6>
       <p>
         <ul>
-          <li>Pays de Rennes (35) : https://wxs.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/v/wmts?</li>
+          <li>Pays de Rennes (35) : https://wxs.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/wmts?</li>
         </ul>
       </p>
 
