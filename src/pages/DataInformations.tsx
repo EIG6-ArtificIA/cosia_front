@@ -1,7 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { useConstCallback } from "powerhooks";
-import { ScrollRestoration } from "react-router-dom";
 import { MemoizedDataDescriptionCard as DataDescriptionCard, useTabs } from "geocommuns-core";
 
 import { GenericInfo } from "./Tabs/GenericInfo";
@@ -71,7 +70,6 @@ export const DataInformations = () => {
 
   return (
     <main className={classes.container}>
-      <ScrollRestoration />
       <div className={classes.header}>
         <DataDescriptionCard
           title="CoSIA"
