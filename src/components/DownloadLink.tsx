@@ -14,6 +14,7 @@ type Props = {
   doc: Doc;
 };
 
+//TODO use DownloadLink from geocommuns-core
 const DownloadLink = ({ doc }: Props) => {
   const { classes } = useStyles();
 
