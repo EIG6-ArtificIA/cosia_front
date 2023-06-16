@@ -1,7 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { Doc } from "../../components/DownloadLink";
-import { GenericDataInfo } from "geocommuns-core";
+import { GenericDataInfo, Doc } from "geocommuns-core";
 
 const useStyles = makeStyles()(() => ({
   subtitle: {
