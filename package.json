@@ -1,6 +1,6 @@
 {
   "name": "lidarviz-front",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": true,
   "scripts": {
     "start": "BROWSER=none PORT=3001 react-scripts start ",
@@ -24,7 +24,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
-    "geocommuns-core": "^0.14.0",
+    "geocommuns-core": "^0.14.2",
     "ol": "^7.1.0",
     "powerhooks": "^0.26.2",
     "react": "^18.2.0",
