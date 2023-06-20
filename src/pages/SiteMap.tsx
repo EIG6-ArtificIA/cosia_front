@@ -1,4 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
+import { Link } from "react-router-dom";
 import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()((theme) => ({
@@ -26,29 +27,29 @@ export const SiteMap = () => {
       <h1>Plan du site</h1>
       <ul className={classes.noBullet}>
         <li>
-          <a href={"/"}>Accueil</a>
+          <Link to={"/"}>Accueil</Link>
         </li>
         <li>
-          <a href={"/info"}>CoSIA</a>
+          <Link to={"/info"}>CoSIA</Link>
         </li>
         <ul>
           <li>
-            <a href="/info#info"> Informations</a>
+            <Link to="/info#info"> Informations</Link>
           </li>
           <li>
-            <a href="/info#visualisation"> Visualisation</a>
+            <Link to="/info#visualisation"> Visualisation</Link>
           </li>
           <li>
-            <a href="/info#export-&-apis"> Export & APIs</a>
+            <Link to="/info#export-&-apis"> Export & APIs</Link>
           </li>
           <li>
-            <a href="/info#cas-usages"> Cas d'usage</a>
+            <Link to="/info#cas-usages"> Cas d'usage</Link>
           </li>
           <li>
-            <a href="/info#communaute"> Communauté</a>
+            <Link to="/info#communaute"> Communauté</Link>
           </li>
           <li>
-            <a href="/info#metadonnees"> Métadonnées</a>
+            <Link to="/info#metadonnees"> Métadonnées</Link>
           </li>
         </ul>
       </ul>
