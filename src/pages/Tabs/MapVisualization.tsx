@@ -9,6 +9,7 @@ import { City, getCities } from "../../api/geoApiGouv";
 import { Legend } from "../../components/Legend";
 import TextFieldWithOptions from "../../components/TextFieldWithOptions";
 import { useConstCallback } from "powerhooks";
+import { Link } from "react-router-dom";
 
 const ORIGINAL_CENTER: [number, number] = [-1.677, 48.1];
 const ORIGINAL_ZOOM = 14;
@@ -131,7 +132,7 @@ export const MapVisualization = () => {
       <CallOut colorVariant="brown-caramel">
         <span className={fr.cx("fr-icon-info-line")} /> Les données affichées ont été produites pour le
         pays de Rennes. D'autres données CoSIA sont disponibles et téléchargeables depuis l'onglet{" "}
-        <a href="/info#export-&-apis">Export et APIs</a>.
+        <Link to="/info#export-&-apis">Export et APIs</Link>.
       </CallOut>
 
       <Grid container spacing={2}>
