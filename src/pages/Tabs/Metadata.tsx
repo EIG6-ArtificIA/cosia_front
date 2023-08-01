@@ -18,12 +18,17 @@ type Block = {
   children: BlockItem[];
 };
 
-const generateTagsList = (words: string[]) =>
-  words.map((w) => (
-    <Tag key={w} className={fr.cx("fr-mr-1w")}>
-      {w}
-    </Tag>
-  ));
+const generateTagsList = (words: string[]) => (
+  <Grid container rowSpacing={1}>
+    {words.map((w) => (
+      <Grid item>
+        <Tag key={w} className={fr.cx("fr-mr-1w")}>
+          {w}
+        </Tag>
+      </Grid>
+    ))}
+  </Grid>
+);
 
 const completionItems: BlockItem[] = [
   {
@@ -88,11 +93,11 @@ const regionalInfoItem: BlockItem[] = [
 const technicalInfoItem: BlockItem[] = [
   { title: "Type de représentation géographique", child: "Vecteur" },
   { title: "Formats du fichier", child: "Shapefile" },
-  { title: "Système de projection", child: "EPSG:2154" },
-  { title: "Encodage du fichier", child: "Unit8" },
-  { title: "Encodage des caractères", child: "UTF-8" },
+  { title: "Système de projection", child: "EPSG:2154 / Lambert-93" },
   { title: "Lissage vecteur", child: "0,5m" },
   { title: "Nombre de classes", child: "16" },
+  { title: "Encodage du fichier", child: "Unit8" },
+  { title: "Encodage des caractères", child: "UTF-8" },
 ];
 
 const licenceItem: BlockItem[] = [
@@ -127,7 +132,7 @@ export const Metadata = () => {
 
   return (
     <section className={classes.container}>
-      <h4>Métadonnées</h4>
+      <h4 className={fr.cx("fr-mb-4w")}>Métadonnées</h4>
 
       {blocks.map((block, i) => {
         return (
@@ -136,7 +141,7 @@ export const Metadata = () => {
             <Grid container rowSpacing={2}>
               {block.children.map((item) => generateBlockItem(item))}
             </Grid>
-            {i !== blocks.length - 1 ? <hr className={fr.cx("fr-mt-3w", "fr-mb-1w")} /> : null}
+            {i !== blocks.length - 1 ? <hr className={fr.cx("fr-mt-4w", "fr-mb-1w")} /> : null}
           </div>
         );
       })}
