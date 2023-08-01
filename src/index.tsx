@@ -19,6 +19,7 @@ export enum ROUTES {
   PersonalData = "/donnees-personnelles",
   LegalTerms = "/mentions-legales",
   CookiesManagement = "/gestion-des-cookies",
+  About = "/a-propos",
 }
 
 declare module "@codegouvfr/react-dsfr/spa" {
@@ -60,8 +61,22 @@ const router = createBrowserRouter([
             </Badge>
           </>
         }
-        contactMail="cosia@ign.fr"
-        feedbackLink="https://forms.office.com/e/MVeBMBdusY"
+        quickAccessItems={[
+          {
+            iconId: "ri-information-line",
+            linkProps: {
+              to: ROUTES.About,
+            },
+            text: "A propos",
+          },
+          {
+            iconId: "ri-mail-line",
+            linkProps: {
+              to: `mailto:cosia@ign.fr`,
+            },
+            text: "Nous contacter",
+          },
+        ]}
         contentDescription={contentDescription}
         personalDataLinkProps={{ to: ROUTES.PersonalData }}
         termsLinkProps={{ to: ROUTES.LegalTerms }}
