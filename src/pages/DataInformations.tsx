@@ -10,14 +10,11 @@ import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
 
 const useStyles = makeStyles()((theme) => ({
-  container: {
-    paddingTop: fr.spacing("10w"),
-  },
   header: {
     margin: "auto",
     maxWidth: 1200,
     width: "90%",
-    paddingBottom: fr.spacing("5w"),
+    paddingBottom: fr.spacing("7w"),
   },
   bodyBackground: {
     backgroundColor: theme.decisions.artwork.background.grey.default,
@@ -69,7 +66,7 @@ export const DataInformations = () => {
   });
 
   return (
-    <main className={classes.container}>
+    <main>
       <div className={classes.header}>
         <DataDescriptionCard
           title="CoSIA"
