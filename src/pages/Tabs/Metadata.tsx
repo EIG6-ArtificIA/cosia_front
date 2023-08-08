@@ -96,7 +96,7 @@ const technicalInfoItem: BlockItem[] = [
   { title: "Système de projection", child: "EPSG:2154 / Lambert-93" },
   { title: "Lissage vecteur", child: "0,5m" },
   { title: "Nombre de classes", child: "16" },
-  { title: "Encodage du fichier", child: "Unit8" },
+  { title: "Encodage du fichier", child: "Uint8" },
   { title: "Encodage des caractères", child: "UTF-8" },
 ];
 

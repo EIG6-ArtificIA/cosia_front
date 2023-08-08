@@ -29,7 +29,7 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const DEFAULT_TAB = { tabId: "info", label: "Informations" };
+const DEFAULT_TAB = { tabId: "descriptif", label: "Descriptif" };
 const TABS = [
   DEFAULT_TAB,
   { tabId: "visualisation", label: "Visualisation" },
@@ -50,7 +50,7 @@ export const DataInformations = () => {
 
   const renderContent = useConstCallback((tabId: string) => {
     switch (tabId) {
-      case "info":
+      case "descriptif":
         return <GenericInfo />;
       case "visualisation":
         return <MapVisualization />;

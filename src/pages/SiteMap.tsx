@@ -34,7 +34,7 @@ export const SiteMap = () => {
         </li>
         <ul>
           <li>
-            <Link to="/info#info"> Informations</Link>
+            <Link to="/info#descriptif"> Descriptif</Link>
           </li>
           <li>
             <Link to="/info#visualisation"> Visualisation</Link>

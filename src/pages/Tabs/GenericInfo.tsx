@@ -17,6 +17,11 @@ const DOCS: Doc[] = [
     link: "/pdf/Cosia_Documentation_Technique_IGN_2023.pdf",
     size: "7,4 Mo",
   },
+  {
+    name: "Comparatif CoSIA et OCSGE",
+    link: "/pdf/Comparatif_OCSGE_CoSIA_IGN_2023.pdf",
+    size: "18 Mo",
+  },
 ];
 
 export const GenericInfo = () => {
