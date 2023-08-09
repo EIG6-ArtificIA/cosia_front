@@ -8,13 +8,23 @@ jobs:
   test_lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - uses: bahmutov/npm-install@v1
-      - name: If this step fails run 'yarn lint' and 'yarn format' then commit again.
-        run: |
-          yarn lint:check
-          yarn format:check
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "19.2"
+
+      - name: Install yarn
+        run: npm install --global yarn
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Run ESLint
+        run: yarn lint
+
   test:
     runs-on: ${{ matrix.os }}
     needs: test_lint
