@@ -13,9 +13,6 @@
     "lint": "eslint 'src/**/*.tsx'",
     "lint-fix": "eslint 'src/**/*.tsx' --fix",
     "lint:check": "eslint . --ext .ts,.tsx",
-    "_format": "prettier '**/*.{ts,tsx,json,md}'",
-    "format": "npm run _format -- --write",
-    "format:check": "npm run _format -- --list-different",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -49,8 +46,7 @@
     "eslint": "^8.34.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
-    "husky": "^8.0.3",
-    "prettier": "^2.3.2"
+    "husky": "^8.0.3"
   },
   "eslintConfig": {
     "settings": {
