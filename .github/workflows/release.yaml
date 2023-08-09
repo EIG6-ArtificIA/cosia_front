@@ -61,6 +61,8 @@ jobs:
       )
     needs:
       - check_if_version_upgraded
+    permissions:
+      contents: write
     steps:
       - uses: softprops/action-gh-release@v1
         with:
