@@ -1,9 +1,8 @@
 name: Build image and push on Docker Hub
 
 on:
-  push:
-    branches:
-      - "master"
+  release:
+    types: [published]
 
 jobs:
   docker:
