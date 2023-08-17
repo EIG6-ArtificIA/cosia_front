@@ -1,4 +1,4 @@
-# Visualisateur LiDAR HD
+# CoSIA
 
 ## Contribution
 
@@ -14,8 +14,13 @@
 
 ### Pour lancer le projet avec docker
 
-Construire l'image : `docker build . -t ign/predictia_front`
-Lancer le projet : `docker run -p 3001:3001 ign/predictia_front`
+Construire l'image : `docker build -t ign/cosia_front .`
+Lancer le projet : `docker run -p 3001:3001 ign/cosia_front`
+
+### Pour build le projet avec docker + deploy
+
+Construire l'image : `docker build -t ign/cosia_front -f Dockerfile.prod .`
+Lancer le projet : `docker run --rm -d -p 80:80 ign/cosia_front`
 
 ## Autres scripts (par défaut avec create-react-app)
 

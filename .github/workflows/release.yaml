@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: maximallain/predictia_front:latest
+          tags: maximallain/cosia_front:latest
           file: Dockerfile.prod
 
   check_if_version_upgraded:
@@ -129,5 +129,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: maximallain/predictia_front:${{needs.check_if_version_upgraded.outputs.to_version}}
+          tags: maximallain/cosia_front:${{needs.check_if_version_upgraded.outputs.to_version}}
           file: Dockerfile.prod
