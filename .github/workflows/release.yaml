@@ -51,6 +51,7 @@ jobs:
         with:
           push: true
           tags: maximallain/predictia_front:latest
+          file: Dockerfile.prod
 
   check_if_version_upgraded:
     name: Check if version upgrade
@@ -129,3 +130,4 @@ jobs:
         with:
           push: true
           tags: maximallain/predictia_front:${{needs.check_if_version_upgraded.outputs.to_version}}
+          file: Dockerfile.prod
