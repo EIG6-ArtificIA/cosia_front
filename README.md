@@ -15,7 +15,7 @@
 ### Pour lancer le projet avec docker
 
 Construire l'image : `docker build . -t ign/predictia_front`
-Lancer le projet : `docker run -p 3000:3000 ign/predictia_front`
+Lancer le projet : `docker run -p 3001:3001 ign/predictia_front`
 
 ## Autres scripts (par défaut avec create-react-app)
 
