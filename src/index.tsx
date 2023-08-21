@@ -9,6 +9,7 @@ import { Root, ErrorPage, PersonalData, LegalTerms, Page, CookiesManagement } fr
 import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
+import { About } from "./pages/About";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
@@ -95,6 +96,14 @@ const router = createBrowserRouter([
         }),
       },
       {
+        path: ROUTES.About,
+        element: generatePageWithDocumentTitle({
+          element: <About />,
+          pageTitle: "À propos",
+          scrollRestoration: true,
+        }),
+      },
+      {
         path: ROUTES.SiteMap,
         element: generatePageWithDocumentTitle({
           element: <SiteMap />,
@@ -143,5 +152,5 @@ root.render(
     <MuiDsfrThemeProvider>
       <RouterProvider router={router} />
     </MuiDsfrThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
