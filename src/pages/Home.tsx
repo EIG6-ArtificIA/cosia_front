@@ -2,57 +2,70 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import { ROUTES } from "..";
-import { Home as CommonHome } from "geocommuns-core";
 
-const useStyles = makeStyles()({
+const ligthTheme = fr.getColors(false);
+const useStyles = makeStyles<{ backgroundImage: string }>()((theme, { backgroundImage }) => ({
+  titleTexts: {
+    position: "absolute",
+    textAlign: "center",
+    padding: fr.spacing("2w"),
+    [fr.breakpoints.down("md")]: { width: "90%" },
+    [fr.breakpoints.up("md")]: { width: "70%" },
+    [fr.breakpoints.up("lg")]: { width: "50%" },
+  },
+  titleBlock: {
+    height: "inherit",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundImage: `url(${backgroundImage})`,
+    minHeight: 500,
+    backgroundSize: "cover",
+  },
+  title: {
+    color: ligthTheme.decisions.text.inverted.grey.default,
+    fontSize: 64,
+  },
+  subtitle: {
+    color: ligthTheme.decisions.text.inverted.grey.default,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 48,
+    lineHeight: fr.spacing("7w"),
+  },
+  titleInfo: {
+    fontVariantCaps: "all-small-caps",
+    color: ligthTheme.decisions.text.inverted.grey.default,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginTop: fr.spacing("8w"),
+  },
   iconButton: {
     marginLeft: fr.spacing("1w"),
   },
-});
-
-const DESCRIPTION = [
-  <p key={1}>
-    Ce prototype est à destination de tous les utilisateurs des services IGN pour qu’ils découvrent
-    CoSIA,
-    <b> les cartes de couvertures du sol directement obtenues par intelligence artificielle</b>, et qui
-    interviennent par exemple dans la fabrication de l’OCSGE.
-  </p>,
-  <p key={2}>
-    Ces données ne sont pas encore publiées sur les sites de l’IGN (à l’exception du Gers). Ce prototype
-    fonctionne comme <b>un outil de co-construction</b> pour tester et valider les besoins et les usages
-    possibles autour de ces cartes avant leur publication.
-    <b> Les fonctionnalités et terminologies ne sont pas figées et peuvent faire l’objet de retours. </b>
-  </p>,
-  <p key={3}>
-    En tant que testeur, nous vous invitons à naviguer dans cette première version et
-    <b> à nous faire parvenir vos retours</b> sur les données et les interfaces.
-  </p>,
-  <p key={4}>
-    Vous pouvez partager ce prototype à votre entourage professionnel mais nous vous demandons de ne pas
-    communiquer publiquement dessus.
-  </p>,
-];
+}));
 
 export const Home = () => {
-  const { cx, classes } = useStyles();
-  const CTA = (
-    <Button linkProps={{ to: ROUTES.DataInfo }} priority="secondary">
-      Accéder au prototype
-      <span
-        className={cx(fr.cx("fr-icon-arrow-right-line"), classes.iconButton)}
-        aria-hidden="true"
-      ></span>
-    </Button>
-  );
+  const { cx, classes } = useStyles({
+    backgroundImage: require("../assets/img/carte_de_predictions.png"),
+  });
 
   return (
-    <CommonHome
-      title="CoSIA"
-      subtitle="La Couverture du Sol par Intelligence Artificielle"
-      titleInfo="Prototype de démonstration"
-      cover={require("../assets/img/carte_de_predictions.png")}
-      description={DESCRIPTION}
-      cta={CTA}
-    />
+    <section className={classes.titleBlock}>
+      <div className={classes.titleTexts}>
+        <h1 className={classes.title}>CoSIA</h1>
+        <h2 className={classes.subtitle}>La Couverture du Sol par Intelligence Artificielle</h2>
+        <p className={classes.titleInfo}>Prototype de démonstration</p>
+
+        <Button linkProps={{ to: ROUTES.DataInfo }}>
+          Accéder au prototype
+          <span
+            className={cx(fr.cx("fr-icon-arrow-right-line"), classes.iconButton)}
+            aria-hidden="true"
+          ></span>
+        </Button>
+      </div>
+    </section>
   );
 };
