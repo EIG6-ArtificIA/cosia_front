@@ -30,14 +30,15 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-const DEFAULT_TAB = { tabId: "descriptif", label: "Descriptif" };
+const DEFAULT_TAB = { tabId: "visualisation", label: "Visualisation" };
 const TABS = [
   DEFAULT_TAB,
-  { tabId: "visualisation", label: "Visualisation" },
-  { tabId: "export-&-apis", label: "Export & APIs" },
+  { tabId: "descriptif", label: "Descriptif" },
+  { tabId: "export", label: "Export" },
   { tabId: "cas-usages", label: "Cas d'usage" },
   { tabId: "communaute", label: "Communauté" },
   { tabId: "metadonnees", label: "Métadonnées" },
+  { tabId: "retours", label: "Retours" },
 ];
 
 export const DataInformations = () => {
