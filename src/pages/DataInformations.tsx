@@ -9,11 +9,12 @@ import { ExportAndApis } from "./Tabs/ExportAndApis";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()(theme => ({
   header: {
     margin: "auto",
     maxWidth: 1200,
     width: "90%",
+    paddingTop: fr.spacing("7w"),
     paddingBottom: fr.spacing("7w"),
   },
   bodyBackground: {
