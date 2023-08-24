@@ -19,7 +19,7 @@ const useStyles = makeStyles<{ backgroundImage: string }>()((theme, { background
     alignItems: "center",
     justifyContent: "center",
     backgroundImage: `url(${backgroundImage})`,
-    minHeight: 500,
+    minHeight: 600,
     backgroundSize: "cover",
   },
   title: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles<{ backgroundImage: string }>()((theme, { background
     color: ligthTheme.decisions.text.inverted.grey.default,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 48,
+    fontSize: 40,
     lineHeight: fr.spacing("7w"),
   },
   titleInfo: {

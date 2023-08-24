@@ -6,6 +6,7 @@ const useStyles = makeStyles()(theme => ({
   body: {
     margin: "auto",
     marginTop: fr.spacing("5w"),
+    marginBottom: fr.spacing("5w"),
     maxWidth: 1200,
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
