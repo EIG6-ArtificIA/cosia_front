@@ -53,16 +53,17 @@ jobs:
           tags: maximallain/cosia_front:latest
           file: Dockerfile.prod
 
-  trigger_deployment_pipeline:
-    name: Trigger deployment pipeline
-    runs-on: ubuntu-latest
-    needs:
-      - publish_latest_on_dockerhub
-    steps:
-      - name: Fetch gitlab webhook
-        uses: joelwmale/webhook-action@master
-        with:
-          url: https://gitlab.gpf-tech.ign.fr/api/v4/projects/701/ref/master/trigger/pipeline?token=${{ secrets.DEV_TRIGGER_GITLAB_TOKEN }}
+  # Unabled because of IGN network... When l'usine logicielle is open on internet => let's go !
+  # trigger_deployment_pipeline:
+  #   name: Trigger deployment pipeline
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - publish_latest_on_dockerhub
+  #   steps:
+  #     - name: Fetch gitlab webhook
+  #       uses: joelwmale/webhook-action@master
+  #       with:
+  #         url: https://gitlab.gpf-tech.ign.fr/api/v4/projects/701/ref/master/trigger/pipeline?token=${{ secrets.DEV_TRIGGER_GITLAB_TOKEN }}
 
   check_if_version_upgraded:
     name: Check if version upgrade
