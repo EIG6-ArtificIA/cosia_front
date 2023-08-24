@@ -60,9 +60,9 @@ jobs:
       - publish_latest_on_dockerhub
     steps:
       - name: Fetch gitlab webhook
-      uses: joelwmale/webhook-action@master
-      with:
-        url: https://gitlab.gpf-tech.ign.fr/api/v4/projects/701/ref/master/trigger/pipeline?token=${{ secrets.DEV_TRIGGER_GITLAB_TOKEN }}
+        uses: joelwmale/webhook-action@master
+        with:
+          url: https://gitlab.gpf-tech.ign.fr/api/v4/projects/701/ref/master/trigger/pipeline?token=${{ secrets.DEV_TRIGGER_GITLAB_TOKEN }}
 
   check_if_version_upgraded:
     name: Check if version upgrade
