@@ -56,7 +56,7 @@ export const DataInformations = () => {
         return <GenericInfo />;
       case "visualisation":
         return <MapVisualization />;
-      case "export-&-apis":
+      case "export":
         return <ExportAndApis />;
       case "cas-usages":
         return <UseCases />;
