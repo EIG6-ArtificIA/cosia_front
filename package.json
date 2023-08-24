@@ -1,6 +1,6 @@
 {
   "name": "cosia_front",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "scripts": {
     "start": "BROWSER=none PORT=3001 react-scripts start ",
@@ -16,7 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^0.73.2",
+    "@codegouvfr/react-dsfr": "~0.73.2",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.16",
