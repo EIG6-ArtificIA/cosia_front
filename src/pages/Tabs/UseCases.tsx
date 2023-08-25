@@ -2,9 +2,10 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { makeStyles } from "tss-react/dsfr";
 import { UseCaseCard } from "../../components/UseCaseCard";
 import { fr } from "@codegouvfr/react-dsfr";
+import { Grid } from "@mui/material";
 
 const useStyles = makeStyles()(() => ({
-  container: {
+  paragraph: {
     maxWidth: 650,
   },
   h6: {
@@ -13,14 +14,50 @@ const useStyles = makeStyles()(() => ({
   },
 }));
 
+type UseCase = {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  imageAlt: string;
+  source: string;
+};
+
+const USE_CASES: UseCase[] = [
+  {
+    title: "Dispositif de Suivi des Bocages",
+    description:
+      "Les bocages sont des puits de biodiversité dans lesquels vivent de nombreuses espèces animales et végétales. L’IGN et l’OFB oeuvrent pour protéger ces paysages en mettant en place un Dispositif de Suivi des Bocages (DSB) efficace à travers la France métropolitaine. L’obtention de ce suivi a pour but de dégager des tendances, d’évaluer l’efficacité des politiques publiques et d’aider à la prise de décision pour une meilleure préservation de ces paysages.",
+    tags: ["Aménagement du territoire", "Biodiversité", "Agriculture"],
+    image: require("../../assets/img/use_case_DSB_1.png"),
+    imageAlt: "Test de détection des zones arborées dans le Gers en 2019",
+    source: "IGN - Institut national de l'information géographique et forestière",
+  },
+];
+
 export const UseCases = () => {
   const { classes } = useStyles();
   return (
-    <section className={classes.container}>
+    <section>
       <h4>Cas d'usage</h4>
-      <UseCaseCard />
+      <Grid container spacing={2}>
+        {USE_CASES.map(useCase => {
+          return (
+            <Grid item xs={12} lg={6} xl={4}>
+              <UseCaseCard
+                title={useCase.title}
+                description={useCase.description}
+                tags={useCase.tags}
+                image={useCase.image}
+                imageAlt={useCase.imageAlt}
+                source={useCase.source}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
       <h6 className={classes.h6}>Proposer un cas d'usage</h6>
-      <p>
+      <p className={classes.paragraph}>
         Si vous souhaitez mettre en place ou enrichir un cas d'usage à partir des données CoSIA et que
         vous souhaitez être accompagnés par l'IGN, vous pouvez remplir ce formulaire. Nous vous
         recontacterons rapidement pour définir avec vous la meilleure façon de vous accompagner.
