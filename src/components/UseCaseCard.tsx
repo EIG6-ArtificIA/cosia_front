@@ -7,6 +7,7 @@ const useStyles = makeStyles()(theme => ({
   container: {
     minWidth: 360,
     marginBottom: fr.spacing("3w"),
+    textAlign: "left",
   },
   source: {
     color: theme.decisions.text.mention.grey.default,

@@ -16,7 +16,7 @@ const useStyles = makeStyles()(() => ({
   },
 }));
 
-type UseCase = {
+export type UseCase = {
   title: string;
   description: string;
   tags: string[];
@@ -39,7 +39,7 @@ const USE_CASES: UseCase[] = [
 
 export const UseCases = memo(() => {
   const { classes } = useStyles();
-  const [displayDetail, setDisplayDetail] = useState(false);
+  const [selectedUseCase, setSelectedUseCase] = useState<UseCase | undefined>(undefined);
 
   const list = (
     <>
@@ -55,7 +55,7 @@ export const UseCases = memo(() => {
                 image={useCase.image}
                 imageAlt={useCase.imageAlt}
                 source={useCase.source}
-                onClick={() => setDisplayDetail(true)}
+                onClick={() => setSelectedUseCase(useCase)}
               />
             </Grid>
           );
@@ -76,7 +76,13 @@ export const UseCases = memo(() => {
     </>
   );
 
-  const detail = <UseCaseDetail goBackToList={() => setDisplayDetail(false)} />;
-
-  return <section>{displayDetail ? detail : list}</section>;
+  return (
+    <section>
+      {selectedUseCase ? (
+        <UseCaseDetail useCase={selectedUseCase} goBackToList={() => setSelectedUseCase(undefined)} />
+      ) : (
+        list
+      )}
+    </section>
+  );
 });
