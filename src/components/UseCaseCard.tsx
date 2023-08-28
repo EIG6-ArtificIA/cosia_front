@@ -7,6 +7,7 @@ const useStyles = makeStyles()(theme => ({
   container: {
     minWidth: 360,
     marginBottom: fr.spacing("3w"),
+    textAlign: "left",
   },
   source: {
     color: theme.decisions.text.mention.grey.default,
@@ -28,12 +29,13 @@ type Props = {
   image: string;
   imageAlt: string;
   source: string;
+  onClick(): void;
 };
 
-export const UseCaseCard = ({ title, description, tags, image, imageAlt, source }: Props) => {
+export const UseCaseCard = ({ title, description, tags, image, imageAlt, source, onClick }: Props) => {
   const { classes } = useStyles();
   return (
-    <div className={classes.container}>
+    <button className={classes.container} onClick={onClick}>
       <Card
         detail={
           <div className={classes.detail}>
@@ -54,6 +56,6 @@ export const UseCaseCard = ({ title, description, tags, image, imageAlt, source 
         title={title}
         desc={description}
       />
-    </div>
+    </button>
   );
 };

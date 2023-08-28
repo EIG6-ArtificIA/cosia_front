@@ -1,8 +1,10 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { makeStyles } from "tss-react/dsfr";
 import { UseCaseCard } from "../../components/UseCaseCard";
+import { UseCaseDetail } from "../../components/UseCaseDetail";
 import { fr } from "@codegouvfr/react-dsfr";
 import { Grid } from "@mui/material";
+import { memo, useState } from "react";
 
 const useStyles = makeStyles()(() => ({
   paragraph: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles()(() => ({
   },
 }));
 
-type UseCase = {
+export type UseCase = {
   title: string;
   description: string;
   tags: string[];
@@ -35,10 +37,12 @@ const USE_CASES: UseCase[] = [
   },
 ];
 
-export const UseCases = () => {
+export const UseCases = memo(() => {
   const { classes } = useStyles();
-  return (
-    <section>
+  const [selectedUseCase, setSelectedUseCase] = useState<UseCase | undefined>(undefined);
+
+  const list = (
+    <>
       <h4>Cas d'usage</h4>
       <Grid container spacing={2}>
         {USE_CASES.map(useCase => {
@@ -51,6 +55,7 @@ export const UseCases = () => {
                 image={useCase.image}
                 imageAlt={useCase.imageAlt}
                 source={useCase.source}
+                onClick={() => setSelectedUseCase(useCase)}
               />
             </Grid>
           );
@@ -68,6 +73,16 @@ export const UseCases = () => {
       >
         Proposer un cas d'usage
       </Button>
+    </>
+  );
+
+  return (
+    <section>
+      {selectedUseCase ? (
+        <UseCaseDetail useCase={selectedUseCase} goBackToList={() => setSelectedUseCase(undefined)} />
+      ) : (
+        list
+      )}
     </section>
   );
-};
+});
