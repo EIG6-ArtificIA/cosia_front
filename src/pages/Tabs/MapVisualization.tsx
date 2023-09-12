@@ -1,20 +1,19 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Box, CircularProgress, Grid } from "@mui/material";
 import { AvailableLayer, useMap, OpacitySlider } from "geocommuns-core";
-import { useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
 
-import { City, getCities } from "../../api/geoApiGouv";
 import { Legend } from "../../components/Legend";
-import TextFieldWithOptions from "../../components/TextFieldWithOptions";
 import { useConstCallback } from "powerhooks";
 import { Link } from "react-router-dom";
+import { RENNES_POLYGON } from "../../data/rennesPolygon";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 const ORIGINAL_CENTER: [number, number] = [-1.677, 48.1];
 const ORIGINAL_ZOOM = 14;
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()(theme => ({
   block: {
     marginBottom: fr.spacing("4w"),
   },
@@ -60,17 +59,15 @@ const LAYERS_SETTERS: LayerSetter[] = [
   { label: "Prise de vues aériennes", layer: "ortho", defaultVisibility: true, defaultOpacity: 100 },
 ];
 
-// TODO : debounce à mettre en place
-export const MapVisualization = () => {
-  const [inputText, setInputText] = useState<string>("");
-  const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const [cityPropositions, setCityPropositions] = useState<City[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+const RENNES_TERRITORY = {
+  name: "Rennes",
+  polygon: RENNES_POLYGON.contour.coordinates,
+};
 
+export const MapVisualization = () => {
   const { classes } = useStyles();
 
   const {
-    setNewCenterAndNewZoom,
     fitViewToPolygon,
     setLayerOpacity,
     setLayerVisibility,
@@ -100,26 +97,9 @@ export const MapVisualization = () => {
     );
   });
 
-  useEffect(() => {
-    if (inputText.length <= 3 || selectedCity !== null) return;
-
-    setIsLoading(true);
-    getCities(inputText)
-      .then((res) => {
-        setCityPropositions(res.data);
-      })
-      .catch((e) => console.warn("error " + e))
-      .finally(() => setIsLoading(false));
-  }, [inputText, selectedCity]);
-
-  useEffect(() => {
-    if (selectedCity === null) {
-      setNewCenterAndNewZoom(ORIGINAL_CENTER, ORIGINAL_ZOOM);
-      return;
-    }
-
-    fitViewToPolygon(selectedCity.contour.coordinates);
-  }, [selectedCity]);
+  const onTerritoryClick = (coordinates: typeof RENNES_TERRITORY.polygon) => {
+    fitViewToPolygon(coordinates);
+  };
 
   return (
     <Box
@@ -142,27 +122,20 @@ export const MapVisualization = () => {
 
         <Grid item xs={12} md={4} className={classes.parametersContainer}>
           <div className={classes.block}>
-            <h6>Territoire</h6>
-            <TextFieldWithOptions<City>
-              value={selectedCity}
-              setValue={setSelectedCity}
-              inputValue={inputText}
-              setInputValue={setInputText}
-              options={cityPropositions}
-              isLoading={isLoading}
-              getOptionLabel={(option: City) => {
-                const label = option.nom;
-                if (option.codesPostaux.length === 1) return label + ", " + option.codesPostaux[0];
-                return label;
-              }}
-            />
+            <h6 className={fr.cx("fr-mb-1w")}>Territoire</h6>
+            <Button onClick={() => onTerritoryClick(RENNES_POLYGON.contour.coordinates)}>
+              {RENNES_TERRITORY.name}
+            </Button>
+            <p className={fr.cx("fr-mt-1w")}>
+              D'autres données de visualisation sont en cours de production.
+            </p>
           </div>
 
           <div className={classes.block}>
             <h6 className={classes.layerTitle}>
               Calques {isMapLoading && <CircularProgress size={20} />}
             </h6>
-            {LAYERS_SETTERS.map((ls) => generateOpacitySlider(ls))}
+            {LAYERS_SETTERS.map(ls => generateOpacitySlider(ls))}
           </div>
 
           <Legend />
