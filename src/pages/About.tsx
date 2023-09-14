@@ -1,6 +1,8 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { makeStyles } from "tss-react/dsfr";
+import { getTerritories } from "../api/backendApi";
+import { useMapTest } from "../components/useMapTest";
 
 const useStyles = makeStyles()(theme => ({
   body: {
