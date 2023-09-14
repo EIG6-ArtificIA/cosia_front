@@ -13,10 +13,25 @@ const useStyles = makeStyles()(theme => ({
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
   },
+  mapContainer: {
+    height: 600,
+    minHeight: 500,
+    maxHeight: 640,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: theme.decisions.artwork.motif.grey.default,
+  },
 }));
 
 export const About = () => {
   const { classes } = useStyles();
+
+  const getAllTerritories = () => {
+    return getTerritories().then(data => console.log(data));
+  };
+
+  useMapTest("map");
+
   return (
     <section className={classes.body}>
       <h1>À propos</h1>
@@ -45,6 +60,10 @@ export const About = () => {
         </b>
       </p>
       <Button linkProps={{ to: "mailto:cosia@ign.fr" }}>Soumettre mes retours sur le prototype</Button>
+      <br />
+      <Button onClick={getAllTerritories}>Test API</Button>
+
+      <div id="map" className={classes.mapContainer} />
     </section>
   );
 };
