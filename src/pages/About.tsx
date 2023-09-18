@@ -10,6 +10,7 @@ const useStyles = makeStyles()(theme => ({
     maxWidth: 1200,
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
+    height: "100%",
   },
 }));
 

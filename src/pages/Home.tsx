@@ -48,7 +48,7 @@ const useStyles = makeStyles<{ backgroundImage: string }>()((theme, { background
 
 export const Home = () => {
   const { cx, classes } = useStyles({
-    backgroundImage: require("../assets/img/carte_de_predictions.png"),
+    backgroundImage: require("../assets/img/carte_de_predictions.jpg"),
   });
 
   return (
