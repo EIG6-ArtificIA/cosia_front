@@ -52,7 +52,7 @@ jobs:
         with:
           push: true
           tags: maximallain/cosia_front:latest
-          file: Dockerfile.prod
+          file: Dockerfile.qlf
 
   # Unabled because of IGN network... When l'usine logicielle is open on internet => let's go !
   # trigger_deployment_pipeline:

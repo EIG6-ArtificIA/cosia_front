@@ -33,17 +33,17 @@
 
     <!-- Matomo -->
     <script>
-      const DEFAULT_MATOMO_SITE_ID = "1";
-      const POSSIBLE_MATOMO_IDS = ["1" | "3"];
       var _paq = (window._paq = window._paq || []);
+
+      const DEFAULT_MATOMO_SITE_ID = "1";
+      const POSSIBLE_MATOMO_IDS = ["1", "3"];
+
       var siteId = DEFAULT_MATOMO_SITE_ID;
       if (POSSIBLE_MATOMO_IDS.includes("%REACT_APP_MATOMO_SITE_ID%"))
         siteId = "%REACT_APP_MATOMO_SITE_ID%";
       else
         console.warn(
-          `REACT_APP_MATOMO_SITE_ID env variable is not set ${
-            POSSIBLE_MATOMO_IDS ? "(" + POSSIBLE_MATOMO_IDS + ")" : ""
-          }). ${DEFAULT_MATOMO_SITE_ID} is used by default`,
+          `REACT_APP_MATOMO_SITE_ID env variable is not set. ${DEFAULT_MATOMO_SITE_ID} is used by default`,
         );
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
       _paq.push(["trackPageView"]);
