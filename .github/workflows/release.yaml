@@ -29,6 +29,7 @@ jobs:
   publish_latest_on_dockerhub:
     name: Publish on dockerhub as latest
     runs-on: ubuntu-latest
+    environment: qlf
 
     needs:
       - test_lint
@@ -119,6 +120,7 @@ jobs:
   publish_version_on_dockerhub:
     name: Publish new tag on dockerhub
     runs-on: ubuntu-latest
+    environment: prod
 
     needs:
       - check_if_version_upgraded
