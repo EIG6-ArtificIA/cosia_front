@@ -42,7 +42,7 @@
       else
         console.warn(
           `REACT_APP_MATOMO_SITE_ID env variable is not set ${
-            POSSIBLE_MATOMO_IDS ? "(" + POSSIBLE_MATOMO_IDS + ")" : ""
+            REACT_APP_MATOMO_SITE_ID ? "(" + REACT_APP_MATOMO_SITE_ID + ")" : ""
           }). ${DEFAULT_MATOMO_SITE_ID} is used by default`,
         );
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
