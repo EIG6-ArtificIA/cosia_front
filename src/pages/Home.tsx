@@ -50,6 +50,7 @@ export const Home = () => {
   const { cx, classes } = useStyles({
     backgroundImage: require("../assets/img/carte_de_predictions.jpg"),
   });
+  console.log("Hollande", process.env.REACT_APP_MATOMO_SITE_ID);
 
   return (
     <section className={classes.titleBlock}>
