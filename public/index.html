@@ -33,9 +33,11 @@
 
     <!-- Matomo -->
     <script>
+      var _paq = (window._paq = window._paq || []);
+
       const DEFAULT_MATOMO_SITE_ID = "1";
       const POSSIBLE_MATOMO_IDS = ["1" | "3"];
-      var _paq = (window._paq = window._paq || []);
+
       var siteId = DEFAULT_MATOMO_SITE_ID;
       if (POSSIBLE_MATOMO_IDS.includes("%REACT_APP_MATOMO_SITE_ID%"))
         siteId = "%REACT_APP_MATOMO_SITE_ID%";
