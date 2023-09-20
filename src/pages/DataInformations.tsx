@@ -5,7 +5,7 @@ import { MemoizedDataDescriptionCard as DataDescriptionCard, useTabs } from "geo
 
 import { GenericInfo } from "./Tabs/GenericInfo";
 import { MapVisualization } from "./Tabs/MapVisualization";
-import { ExportAndApis } from "./Tabs/ExportAndApis";
+import { DataExport } from "./Tabs/DataExport";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
 
@@ -57,7 +57,7 @@ export const DataInformations = () => {
       case "visualisation":
         return <MapVisualization />;
       case "export":
-        return <ExportAndApis />;
+        return <DataExport />;
       case "cas-usages":
         return <UseCases />;
       case "metadonnees":
