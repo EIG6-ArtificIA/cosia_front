@@ -30,7 +30,7 @@ export const DataExport = () => {
         <Download
           label={territory.label}
           linkProps={{ to: territory.link }}
-          details={`ZIP - ${territory.size}`}
+          details={`ZIP ${territory.zipSize} - ZIP décompressé ${territory.size}`}
         />
       </li>
     );
@@ -43,6 +43,7 @@ export const DataExport = () => {
       <h6 className={classes.h6}>
         Télécharger un département <span className={cx("fr-icon-download-line")} />
       </h6>
+      <p>Toutes les données sont diffusées sous le format Geopackage.</p>
 
       <ul className={classes.downloadableList}>
         {DOWNLOADABLE_TERRITORIES.map(territory => generateDownloadLink(territory))}
