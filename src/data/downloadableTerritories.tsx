@@ -22,8 +22,8 @@ export const DOWNLOADABLE_TERRITORIES: DownloadableTerritory[] = [
   },
   {
     label: "38 Isère - 2021",
-    link: "",
-    size: "- Go",
+    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/CoSIA_D038_2021.zip",
+    size: "3,8 Go",
   },
   {
     label: "40 Landes - 2021",
