@@ -1,7 +1,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { List, ListItem } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
-
+import { MemoColorIconCircle as ColorIconCircle } from "./ColorIconCircle";
 const CLASS_TO_COLOR = {
   Batiment: "#ce7079",
   "Zone imperméable": "#a6aab7",
@@ -30,22 +30,15 @@ const useStyles = makeStyles()(() => ({
     paddingTop: fr.spacing("1v"),
     paddingBottom: fr.spacing("1v"),
   },
-  cercle: {
-    width: "0.8rem",
-    height: "0.8rem",
-    marginRight: fr.spacing("1w"),
-    borderRadius: 16,
-    display: "inline-block",
-  },
 }));
 
 export const Legend = () => {
-  const { css, cx, classes } = useStyles();
+  const { classes } = useStyles();
   const listItems = Object.entries(CLASS_TO_COLOR).map(([key, value]) => {
     return (
       <ListItem key={key} className={classes.listItem}>
         <span>
-          <span className={cx(classes.cercle, css({ background: value }))} /> {key}
+          <ColorIconCircle color={value} /> {key}
         </span>
       </ListItem>
     );
