@@ -61,8 +61,8 @@ export const DOWNLOADABLE_TERRITORIES: DownloadableTerritory[] = [
     size: "6,0 Go",
   },
   {
-    label: "77 Seine-et-Marne - 2020",
-    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/CoSIA_D095_2021.zip",
+    label: "77 Seine-et-Marne - 2021",
+    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/CoSIA_D077_2021.zip",
     zipSize: "1,7 Go",
     size: "7,8 Go",
   },
