@@ -58,7 +58,7 @@ export const DataExport = () => {
           </h6>
           <img
             className={classes.image}
-            src={require("../../assets/img/carte_departements_production.png")}
+            src={require("../../assets/img/carte_departements_disponibles.png")}
           />
           <div className={classes.legend}>
             <span>

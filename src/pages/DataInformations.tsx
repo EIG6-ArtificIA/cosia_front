@@ -8,6 +8,7 @@ import { MapVisualization } from "./Tabs/MapVisualization";
 import { DataExport } from "./Tabs/DataExport";
 import { UseCases } from "./Tabs/UseCases";
 import { Metadata } from "./Tabs/Metadata";
+import { MemoFeedback as Feedback } from "./Tabs/Feedback";
 
 const useStyles = makeStyles()(theme => ({
   header: {
@@ -62,6 +63,8 @@ export const DataInformations = () => {
         return <UseCases />;
       case "metadonnees":
         return <Metadata />;
+      case "retours":
+        return <Feedback />;
       default:
         return <p key={selectedTabId}>🚧 Page en cours de construction</p>;
     }

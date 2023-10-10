@@ -11,16 +11,16 @@ const useStyles = makeStyles()(() => ({
 
 const DOCS: Doc[] = [
   { name: "Description", link: "/pdf/Cosia_Descriptif_IGN_2023.pdf", size: "1,2 Mo" },
-  { name: "Nomenclature des classes", link: "/pdf/Cosia_Nomenclature_IGN_2023.pdf", size: "969 Ko" },
+  { name: "Nomenclature des classes", link: "/pdf/Cosia_Nomenclature_IGN_2023.pdf", size: "0,9 Mo" },
   {
     name: "Documentation technique",
     link: "/pdf/Cosia_Documentation_Technique_IGN_2023.pdf",
-    size: "7,4 Mo",
+    size: "7,1 Mo",
   },
   {
     name: "Comparatif CoSIA et OCSGE",
     link: "/pdf/Comparatif_OCSGE_CoSIA_IGN_2023.pdf",
-    size: "18 Mo",
+    size: "1,9 Mo",
   },
 ];
 
