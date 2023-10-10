@@ -44,7 +44,7 @@ export const DOWNLOADABLE_TERRITORIES: DownloadableTerritory[] = [
   },
   {
     label: "62 Pas de Calais - 2021",
-    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/62/D062_1_Lens.zip",
+    link: "https://filedn.eu/lMasUDxMj4Mfo9XOassyn4b/CoSIA_D062_2021.zip",
     zipSize: "2,1 Go",
     size: "8,6 Go",
   },
