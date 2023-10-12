@@ -53,7 +53,7 @@ const DownloadForm = () => {
   const isRequiredStringFieldEmpty = (requiredStringField: string) => {
     return requiredStringField.length < 3;
   };
-  const isCorrectEmail = () => /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
+  const isCorrectEmail = () => /^[\w\-.]+@[\w-]+\.[\w-]{2,}$/.test(email);
 
   const getFormErrors = () => {
     const newErrors = [];
@@ -73,7 +73,7 @@ const DownloadForm = () => {
 
   const getFieldState = (field: Field): "default" | "error" | "success" => {
     if (errors === undefined) return "default";
-    return errors.includes(field) ? "error" : "success";
+    return errors.includes(field) ? "error" : "default";
   };
 
   const getFieldStateMessage = (field: Field): string => {
