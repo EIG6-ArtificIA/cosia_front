@@ -124,6 +124,7 @@ const router = createBrowserRouter([
         element: generatePageWithDocumentTitle({
           element: (
             <LegalTerms
+              projectName="CoSIA"
               teamName="ArtificIA"
               teamUrl="https://eig.etalab.gouv.fr/defis/artificia/"
               teamEmail="cosia@ign.fr"
