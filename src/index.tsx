@@ -21,6 +21,7 @@ export enum ROUTES {
   LegalTerms = "/mentions-legales",
   CookiesManagement = "/gestion-des-cookies",
   About = "/a-propos",
+  TestAPI = "/test-api",
 }
 
 declare module "@codegouvfr/react-dsfr/spa" {
@@ -138,6 +139,14 @@ const router = createBrowserRouter([
         element: generatePageWithDocumentTitle({
           element: <CookiesManagement />,
           pageTitle: "Gestion des cookies",
+          scrollRestoration: true,
+        }),
+      },
+      {
+        path: ROUTES.TestAPI,
+        element: generatePageWithDocumentTitle({
+          element: <TestAPI />,
+          pageTitle: "Test API",
           scrollRestoration: true,
         }),
       },
