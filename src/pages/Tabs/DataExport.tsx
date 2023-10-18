@@ -1,8 +1,5 @@
 import { makeStyles } from "tss-react/dsfr";
-import { Download } from "@codegouvfr/react-dsfr/Download";
-import { DOWNLOADABLE_TERRITORIES, DownloadableTerritory } from "../../data/downloadableTerritories";
 import { fr } from "@codegouvfr/react-dsfr";
-import { useCallback } from "react";
 import { Grid } from "@mui/material";
 import { MemoColorIconCircle as ColorIconCircle } from "../../components/ColorIconCircle";
 import { MemoDownloadForm as DownloadForm } from "../../components/DownloadForm";
@@ -33,18 +30,6 @@ const useStyles = makeStyles()({
 
 export const DataExport = () => {
   const { classes, cx } = useStyles();
-
-  const generateDownloadLink = useCallback((territory: DownloadableTerritory) => {
-    return (
-      <li>
-        <Download
-          label={territory.label}
-          linkProps={{ to: territory.link }}
-          details={`ZIP ${territory.zipSize} - ZIP décompressé ${territory.size}`}
-        />
-      </li>
-    );
-  }, []);
 
   // make img a11y
 

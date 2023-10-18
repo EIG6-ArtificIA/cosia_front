@@ -1,5 +1,7 @@
 FROM node:19.2-alpine
 ENV REACT_APP_MATOMO_SITE_ID='3'
+ENV REACT_APP_API_URL=${API_URL}
+
 WORKDIR /app
 COPY package.json .
 COPY public/ /app/public/

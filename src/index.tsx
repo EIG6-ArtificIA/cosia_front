@@ -10,6 +10,7 @@ import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
 import { About } from "./pages/About";
+import { TestAPI } from "./pages/TestAPI";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
