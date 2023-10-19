@@ -2,12 +2,14 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { Link } from "react-router-dom";
 import { makeStyles } from "tss-react/dsfr";
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()(theme => ({
   body: {
     margin: "auto",
     marginTop: fr.spacing("5w"),
-    maxWidth: 1200,
+    marginBottom: fr.spacing("5w"),
+    maxWidth: 1000,
     width: "90%",
+    height: "100%",
     backgroundColor: theme.decisions.background.default.grey.default,
   },
   noBullet: {
