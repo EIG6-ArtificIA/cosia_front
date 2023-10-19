@@ -24,6 +24,11 @@ export enum ROUTES {
   About = "/a-propos",
   TestAPI = "/test-api",
 }
+declare global {
+  interface Window {
+    _env_: { [key: string]: string };
+  }
+}
 
 declare module "@codegouvfr/react-dsfr/spa" {
   interface RegisterLink {

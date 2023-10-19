@@ -3,7 +3,7 @@
   "version": "0.8.2",
   "private": true,
   "scripts": {
-    "start": "BROWSER=none PORT=3001 react-scripts start ",
+    "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && BROWSER=none PORT=3001 react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
