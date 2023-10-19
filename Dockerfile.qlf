@@ -1,6 +1,9 @@
 FROM node:19.2-alpine
 ENV REACT_APP_MATOMO_SITE_ID='1'
-ENV REACT_APP_API_URL=${API_URL}
+ENV REACT_APP_API_URL='http://cosia-api.cosia'
+ENV REACT_APP_API_URL_AVEC_HTTPS='https://cosia-api.cosia'
+ENV REACT_APP_API_URL_SANS_COSIA='http://cosia-api'
+ENV REACT_APP_API_URL_SANS_COSIA_AVEC_HTTPS='https://cosia-api'
 
 WORKDIR /app
 COPY package.json .
