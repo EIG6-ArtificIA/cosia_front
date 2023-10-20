@@ -7,8 +7,10 @@ export const TestAPI = () => {
 
   const fetchDepts = () => {
     console.log("Chirac");
-    console.log(process.env.REACT_APP_API_URL);
+    console.log("process.env");
     console.log(process.env);
+    console.log("window._env_");
+    console.log(window._env_);
     getAllDepartments()
       .then(res => {
         console.log("Hollande");
