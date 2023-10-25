@@ -11,6 +11,8 @@ import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
 import { About } from "./pages/About";
 import { TestAPI } from "./pages/TestAPI";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
@@ -162,11 +164,21 @@ const router = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 root.render(
   <React.StrictMode>
     <MuiDsfrThemeProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </MuiDsfrThemeProvider>
   </React.StrictMode>,
 );

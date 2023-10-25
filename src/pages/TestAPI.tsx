@@ -6,11 +6,6 @@ export const TestAPI = () => {
   const [depts, setDepts] = useState<Department[]>([]);
 
   const fetchDepts = () => {
-    console.log("Chirac");
-    console.log("process.env");
-    console.log(process.env);
-    console.log("window._env_");
-    console.log(window._env_);
     getAllDepartments()
       .then(res => {
         console.log("Hollande");
