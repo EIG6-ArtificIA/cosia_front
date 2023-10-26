@@ -4,13 +4,14 @@ import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import { startReactDsfr } from "@codegouvfr/react-dsfr/spa";
 import { MuiDsfrThemeProvider } from "@codegouvfr/react-dsfr/mui";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
-import { Root, ErrorPage, PersonalData, LegalTerms, Page, CookiesManagement } from "geocommuns-core";
+import { Root, ErrorPage, PersonalData, Page, CookiesManagement } from "geocommuns-core";
 
 import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
 import { About } from "./pages/About";
 import { TestAPI } from "./pages/TestAPI";
+import { LegalTerms } from "./pages/LegalTerms";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -131,14 +132,7 @@ const router = createBrowserRouter([
       {
         path: ROUTES.LegalTerms,
         element: generatePageWithDocumentTitle({
-          element: (
-            <LegalTerms
-              projectName="CoSIA"
-              teamName="ArtificIA"
-              teamUrl="https://eig.etalab.gouv.fr/defis/artificia/"
-              teamEmail="cosia@ign.fr"
-            />
-          ),
+          element: <LegalTerms />,
           pageTitle: "Mentions Légales",
           scrollRestoration: true,
         }),
