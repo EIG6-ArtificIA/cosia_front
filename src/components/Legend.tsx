@@ -1,7 +1,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { List, ListItem } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
-import { MemoColorIconCircle as ColorIconCircle } from "./ColorIconCircle";
+import { MemoColorIconCircle as ColorIconCircle } from "./ui/ColorIconCircle";
 const CLASS_TO_COLOR = {
   Batiment: "#ce7079",
   "Zone imperméable": "#a6aab7",

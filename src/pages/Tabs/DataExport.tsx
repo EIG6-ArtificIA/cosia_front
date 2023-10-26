@@ -1,7 +1,7 @@
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import { Grid } from "@mui/material";
-import { MemoColorIconCircle as ColorIconCircle } from "../../components/ColorIconCircle";
+import { MemoColorIconCircle as ColorIconCircle } from "../../components/ui/ColorIconCircle";
 import { MemoDownloadForm as DownloadForm } from "../../components/DownloadForm";
 
 const useStyles = makeStyles()({

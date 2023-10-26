@@ -6,9 +6,10 @@ import { FormEvent, memo, useCallback, useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { useMutation, useQuery } from "react-query";
 import { createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
-import { CircularProgress, Snackbar } from "@mui/material";
+import { CircularProgress } from "@mui/material";
+import { useSnackbar } from "../hooks/useSnackbar";
 
-const useStyles = makeStyles()(theme => ({
+const useStyles = makeStyles()({
   container: {
     display: "flex",
     flexDirection: "column",
@@ -33,10 +34,7 @@ const useStyles = makeStyles()(theme => ({
     display: "flex",
     flexDirection: "column",
   },
-  alert: {
-    backgroundColor: theme.decisions.background.default.grey.default,
-  },
-}));
+});
 
 type Field = "name" | "organization" | "email" | "territory";
 const MESSAGES: Record<Field, { success: string; error: string }> = {
@@ -59,14 +57,15 @@ const MESSAGES: Record<Field, { success: string; error: string }> = {
 };
 
 const DownloadForm = () => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const [name, setName] = useState("");
   const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [territory, setTerritory] = useState("");
   const [errors, setErrors] = useState<string[] | undefined>(undefined);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const handleClose = useCallback(() => setSnackbarOpen(false), []);
+  const { SnackbarComponent, setSnackbarOpen } = useSnackbar({
+    message: "Le téléchargement vient de démarrer",
+  });
 
   const {
     isLoading,
@@ -76,7 +75,7 @@ const DownloadForm = () => {
   } = useQuery({
     queryKey: ["departmentData"],
     queryFn: () => getAllDepartmentData(),
-    staleTime: 600_000,
+    staleTime: 60_000,
   });
 
   const isRequiredStringFieldEmpty = (requiredStringField: string) => {
@@ -121,14 +120,11 @@ const DownloadForm = () => {
     if (isSuccess || isCreationError) {
       setSnackbarOpen(true);
       const downloadLink = departmentData?.find(depData => depData.id == territory)?.download_link;
-      if (downloadLink)
-        window.open(
-          "https://geoservices.ign.fr/download/files/221470/3eb5f9fa7c4cec347a66d7cbafaa14fb/0/1100/0/1",
-          "_self",
-        );
+      if (downloadLink) window.open(downloadLink, "_self");
     }
     if (isCreationError) {
       console.error("Error during DepartmentDataDownloadCreation", {
+        creationError,
         email,
         organization,
         username: name,
@@ -162,19 +158,7 @@ const DownloadForm = () => {
 
   return (
     <div className={classes.container}>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={60000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <div className={cx(fr.cx("fr-alert", "fr-alert--success"), classes.alert)}>
-          <p>Le téléchargement est lancé !</p>
-          <button className="fr-btn--close fr-btn" title="Masquer le message" onClick={handleClose}>
-            Masquer le message
-          </button>
-        </div>
-      </Snackbar>
+      <SnackbarComponent />
 
       <h6 className={classes.h6}>Télécharger un département</h6>
       {isLoading || isError ? (

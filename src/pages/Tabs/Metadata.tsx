@@ -2,7 +2,7 @@ import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import { Grid } from "@mui/material";
-import { CompletionBar } from "../../components/CompletionBar";
+import { CompletionBar } from "../../components/ui/CompletionBar";
 
 const useStyles = makeStyles()(() => ({
   container: {},
@@ -20,7 +20,7 @@ type Block = {
 
 const generateTagsList = (words: string[]) => (
   <Grid container rowSpacing={1}>
-    {words.map((w) => (
+    {words.map(w => (
       <Grid item>
         <Tag key={w} className={fr.cx("fr-mr-1w")}>
           {w}
@@ -139,7 +139,7 @@ export const Metadata = () => {
           <div key={block.title}>
             <h6>{block.title}</h6>
             <Grid container rowSpacing={2}>
-              {block.children.map((item) => generateBlockItem(item))}
+              {block.children.map(item => generateBlockItem(item))}
             </Grid>
             {i !== blocks.length - 1 ? <hr className={fr.cx("fr-mt-4w", "fr-mb-1w")} /> : null}
           </div>
