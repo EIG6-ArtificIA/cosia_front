@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "react-query";
 import { createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
 import { CircularProgress } from "@mui/material";
 import { useSnackbar } from "../hooks/useSnackbar";
+import { isCorrectEmail } from "../utils";
 
 const useStyles = makeStyles()({
   container: {
@@ -81,13 +82,12 @@ const DownloadForm = () => {
   const isRequiredStringFieldEmpty = (requiredStringField: string) => {
     return requiredStringField.length < 3;
   };
-  const isCorrectEmail = () => /^[\w\-.]+@[\w-]+\.[\w-]{2,}$/.test(email);
 
   const getFormErrors = () => {
     const newErrors = [];
     if (isRequiredStringFieldEmpty(name)) newErrors.push("name");
     if (isRequiredStringFieldEmpty(organization)) newErrors.push("organization");
-    if (!isCorrectEmail()) newErrors.push("email");
+    if (!isCorrectEmail(email)) newErrors.push("email");
     if (territory === "") newErrors.push("territory");
     return newErrors;
   };
@@ -103,7 +103,6 @@ const DownloadForm = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors = getFormErrors();
-    console.log(newErrors);
     setErrors(newErrors);
     if (newErrors.length === 0) {
       const payload = {
@@ -156,6 +155,24 @@ const DownloadForm = () => {
     </div>
   );
 
+  const getInput = useCallback(
+    (label: string, fieldName: Field, field: string, setField: (a: string) => void) => (
+      <Input
+        label={label}
+        state={getFieldState(fieldName)}
+        stateRelatedMessage={getFieldStateMessage(fieldName)}
+        nativeInputProps={{
+          name: fieldName,
+          value: field,
+          onChange: e => {
+            setField(e.currentTarget.value);
+          },
+        }}
+      />
+    ),
+    [],
+  );
+
   return (
     <div className={classes.container}>
       <SnackbarComponent />
@@ -165,42 +182,9 @@ const DownloadForm = () => {
         loaderOrErrorContainer
       ) : (
         <form onSubmit={handleSubmit}>
-          <Input
-            label="Nom, Prénom*"
-            state={getFieldState("name")}
-            stateRelatedMessage={getFieldStateMessage("name")}
-            nativeInputProps={{
-              name: "name",
-              value: name,
-              onChange: e => {
-                setName(e.currentTarget.value);
-              },
-            }}
-          />
-          <Input
-            label="Organisation*"
-            state={getFieldState("organization")}
-            stateRelatedMessage={getFieldStateMessage("organization")}
-            nativeInputProps={{
-              name: "organization",
-              value: organization,
-              onChange: e => {
-                setOrganization(e.currentTarget.value);
-              },
-            }}
-          />
-          <Input
-            label="Email*"
-            state={getFieldState("email")}
-            stateRelatedMessage={getFieldStateMessage("email")}
-            nativeInputProps={{
-              name: "email",
-              value: email,
-              onChange: e => {
-                setEmail(e.currentTarget.value);
-              },
-            }}
-          />
+          {getInput("Nom, Prénom", "name", name, setName)}
+          {getInput("Organisation*", "organization", organization, setOrganization)}
+          {getInput("Email*", "email", email, setEmail)}
           <Select
             label="Territoire"
             state={getFieldState("territory")}
