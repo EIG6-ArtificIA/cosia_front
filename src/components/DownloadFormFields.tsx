@@ -1,15 +1,8 @@
-import { fr } from "@codegouvfr/react-dsfr";
-import Button from "@codegouvfr/react-dsfr/Button";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Select } from "@codegouvfr/react-dsfr/Select";
-import { FormEvent, memo, useCallback, useEffect, useMemo, useState } from "react";
-import { makeStyles } from "tss-react/dsfr";
-import { useMutation, useQuery } from "react-query";
-import { DepartmentData, createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
-import { CircularProgress } from "@mui/material";
-import { useSnackbar } from "../hooks/useSnackbar";
-import { isCorrectEmail } from "../utils";
 import { useConstCallback } from "powerhooks";
+import { useCallback } from "react";
+import { DepartmentData } from "../api/cosiaApi";
 
 type Field = "name" | "organization" | "email" | "territory";
 
