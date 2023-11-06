@@ -10,7 +10,6 @@ import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
 import { About } from "./pages/About";
-import { TestAPI } from "./pages/TestAPI";
 import { LegalTerms } from "./pages/LegalTerms";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -25,7 +24,6 @@ export enum ROUTES {
   LegalTerms = "/mentions-legales",
   CookiesManagement = "/gestion-des-cookies",
   About = "/a-propos",
-  TestAPI = "/test-api",
 }
 declare global {
   interface Window {
@@ -142,14 +140,6 @@ const router = createBrowserRouter([
         element: generatePageWithDocumentTitle({
           element: <CookiesManagement />,
           pageTitle: "Gestion des cookies",
-          scrollRestoration: true,
-        }),
-      },
-      {
-        path: ROUTES.TestAPI,
-        element: generatePageWithDocumentTitle({
-          element: <TestAPI />,
-          pageTitle: "Test API",
           scrollRestoration: true,
         }),
       },

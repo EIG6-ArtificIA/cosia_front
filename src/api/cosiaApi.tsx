@@ -19,8 +19,6 @@ export const getAllDepartments = (): Promise<{ data: Department[] }> => {
   return cosiaApiAxiosInstance.get("departments");
 };
 
-//todo middleware to camelize keys when fetching and snakize keys when posting
-
 type DepartmentDataResponse = {
   id: string;
   year: number;
