@@ -1,6 +1,6 @@
 {
   "name": "cosia_front",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && BROWSER=none PORT=3001 react-scripts start ",
