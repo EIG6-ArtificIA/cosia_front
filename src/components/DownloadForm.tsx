@@ -5,7 +5,7 @@ import { makeStyles } from "tss-react/dsfr";
 import { useMutation, useQuery } from "react-query";
 import { CircularProgress } from "@mui/material";
 
-import { createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
+import { DepartmentData, createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
 import { useSnackbar } from "../hooks/useSnackbar";
 import { isCorrectEmail } from "../utils";
 import { DownloadFormFields } from "./DownloadFormFields";
@@ -43,6 +43,16 @@ const DownloadForm = () => {
   const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [territory, setTerritory] = useState("");
+  const [selectedDepartmentData, setSelectedDepartmentData] = useState<DepartmentData | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    if (territory == undefined) setSelectedDepartmentData(undefined);
+    const newDepartmentData = departmentData?.find(depData => depData.id == territory);
+    setSelectedDepartmentData(newDepartmentData);
+  }, [territory]);
+
   const [errors, setErrors] = useState<string[] | undefined>(undefined);
   const { SnackbarComponent, setSnackbarOpen } = useSnackbar({
     message: "Le téléchargement vient de démarrer",
@@ -99,7 +109,7 @@ const DownloadForm = () => {
     if (!isSuccess && !isCreationError) return;
 
     setSnackbarOpen(true);
-    const downloadLink = departmentData?.find(depData => depData.id == territory)?.download_link;
+    const downloadLink = selectedDepartmentData?.downloadLink;
     if (downloadLink) window.open(downloadLink, "_self");
 
     if (isCreationError) {
@@ -150,6 +160,16 @@ const DownloadForm = () => {
             setEmail={setEmail}
             setTerritory={setTerritory}
           />
+          {selectedDepartmentData && (
+            <p>
+              <i>
+                Taille du fichier Zip : {selectedDepartmentData.zipSize}
+                <br />
+                Taille du fichier décompressé : {selectedDepartmentData.fileSize}
+                <br />
+              </i>
+            </p>
+          )}
           <Button
             iconId="fr-icon-download-line"
             className={classes.button}

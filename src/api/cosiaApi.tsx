@@ -1,9 +1,12 @@
 import axios from "axios";
+import applyCaseMiddleware from "axios-case-converter";
 
-const cosiaApiAxiosInstance = axios.create({
-  baseURL: window._env_.API_URL,
-  timeout: 15000,
-});
+const cosiaApiAxiosInstance = applyCaseMiddleware(
+  axios.create({
+    baseURL: window._env_.API_URL,
+    timeout: 15000,
+  }),
+);
 
 export type Department = {
   name: string;
@@ -16,24 +19,21 @@ export const getAllDepartments = (): Promise<{ data: Department[] }> => {
   return cosiaApiAxiosInstance.get("departments");
 };
 
+//todo middleware to camelize keys when fetching and snakize keys when posting
+
 type DepartmentDataResponse = {
   id: string;
   year: number;
-  download_link: string;
+  downloadLink: string;
   department: {
     number: string;
     name: string;
   };
+  fileSize: string;
+  zipSize: string;
 };
 
-export type DepartmentData = {
-  id: string;
-  year: number;
-  download_link: string;
-  department: {
-    number: string;
-    name: string;
-  };
+export type DepartmentData = DepartmentDataResponse & {
   label: string;
 };
 
