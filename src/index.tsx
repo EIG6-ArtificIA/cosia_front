@@ -4,12 +4,15 @@ import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import { startReactDsfr } from "@codegouvfr/react-dsfr/spa";
 import { MuiDsfrThemeProvider } from "@codegouvfr/react-dsfr/mui";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
-import { Root, ErrorPage, PersonalData, LegalTerms, Page, CookiesManagement } from "geocommuns-core";
+import { Root, ErrorPage, PersonalData, Page, CookiesManagement } from "geocommuns-core";
 
 import { Home } from "./pages/Home";
 import { DataInformations } from "./pages/DataInformations";
 import { SiteMap } from "./pages/SiteMap";
 import { About } from "./pages/About";
+import { LegalTerms } from "./pages/LegalTerms";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
@@ -21,6 +24,11 @@ export enum ROUTES {
   LegalTerms = "/mentions-legales",
   CookiesManagement = "/gestion-des-cookies",
   About = "/a-propos",
+}
+declare global {
+  interface Window {
+    _env_: { [key: string]: string };
+  }
 }
 
 declare module "@codegouvfr/react-dsfr/spa" {
@@ -122,14 +130,7 @@ const router = createBrowserRouter([
       {
         path: ROUTES.LegalTerms,
         element: generatePageWithDocumentTitle({
-          element: (
-            <LegalTerms
-              projectName="CoSIA"
-              teamName="ArtificIA"
-              teamUrl="https://eig.etalab.gouv.fr/defis/artificia/"
-              teamEmail="cosia@ign.fr"
-            />
-          ),
+          element: <LegalTerms />,
           pageTitle: "Mentions Légales",
           scrollRestoration: true,
         }),
@@ -147,11 +148,21 @@ const router = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 root.render(
   <React.StrictMode>
     <MuiDsfrThemeProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </MuiDsfrThemeProvider>
   </React.StrictMode>,
 );

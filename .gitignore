@@ -26,3 +26,6 @@ yarn-error.log*
 
 .vscode/
 docker/yarn/*
+.env
+/public/env-config.js
+env-config.js
