@@ -13,11 +13,14 @@ export type Department = {
   name: string;
   number: string;
   status: string;
-  geom: string;
+  geomGeojson: string;
 };
 
-export const getAllDepartments = (): Promise<{ data: Department[] }> => {
-  return cosiaApiAxiosInstance.get("departments");
+export const getAllDepartments = (): Promise<Department[]> => {
+  return cosiaApiAxiosInstance.get("departments").then((res: { data: Department[] }) => {
+    console.log(res);
+    return res.data;
+  });
 };
 
 type DepartmentDataResponse = {
