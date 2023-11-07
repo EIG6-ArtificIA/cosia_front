@@ -17,10 +17,7 @@ export type Department = {
 };
 
 export const getAllDepartments = (): Promise<Department[]> => {
-  return cosiaApiAxiosInstance.get("departments").then((res: { data: Department[] }) => {
-    console.log(res);
-    return res.data;
-  });
+  return cosiaApiAxiosInstance.get("departments").then((res: { data: Department[] }) => res.data);
 };
 
 type DepartmentDataResponse = {
