@@ -1,5 +1,5 @@
 import { Map, MapBrowserEvent } from "ol";
-import Feature from "ol/Feature";
+import Feature, { FeatureLike } from "ol/Feature";
 import { Geometry, Point } from "ol/geom";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
@@ -70,6 +70,31 @@ export const useToolTipMap = ({ layer, map }: Props) => {
     [map],
   );
 
+  const updateSelectedFeature = useConstCallback((featureLike: FeatureLike, source: VectorSource) => {
+    const featureProperties = featureLike.getProperties();
+    const featureDepartmentNumber = featureProperties["number"];
+
+    if (featureDepartmentNumber !== selectedDepartmentNumber) {
+      source.clear();
+
+      const feature = new Feature({
+        geometry: featureLike.getGeometry() as Geometry,
+        ...featureLike.getProperties(),
+      });
+
+      if (feature) source.addFeature(feature);
+      setSelectedDepartmentNumber(featureDepartmentNumber);
+      feature.setStyle(selectStyles);
+
+      const tooltipGeometry = tooltip.getGeometry() as Point;
+      const departmentCentroid = JSON.parse(featureProperties["centroidGeojson"]);
+      tooltipGeometry.setCoordinates(departmentCentroid["coordinates"]);
+
+      const text = `${featureDepartmentNumber} - ${featureProperties["name"]}`;
+      tooltip.getText().setText(text);
+    }
+  });
+
   const displayFeatureInfo = useConstCallback((event: MapBrowserEvent<any>) => {
     if (layer === undefined) return;
     if (featureOverlay === undefined) return;
@@ -84,29 +109,7 @@ export const useToolTipMap = ({ layer, map }: Props) => {
         return;
       }
 
-      const featureProperties = featureLike.getProperties();
-      const featureDepartmentNumber = featureProperties["number"];
-
-      const feature = new Feature({
-        geometry: featureLike.getGeometry() as Geometry,
-        ...featureLike.getProperties(),
-      });
-
-      if (featureDepartmentNumber !== selectedDepartmentNumber) {
-        featureOverlaySource.clear();
-        if (feature) featureOverlaySource.addFeature(feature);
-        setSelectedDepartmentNumber(featureDepartmentNumber);
-        featureOverlay.changed();
-
-        const tooltipGeometry = tooltip.getGeometry() as Point;
-        const departmentCentroid = JSON.parse(featureProperties["centroidGeojson"]);
-        tooltipGeometry.setCoordinates(departmentCentroid["coordinates"]);
-
-        const text = `${featureDepartmentNumber} - ${featureProperties["name"]}`;
-        tooltip.getText().setText(text);
-
-        feature.setStyle(selectStyles);
-      }
+      updateSelectedFeature(featureLike, featureOverlaySource);
     });
   });
 

@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { FormEvent, memo, useEffect, useMemo, useState } from "react";
+import { FormEvent, memo, useEffect, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { useMutation, useQuery } from "react-query";
 import { CircularProgress } from "@mui/material";
@@ -9,6 +9,7 @@ import { DepartmentData, createDepartementDataDownload, getAllDepartmentData } f
 import { useSnackbar } from "../hooks/useSnackbar";
 import { isCorrectEmail } from "../utils";
 import { DownloadFormFields } from "./DownloadFormFields";
+import { LoaderOrErrorContainer } from "./ui/LoaderOrErrorContainer";
 
 const useStyles = makeStyles()({
   container: {
@@ -22,18 +23,6 @@ const useStyles = makeStyles()({
   },
   button: {
     alignSelf: "end",
-  },
-  loaderOrErrorContainer: {
-    width: "100%",
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  errorContainer: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
   },
 });
 
@@ -123,29 +112,13 @@ const DownloadForm = () => {
     }
   }, [isSuccess, isCreationError]);
 
-  const loaderOrErrorContainer = useMemo(
-    () => (
-      <div className={classes.loaderOrErrorContainer}>
-        {isLoading ? (
-          <CircularProgress />
-        ) : isError ? (
-          <div className={classes.errorContainer}>
-            <p>Un problème est survenu.</p>
-            <Button onClick={() => refetch()}>Réessayer</Button>
-          </div>
-        ) : null}
-      </div>
-    ),
-    [isLoading, isError],
-  );
-
   return (
     <div className={classes.container}>
       <SnackbarComponent />
 
       <h6 className={classes.h6}>Télécharger un département</h6>
       {isLoading || isError ? (
-        loaderOrErrorContainer
+        <LoaderOrErrorContainer isLoading={isLoading} isError={isError} refetch={refetch} />
       ) : (
         <form onSubmit={handleSubmit}>
           <DownloadFormFields
