@@ -16,7 +16,7 @@ import Text from "ol/style/Text";
 import RegularShape from "ol/style/RegularShape";
 import { useToolTipMap } from "../hooks/useTooltipMap";
 
-const ORIGINAL_CENTER: [number, number] = [4.8, 50.8];
+const ORIGINAL_CENTER: [number, number] = [6.8, 50.8];
 const ORIGINAL_ZOOM = 6.5;
 
 const useStyles = makeStyles()(theme => ({
@@ -32,6 +32,9 @@ const useStyles = makeStyles()(theme => ({
 export const Testmap = () => {
   const { classes } = useStyles();
   const [departementFeatures, setdepartementFeatures] = useState<Feature<Geometry>[]>([]);
+  const [departmentLayer, setDepartmentLayer] = useState<VectorLayer<VectorSource> | undefined>(
+    undefined,
+  );
   const [departementSource, setDepartementSource] = useState<VectorSource | undefined>(undefined);
   const [selectedFeature, setSelectedFeature] = useState<FeatureLike | undefined>(undefined);
   const {
@@ -90,10 +93,11 @@ export const Testmap = () => {
     departmentLayer.setStyle(setStyle);
 
     map.addLayer(departmentLayer);
+    setDepartmentLayer(departmentLayer);
   }, [departementFeatures]);
 
   const { isLoading: isMapLoading, map } = useFrenchMap("map", ORIGINAL_CENTER, ORIGINAL_ZOOM);
-  useToolTipMap({ map });
+  useToolTipMap({ layer: departmentLayer, map });
 
   return (
     <div>
