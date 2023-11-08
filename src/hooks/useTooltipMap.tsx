@@ -1,14 +1,15 @@
 import { Map, MapBrowserEvent } from "ol";
-import Feature, { FeatureLike } from "ol/Feature";
+import Feature from "ol/Feature";
 import { Geometry, Point } from "ol/geom";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import Fill from "ol/style/Fill";
 import RegularShape from "ol/style/RegularShape";
+import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import Text from "ol/style/Text";
 import { useConstCallback } from "powerhooks";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Props = {
   layer?: VectorLayer<VectorSource>;
@@ -21,9 +22,10 @@ export const useToolTipMap = ({ layer, map }: Props) => {
   );
 
   const selectStyle = useMemo(() => {
-    new Style({
-      fill: new Fill({
-        color: "#eeeeee",
+    return new Style({
+      stroke: new Stroke({
+        color: "#FFF",
+        width: 4,
       }),
     });
   }, []);
@@ -55,86 +57,55 @@ export const useToolTipMap = ({ layer, map }: Props) => {
     });
   }, []);
 
-  const selectStyles = [selectStyle, tooltip];
-
-  // const getSetTooltip = useCallback(
-  //   (map: Map) => (e: MapBrowserEvent<any>) => {
-  //     if (map === undefined) return;
-
-  //     if (selectedFeature !== undefined) {
-  //       // selectedFeature.setStyle(undefined);
-  //       setSelectedFeature(undefined);
-  //     }
-
-  //     map.forEachFeatureAtPixel(e.pixel, (f: FeatureLike) => {
-  //       setSelectedFeature(f);
-  //       // selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
-  //       const tooltipGeometry = tooltip.getGeometry() as Point;
-  //       console.log(e.coordinate);
-  //       tooltipGeometry.setCoordinates(e.coordinate);
-  //       tooltip.getText().setText(f.get("name"));
-  //       console.log(f.get("name"));
-
-  //       // f.setStyle(selectStyles);
-  //       return true;
-  //     });
-  //   },
-  //   [map, selectedFeature],
-  // );
+  const selectStyles = useMemo(() => [selectStyle, tooltip], [selectStyle, tooltip]);
 
   const featureOverlay = useMemo(
     () =>
       map
         ? new VectorLayer({
             source: new VectorSource(),
-            map: map,
-            style: {
-              "stroke-color": "rgba(255, 255, 255, 0.7)",
-              "stroke-width": 4,
-            },
+            map,
           })
         : undefined,
     [map],
   );
 
-  // console.log(selectedFeature);
-
   const displayFeatureInfo = useConstCallback((event: MapBrowserEvent<any>) => {
-    console.log("coucou");
-    if (featureOverlay === undefined) return;
     if (layer === undefined) return;
+    if (featureOverlay === undefined) return;
+    const featureOverlaySource = featureOverlay.getSource();
+    if (featureOverlaySource === null) return;
+
     layer.getFeatures(event.pixel).then(features => {
       const featureLike = features.length ? features[0] : undefined;
-      if (featureLike === undefined) return;
+      if (featureLike === undefined) {
+        featureOverlaySource.clear();
+        setSelectedDepartmentNumber(undefined);
+        return;
+      }
 
-      const featureDepartmentNumber = featureLike.getProperties()["number"];
+      const featureProperties = featureLike.getProperties();
+      const featureDepartmentNumber = featureProperties["number"];
 
       const feature = new Feature({
         geometry: featureLike.getGeometry() as Geometry,
         ...featureLike.getProperties(),
       });
 
-      /* const info = document.getElementById('info');
-    if info
-    if (features.length) {
-      info.innerHTML = feature.get('ECO_NAME') + ': ' + feature.get('NNH_NAME');
-    } else {
-      info.innerHTML = '&nbsp;';
-    } */
-      const featureOverlaySource = featureOverlay.getSource();
-      if (featureOverlaySource === null) return;
-
-      console.log("Chirac");
-      console.log(featureDepartmentNumber);
-      console.log(selectedDepartmentNumber);
-      console.log(feature);
-      console.log(featureOverlaySource.getFeatures());
-
       if (featureDepartmentNumber !== selectedDepartmentNumber) {
         featureOverlaySource.clear();
         if (feature) featureOverlaySource.addFeature(feature);
         setSelectedDepartmentNumber(featureDepartmentNumber);
         featureOverlay.changed();
+
+        const tooltipGeometry = tooltip.getGeometry() as Point;
+        const departmentCentroid = JSON.parse(featureProperties["centroidGeojson"]);
+        tooltipGeometry.setCoordinates(departmentCentroid["coordinates"]);
+
+        const text = `${featureDepartmentNumber} - ${featureProperties["name"]}`;
+        tooltip.getText().setText(text);
+
+        feature.setStyle(selectStyles);
       }
     });
   });

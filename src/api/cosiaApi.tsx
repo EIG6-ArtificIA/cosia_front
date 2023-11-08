@@ -14,6 +14,7 @@ export type Department = {
   number: string;
   status: string;
   geomGeojson: string;
+  centroidGeojson: string;
 };
 
 export const getAllDepartments = (): Promise<Department[]> => {
