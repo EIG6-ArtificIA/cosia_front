@@ -95,7 +95,7 @@ export const useToolTipMap = ({ layer, map }: Props) => {
     }
   });
 
-  const displayFeatureInfo = useConstCallback((event: MapBrowserEvent<any>) => {
+  const displayFeatureInfo = useConstCallback((event: MapBrowserEvent<UIEvent>) => {
     if (layer === undefined) return;
     if (featureOverlay === undefined) return;
     const featureOverlaySource = featureOverlay.getSource();

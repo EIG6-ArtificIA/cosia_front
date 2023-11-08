@@ -7,7 +7,7 @@ import { CircularProgress } from "@mui/material";
 
 import { DepartmentData, createDepartementDataDownload, getAllDepartmentData } from "../api/cosiaApi";
 import { useSnackbar } from "../hooks/useSnackbar";
-import { isCorrectEmail } from "../utils";
+import { isCorrectEmail } from "../utils/utils";
 import { DownloadFormFields } from "./DownloadFormFields";
 import { LoaderOrErrorContainer } from "./ui/LoaderOrErrorContainer";
 

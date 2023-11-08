@@ -3,6 +3,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { Grid } from "@mui/material";
 import { MemoColorIconCircle as ColorIconCircle } from "../../components/ui/ColorIconCircle";
 import { MemoDownloadForm as DownloadForm } from "../../components/DownloadForm";
+import { FrenchMap } from "../../components/FrenchMap";
 
 const useStyles = makeStyles()({
   container: {},
@@ -25,13 +26,21 @@ const useStyles = makeStyles()({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginTop: fr.spacing("1w"),
+  },
+  mapContainer: {
+    flex: 1,
+    [fr.breakpoints.down("md")]: {
+      minHeight: 300,
+    },
+    [fr.breakpoints.up("md")]: {
+      minHeight: 500,
+    },
   },
 });
 
 export const DataExport = () => {
   const { classes, cx } = useStyles();
-
-  // make img a11y
 
   return (
     <section className={classes.container}>
@@ -42,15 +51,11 @@ export const DataExport = () => {
           <h6 className={classes.h6}>
             <span className={cx("ri-map-pin-2-line")} /> Carte des départements en production
           </h6>
-          <img
-            className={classes.image}
-            src={require("../../assets/img/carte_departements_disponibles.png")}
-          />
+          <FrenchMap className={classes.mapContainer} />
           <div className={classes.legend}>
             <span>
               <ColorIconCircle color="#6A6AF4" /> Départements disponibles
             </span>
-            <br />
             <span>
               <ColorIconCircle color="#E3E3FD" /> Départements bientôt disponibles
             </span>

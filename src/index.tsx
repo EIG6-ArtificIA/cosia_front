@@ -13,7 +13,6 @@ import { About } from "./pages/About";
 import { LegalTerms } from "./pages/LegalTerms";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Testmap } from "./pages/Testmap";
 
 startReactDsfr({ defaultColorScheme: "system", Link });
 
@@ -142,14 +141,6 @@ const router = createBrowserRouter([
         element: generatePageWithDocumentTitle({
           element: <CookiesManagement />,
           pageTitle: "Gestion des cookies",
-          scrollRestoration: true,
-        }),
-      },
-      {
-        path: ROUTES.TestMap,
-        element: generatePageWithDocumentTitle({
-          element: <Testmap />,
-          pageTitle: "Test Map",
           scrollRestoration: true,
         }),
       },

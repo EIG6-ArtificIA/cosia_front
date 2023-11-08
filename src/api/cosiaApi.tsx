@@ -9,10 +9,16 @@ const cosiaApiAxiosInstance = applyCaseMiddleware(
   }),
 );
 
+export enum DepartmentStatus {
+  Available = "available",
+  Soon = "soon",
+  NotAvailable = "not_available",
+}
+
 export type Department = {
   name: string;
   number: string;
-  status: string;
+  status: DepartmentStatus;
   geomGeojson: string;
   centroidGeojson: string;
 };
