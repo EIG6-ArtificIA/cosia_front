@@ -1,6 +1,6 @@
 import axios from "axios";
 import applyCaseMiddleware from "axios-case-converter";
-import { getCookie } from "../utils";
+import { getCookie } from "../utils/utils";
 
 const cosiaApiAxiosInstance = applyCaseMiddleware(
   axios.create({
@@ -9,15 +9,22 @@ const cosiaApiAxiosInstance = applyCaseMiddleware(
   }),
 );
 
+export enum DepartmentStatus {
+  Available = "available",
+  Soon = "soon",
+  NotAvailable = "not_available",
+}
+
 export type Department = {
   name: string;
   number: string;
-  status: string;
-  geom: string;
+  status: DepartmentStatus;
+  geomGeojson: string;
+  centroidGeojson: string;
 };
 
-export const getAllDepartments = (): Promise<{ data: Department[] }> => {
-  return cosiaApiAxiosInstance.get("departments");
+export const getAllDepartments = (): Promise<Department[]> => {
+  return cosiaApiAxiosInstance.get("departments").then((res: { data: Department[] }) => res.data);
 };
 
 type DepartmentDataResponse = {

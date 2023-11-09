@@ -24,6 +24,7 @@ export enum ROUTES {
   LegalTerms = "/mentions-legales",
   CookiesManagement = "/gestion-des-cookies",
   About = "/a-propos",
+  TestMap = "/test-map",
 }
 declare global {
   interface Window {
