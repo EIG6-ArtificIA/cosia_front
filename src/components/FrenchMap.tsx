@@ -10,8 +10,6 @@ const useStyles = makeStyles()(theme => ({
     display: "grid",
     gridTemplateRow: "1fr",
     gridTemplateColumn: "1fr",
-    /* width: "100%",
-    height: "100%", */
     maxWidth: 800,
     minHeight: 350,
     maxHeight: 800,

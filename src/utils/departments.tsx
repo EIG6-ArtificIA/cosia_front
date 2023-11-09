@@ -21,8 +21,8 @@ export const getAllDepartmentsExtent = (departmentFeatures: Feature<Geometry>[])
   departmentFeatures.forEach(dep => {
     const depGeometry = dep.getGeometry();
     if (depGeometry === undefined) return;
+
     const depExtent = depGeometry.getExtent();
-    // map_json_data[county_id]['google_map_county_polygon'].getGeometry().transform('EPSG:4326', 'EPSG:3857');
     extend(currentExtent, depExtent);
   });
   return currentExtent;
