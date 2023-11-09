@@ -1,5 +1,6 @@
 import axios from "axios";
 import applyCaseMiddleware from "axios-case-converter";
+import { getCookie } from "../utils";
 
 const cosiaApiAxiosInstance = applyCaseMiddleware(
   axios.create({
@@ -58,5 +59,13 @@ type DepartmentDataDownload = DepartementDataDownloadPayload;
 export const createDepartementDataDownload = (
   payload: DepartementDataDownloadPayload,
 ): Promise<{ data: DepartmentDataDownload }> => {
-  return cosiaApiAxiosInstance.post("department-data-downloads/", payload);
+  const csrftoken = getCookie("csrftoken");
+  const config = {
+    headers: {
+      "content-type": "application/json",
+      "X-CSRFToken": csrftoken,
+    },
+  };
+
+  return cosiaApiAxiosInstance.post("department-data-downloads/", payload, config);
 };
