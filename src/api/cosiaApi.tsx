@@ -1,6 +1,6 @@
 import axios from "axios";
 import applyCaseMiddleware from "axios-case-converter";
-import { getCookie } from "../utils";
+import { getCookie } from "../utils/utils";
 
 const cosiaApiAxiosInstance = applyCaseMiddleware(
   axios.create({
