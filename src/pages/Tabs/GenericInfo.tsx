@@ -2,7 +2,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
 import { Doc, MemoizedDownladLink as DownloadLink } from "geocommuns-core";
 import { Grid, Box } from "@mui/material";
-import { MediaCard } from "../../components/ui/MediaCard";
+import { MemoMediaCard as MediaCard } from "../../components/ui/MediaCard";
 import { IgnCard } from "../../components/IgnCard";
 
 const useStyles = makeStyles()(theme => ({
@@ -35,6 +35,33 @@ const DOCS: Doc[] = [
     name: "Comparatif CoSIA et OCSGE",
     link: "/pdf/Comparatif_OCSGE_CoSIA_IGN_2023.pdf",
     size: "1,9 Mo",
+  },
+];
+
+const VIDEOS = [
+  {
+    name: "CoSIA, la Couverture du Sol par Intelligence Artificielle",
+    tag: "Communication",
+    date: "A venir",
+    link: "",
+  },
+  {
+    name: "Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle",
+    tag: "Communication",
+    date: "11 oct. 2023",
+    link: "https://www.youtube.com/embed/kDFb8cTWa1s",
+  },
+  {
+    name: "Intelligence artificielle pour la description de la couverture des sols",
+    tag: "Communication",
+    date: "28 sept. 2023",
+    link: "https://www.youtube.com/embed/g1N1PL8j4MY?si=irzy6Ar9AQJdN2hM",
+  },
+  {
+    name: "Les données IA au service de l’occupation du sol – 30 juin 2022",
+    tag: "Communication",
+    date: "4 juil. 2022",
+    link: "https://www.youtube.com/embed/Vw-MsVNHyW4?si=Mw-dNbb82-hGGY5P",
   },
 ];
 
@@ -99,36 +126,13 @@ export const GenericInfo = () => {
       <Grid item xs={12}>
         {generateSubtitle("Ressources vidéos")}
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={3}>
-            <MediaCard
-              name="Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle"
-              tag="Communication"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <MediaCard
-              name="Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle"
-              tag="Communication"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <MediaCard
-              name="Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle"
-              tag="Communication"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <MediaCard
-              name="Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle"
-              tag="Communication"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <MediaCard
-              name="Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle"
-              tag="Communication"
-            />
-          </Grid>
+          {VIDEOS.map(video => {
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <MediaCard {...video} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
     </Grid>
