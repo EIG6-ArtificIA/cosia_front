@@ -13,6 +13,12 @@ const useStyles = makeStyles()(theme => ({
   },
   iframe: {
     width: "100%",
+    height: 150,
+  },
+  image: {
+    width: "100%",
+    height: 150,
+    objectFit: "cover",
   },
   name: {
     minHeight: fr.spacing("9w"),
@@ -29,23 +35,20 @@ type Props = {
 const MediaCard = ({ name, tag, date, link }: Props) => {
   const { classes, cx } = useStyles();
 
-  // Useful for Youtube
-  const linkWhereEmbedIsReplacedByWatch = link.includes("embed") ? link.replace("embed", "watch") : link;
+  const media = link ? (
+    <iframe
+      className={classes.iframe}
+      src={link}
+      title={name}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    />
+  ) : (
+    <img className={classes.image} src={require("../../assets/img/placeholder_dsfr.png")} />
+  );
 
-  const card = (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia image="/static/images/cards/contemplative-reptile.jpg" title="green iguana">
-        {link ? (
-          <iframe
-            className={classes.iframe}
-            src={link}
-            title={name}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          />
-        ) : (
-          <img className={classes.iframe} src={require("../../assets/img/placeholder_dsfr.png")} />
-        )}
-      </CardMedia>
+  return (
+    <Card>
+      <CardMedia>{media}</CardMedia>
       <CardContent className={cx("fr-pb-2w")}>
         <Tag key={tag}>{tag}</Tag>
         <p className={cx("fr-mt-2w", "fr-mb-2w", classes.name)}>
@@ -54,14 +57,6 @@ const MediaCard = ({ name, tag, date, link }: Props) => {
         <span className={classes.date}>{date}</span>
       </CardContent>
     </Card>
-  );
-
-  return link ? (
-    <a href={linkWhereEmbedIsReplacedByWatch} target="_blank">
-      {card}
-    </a>
-  ) : (
-    card
   );
 };
 
