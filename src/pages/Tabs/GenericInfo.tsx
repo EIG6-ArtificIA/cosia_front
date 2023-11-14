@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { makeStyles } from "tss-react/dsfr";
-import { Doc, MemoizedDownladLink as DownloadLink } from "geocommuns-core";
+import { Doc, MemoizedDownladLink as DownloadLink } from "../../components/ui/DownloadLink";
 import { Grid, Box } from "@mui/material";
 import { MemoMediaCard as MediaCard } from "../../components/ui/MediaCard";
 import { IgnCard } from "../../components/IgnCard";
@@ -23,7 +23,7 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-const DOCS: Doc[] = [
+const DOCS: (Doc & { icon?: string })[] = [
   { name: "Description", link: "/pdf/Cosia_Descriptif_IGN_2023.pdf", size: "1,2 Mo" },
   { name: "Nomenclature des classes", link: "/pdf/Cosia_Nomenclature_IGN_2023.pdf", size: "0,9 Mo" },
   {
@@ -35,6 +35,11 @@ const DOCS: Doc[] = [
     name: "Comparatif CoSIA et OCSGE",
     link: "/pdf/Comparatif_OCSGE_CoSIA_IGN_2023.pdf",
     size: "1,9 Mo",
+  },
+  {
+    name: "Github Flair",
+    link: "https://ignf.github.io/FLAIR/index_fr.html",
+    icon: "ri-github-fill",
   },
 ];
 
@@ -101,40 +106,42 @@ export const GenericInfo = () => {
   );
 
   return (
-    <Grid container columnSpacing={{ md: 10 }}>
-      <Grid item md={12} lg>
-        <h4>Informations</h4>
-        {textInfo}
-      </Grid>
-      <Box component={Grid} item xs={12} display={{ xs: "block", lg: "none" }}>
-        <hr />
-      </Box>
-      <Grid item xs={12} lg={5}>
-        {generateSubtitle("Producteur")}
-        <IgnCard />
-        <>
+    <>
+      <Grid container columnSpacing={{ md: 10 }}>
+        <Grid item md={12} lg>
+          <h4>Informations</h4>
+          {textInfo}
+        </Grid>
+        <Box component={Grid} item xs={12} display={{ xs: "block", lg: "none" }}>
           <hr />
-
-          {generateSubtitle("Ressources")}
-
-          {DOCS.map(doc => (
-            <DownloadLink doc={doc} key={doc.name} />
-          ))}
-        </>
-      </Grid>
-
-      <Grid item xs={12}>
-        {generateSubtitle("Ressources vidéos")}
-        <Grid container spacing={4}>
-          {VIDEOS.map(video => {
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <MediaCard {...video} />
-              </Grid>
-            );
-          })}
+        </Box>
+        <Grid item xs={12} lg={5}>
+          {generateSubtitle("Producteur")}
+          <IgnCard />
+          <>
+            <hr />
+          </>
         </Grid>
       </Grid>
-    </Grid>
+      <hr />
+      {generateSubtitle("Ressources")}
+
+      {DOCS.map(doc => (
+        <DownloadLink doc={doc} key={doc.name} icon={doc.icon} />
+      ))}
+
+      <hr className={fr.cx("fr-mt-4w")} />
+
+      {generateSubtitle("Ressources vidéos")}
+      <Grid container spacing={4}>
+        {VIDEOS.map(video => {
+          return (
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <MediaCard {...video} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </>
   );
 };
