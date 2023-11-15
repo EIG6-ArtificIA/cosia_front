@@ -32,6 +32,8 @@ const DownloadLink = ({ doc, icon }: Props) => {
 
   const iconClassName = icon || fr.cx("fr-icon-file-fill");
 
+  const title = `Ouverture de ${doc.name} - ouvre un nouvel onglet`;
+
   return (
     <div key={doc.name} className={classes.container}>
       <span className={cx(iconClassName, classes.icon)} />
@@ -41,6 +43,7 @@ const DownloadLink = ({ doc, icon }: Props) => {
           href={doc.link || "#"}
           target="_blank"
           rel="noopener noreferrer"
+          title={title}
         >
           {doc.name}
         </a>

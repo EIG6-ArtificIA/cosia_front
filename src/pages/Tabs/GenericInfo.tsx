@@ -52,19 +52,19 @@ const VIDEOS = [
   },
   {
     name: "Découvrez CoSIA, la Couverture du Sol par Intelligence Artificielle",
-    tag: "Communication",
+    tag: "Conférence en ligne",
     date: "11 oct. 2023",
     link: "https://www.youtube.com/embed/kDFb8cTWa1s",
   },
   {
     name: "Intelligence artificielle pour la description de la couverture des sols",
-    tag: "Communication",
+    tag: "Conférence en ligne",
     date: "28 sept. 2023",
     link: "https://www.youtube.com/embed/g1N1PL8j4MY?si=irzy6Ar9AQJdN2hM",
   },
   {
     name: "Les données IA au service de l’occupation du sol – 30 juin 2022",
-    tag: "Communication",
+    tag: "Conférence en ligne",
     date: "4 juil. 2022",
     link: "https://www.youtube.com/embed/Vw-MsVNHyW4?si=Mw-dNbb82-hGGY5P",
   },
@@ -118,14 +118,18 @@ export const GenericInfo = () => {
         <Grid item xs={12} lg={5}>
           {generateSubtitle("Producteur")}
           <IgnCard />
-          <>
-            <hr />
-          </>
+          <hr />
+          {generateSubtitle("Territoire")}
+          <p>France Métropolitaine et DROM</p>
+          <hr />
+          {generateSubtitle("Millésimes")}
+          <p>2017-2022</p>
         </Grid>
       </Grid>
-      <hr />
-      {generateSubtitle("Ressources")}
 
+      <hr />
+
+      {generateSubtitle("Ressources")}
       {DOCS.map(doc => (
         <DownloadLink doc={doc} key={doc.name} icon={doc.icon} />
       ))}
