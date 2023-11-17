@@ -30,7 +30,6 @@ export const getAllDepartments = (): Promise<Department[]> => {
 type DepartmentDataResponse = {
   id: string;
   year: number;
-  downloadLink: string;
   department: {
     number: string;
     name: string;
@@ -58,21 +57,29 @@ export type DepartementDataDownloadPayload = {
   username: string;
   email: string;
   organization: string;
-  department_data: string;
+  departmentData: string;
 };
 
-type DepartmentDataDownload = DepartementDataDownloadPayload;
+type DepartmentDataDownload = DepartementDataDownloadPayload & {
+  departmentData: DepartmentDataResponse & {
+    s3DownloadUrl: string;
+  };
+};
 
-export const createDepartementDataDownload = (
-  payload: DepartementDataDownloadPayload,
-): Promise<{ data: DepartmentDataDownload }> => {
+const getPostRequestConfig = () => {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") return {};
   const csrftoken = getCookie("csrftoken");
-  const config = {
+  return {
     headers: {
       "content-type": "application/json",
       "X-CSRFToken": csrftoken,
     },
   };
+};
 
-  return cosiaApiAxiosInstance.post("department-data-downloads/", payload, config);
+export const createDepartementDataDownload = (
+  payload: DepartementDataDownloadPayload,
+): Promise<DepartmentDataDownload> => {
+  const config = getPostRequestConfig();
+  return cosiaApiAxiosInstance.post("department-data-downloads/", payload, config).then(res => res.data);
 };

@@ -64,6 +64,7 @@ const DownloadForm = () => {
     isError: isCreationError,
     error: creationError,
     mutate,
+    data: departmentDataDownload,
   } = useMutation(createDepartementDataDownload);
 
   const isRequiredStringFieldEmpty = (requiredStringField: string) => {
@@ -88,29 +89,32 @@ const DownloadForm = () => {
         email,
         organization,
         username: name,
-        department_data: territory,
+        departmentData: territory,
       };
       mutate(payload);
     }
   };
 
   useEffect(() => {
-    if (!isSuccess && !isCreationError) return;
-
-    setSnackbarOpen(true);
-    const downloadLink = selectedDepartmentData?.downloadLink;
-    if (downloadLink) window.open(downloadLink, "_self");
-
-    if (isCreationError) {
-      console.error("Error during DepartmentDataDownloadCreation", {
-        creationError,
-        email,
-        organization,
-        username: name,
-        department_data: territory,
-      });
+    console.log(departmentDataDownload);
+    if (departmentDataDownload !== undefined) {
+      setSnackbarOpen(true);
+      const downloadLink = departmentDataDownload.departmentData.s3DownloadUrl;
+      if (downloadLink) window.open(downloadLink, "_self");
     }
-  }, [isSuccess, isCreationError]);
+  }, [departmentDataDownload]);
+
+  //TODO handle error
+  useEffect(() => {
+    if (!isCreationError) return;
+    console.error("Error during DepartmentDataDownloadCreation", {
+      creationError,
+      email,
+      organization,
+      username: name,
+      departmentData: territory,
+    });
+  }, [isCreationError]);
 
   return (
     <div className={classes.container}>
