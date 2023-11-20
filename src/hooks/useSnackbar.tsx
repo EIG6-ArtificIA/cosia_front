@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Snackbar } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
@@ -11,13 +11,19 @@ const useStyles = makeStyles()(theme => ({
 
 type Params = {
   message: string;
+  type: "success" | "error";
   autoHideDuration?: number;
 };
 
-export const useSnackbar = ({ message, autoHideDuration = 60_000 }: Params) => {
+export const useSnackbar = ({ message, type, autoHideDuration = 60_000 }: Params) => {
   const { classes, cx } = useStyles();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleClose = useCallback(() => setSnackbarOpen(false), []);
+
+  const containerClass = useMemo(
+    () => (type === "success" ? "fr-alert--success" : "fr-alert--error"),
+    [type],
+  );
 
   const SnackbarComponent = () => (
     <Snackbar
@@ -26,7 +32,7 @@ export const useSnackbar = ({ message, autoHideDuration = 60_000 }: Params) => {
       onClose={handleClose}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
-      <div className={cx(fr.cx("fr-alert", "fr-alert--success"), classes.alert)}>
+      <div className={cx(fr.cx("fr-alert", containerClass), classes.alert)}>
         <p>{message}</p>
         <button className="fr-btn--close fr-btn" title="Masquer le message" onClick={handleClose}>
           Masquer le message
