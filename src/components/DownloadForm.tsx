@@ -123,7 +123,6 @@ const DownloadForm = () => {
     }
   }, [departmentDataDownload]);
 
-  //TODO handle error
   useEffect(() => {
     if (!isCreationError) return;
 
