@@ -46,14 +46,22 @@ const MediaCard = ({ name, tag, date, link }: Props) => {
     <img className={classes.image} src={require("../../assets/img/placeholder_dsfr.png")} />
   );
 
+  const newTabLink = link.replace("embed", "watch");
+
+  const title = newTabLink ? (
+    <a href={newTabLink} target="_blank">
+      <b>{name}</b>
+    </a>
+  ) : (
+    <b>{name}</b>
+  );
+
   return (
     <Card>
       <CardMedia>{media}</CardMedia>
       <CardContent className={cx("fr-pb-2w")}>
         <Tag key={tag}>{tag}</Tag>
-        <p className={cx("fr-mt-2w", "fr-mb-2w", classes.name)}>
-          <b>{name}</b>
-        </p>
+        <p className={cx("fr-mt-2w", "fr-mb-2w", classes.name)}>{title}</p>
         <span className={classes.date}>{date}</span>
       </CardContent>
     </Card>
