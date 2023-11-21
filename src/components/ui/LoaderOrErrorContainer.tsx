@@ -26,7 +26,6 @@ const useStyles = makeStyles()({
 
 export const LoaderOrErrorContainer = ({ isLoading, isError, refetch }: Props) => {
   const { classes } = useStyles();
-  console.error(isError);
 
   const content = useMemo(() => {
     if (isLoading) return <CircularProgress />;

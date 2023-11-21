@@ -1,6 +1,6 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { FormEvent, memo, useEffect, useState } from "react";
+import { FormEvent, memo, useEffect, useMemo, useState } from "react";
 import { makeStyles } from "tss-react/dsfr";
 import { useMutation, useQuery } from "react-query";
 import { CircularProgress } from "@mui/material";
@@ -26,6 +26,18 @@ const useStyles = makeStyles()({
   },
 });
 
+type MessageAndType = { message: string; type: "success" | "error" };
+
+const SUCCESS_MESSAGE: MessageAndType = {
+  message: "Le téléchargement vient de démarrer",
+  type: "success",
+};
+
+const ERROR_MESSAGE: MessageAndType = {
+  message: "Le téléchargement a échoué. Veuillez réessayer plus tard ou contactez-nous : cosia@ign.fr",
+  type: "error",
+};
+
 const DownloadForm = () => {
   const { classes } = useStyles();
   const [name, setName] = useState("");
@@ -35,17 +47,13 @@ const DownloadForm = () => {
   const [selectedDepartmentData, setSelectedDepartmentData] = useState<DepartmentData | undefined>(
     undefined,
   );
+  const [errors, setErrors] = useState<string[] | undefined>(undefined);
 
   useEffect(() => {
     if (territory == undefined) setSelectedDepartmentData(undefined);
     const newDepartmentData = departmentData?.find(depData => depData.id == territory);
     setSelectedDepartmentData(newDepartmentData);
   }, [territory]);
-
-  const [errors, setErrors] = useState<string[] | undefined>(undefined);
-  const { SnackbarComponent, setSnackbarOpen } = useSnackbar({
-    message: "Le téléchargement vient de démarrer",
-  });
 
   const {
     isLoading,
@@ -60,11 +68,20 @@ const DownloadForm = () => {
 
   const {
     isLoading: isCreating,
-    isSuccess,
+    isSuccess: isCreationSuccess,
     isError: isCreationError,
     error: creationError,
     mutate,
+    data: departmentDataDownload,
   } = useMutation(createDepartementDataDownload);
+
+  const snackbarMessageAndType = useMemo(() => {
+    return isCreationSuccess ? SUCCESS_MESSAGE : ERROR_MESSAGE;
+  }, [isCreationSuccess, isCreationError]);
+
+  const { SnackbarComponent, setSnackbarOpen } = useSnackbar({
+    ...snackbarMessageAndType,
+  });
 
   const isRequiredStringFieldEmpty = (requiredStringField: string) => {
     return requiredStringField.length < 3;
@@ -79,38 +96,39 @@ const DownloadForm = () => {
     return newErrors;
   };
 
+  const getPayload = () => {
+    return {
+      email,
+      organization,
+      username: name,
+      departmentData: territory,
+    };
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors = getFormErrors();
     setErrors(newErrors);
     if (newErrors.length === 0) {
-      const payload = {
-        email,
-        organization,
-        username: name,
-        department_data: territory,
-      };
+      const payload = getPayload();
       mutate(payload);
     }
   };
 
   useEffect(() => {
-    if (!isSuccess && !isCreationError) return;
-
-    setSnackbarOpen(true);
-    const downloadLink = selectedDepartmentData?.downloadLink;
-    if (downloadLink) window.open(downloadLink, "_self");
-
-    if (isCreationError) {
-      console.error("Error during DepartmentDataDownloadCreation", {
-        creationError,
-        email,
-        organization,
-        username: name,
-        department_data: territory,
-      });
+    if (departmentDataDownload !== undefined) {
+      setSnackbarOpen(true);
+      const downloadLink = departmentDataDownload.departmentData.s3DownloadUrl;
+      if (downloadLink) window.open(downloadLink, "_self");
     }
-  }, [isSuccess, isCreationError]);
+  }, [departmentDataDownload]);
+
+  useEffect(() => {
+    if (!isCreationError) return;
+
+    console.error("Error during DepartmentDataDownloadCreation", { creationError, ...getPayload() });
+    setSnackbarOpen(true);
+  }, [isCreationError]);
 
   return (
     <div className={classes.container}>
