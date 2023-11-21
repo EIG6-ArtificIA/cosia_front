@@ -40,10 +40,14 @@
       const POSSIBLE_MATOMO_IDS = ["1", "3"];
 
       var siteId = DEFAULT_MATOMO_SITE_ID;
-      if (POSSIBLE_MATOMO_IDS.includes("%MATOMO_SITE_ID%")) siteId = "%MATOMO_SITE_ID%";
-      else
+      matomoSiteId = window._env_.MATOMO_SITE_ID;
+      if (POSSIBLE_MATOMO_IDS.includes(matomoSiteId)) {
+        siteId = matomoSiteId;
+        /* Remove once all is ok */
+        console.log(`MATOMO_SITE_ID env variable is set : ${matomoSiteId}`);
+      } else
         console.warn(
-          `MATOMO_SITE_ID env variable is not set. ${DEFAULT_MATOMO_SITE_ID} is used by default`,
+          `MATOMO_SITE_ID env variable (${matomoSiteId}) is not available. Value of MATOMO_SITE_ID : .${DEFAULT_MATOMO_SITE_ID} is used by default`,
         );
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
       _paq.push(["trackPageView"]);

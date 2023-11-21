@@ -29,7 +29,7 @@ const useStyles = makeStyles()({
 type MessageAndType = { message: string; type: "success" | "error" };
 
 const SUCCESS_MESSAGE: MessageAndType = {
-  message: "Le téléchargement vient de démarrer",
+  message: "Le téléchargement va commencer",
   type: "success",
 };
 
@@ -107,8 +107,10 @@ const DownloadForm = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const newErrors = getFormErrors();
     setErrors(newErrors);
+
     if (newErrors.length === 0) {
       const payload = getPayload();
       mutate(payload);
@@ -117,9 +119,11 @@ const DownloadForm = () => {
 
   useEffect(() => {
     if (departmentDataDownload !== undefined) {
-      setSnackbarOpen(true);
       const downloadLink = departmentDataDownload.departmentData.s3DownloadUrl;
-      if (downloadLink) window.open(downloadLink, "_self");
+      if (!downloadLink) return;
+
+      window.open(downloadLink, "_self");
+      setSnackbarOpen(true);
     }
   }, [departmentDataDownload]);
 
