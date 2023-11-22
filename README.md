@@ -14,13 +14,14 @@
 
 ### Pour lancer le projet avec docker
 
-Construire l'image : `docker build -t ign/cosia_front .`
-Lancer le projet : `docker run -p 3001:3001 ign/cosia_front`
+1. Construire l'image : `docker build -t ign/cosia_front .`
+2. Lancer le projet : `docker run -p 3001:3001 ign/cosia_front`
 
 ### Pour build le projet avec docker + deploy
 
-Construire l'image : `docker build -t ign/cosia_front -f Dockerfile.prod .`
-Lancer le projet : `docker run --rm -d -p 80:80 ign/cosia_front`
+1. Construire l'image : `docker build -t maximallain/cosia_front -f Dockerfile.prod .`
+2. Lancer le projet : `docker run --rm -d -p 80:80 maximallain/cosia_front`
+3. Pousser le projet : `docker push maximallain/cosia_front`
 
 ## Autres scripts (par défaut avec create-react-app)
 
