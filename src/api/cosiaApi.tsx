@@ -42,15 +42,18 @@ export type DepartmentData = DepartmentDataResponse & {
   label: string;
 };
 
+// TODO remove ?only_with_s3_object_name once front is deployed on prod
 export const getAllDepartmentData = (): Promise<DepartmentData[]> => {
-  return cosiaApiAxiosInstance.get("department-data").then((res: { data: DepartmentDataResponse[] }) => {
-    return res.data.map(depData => {
-      return {
-        ...depData,
-        label: `${depData.department.number} - ${depData.department.name} - ${depData.year}`,
-      };
+  return cosiaApiAxiosInstance
+    .get("department-data?only_with_s3_object_name")
+    .then((res: { data: DepartmentDataResponse[] }) => {
+      return res.data.map(depData => {
+        return {
+          ...depData,
+          label: `${depData.department.number} - ${depData.department.name} - ${depData.year}`,
+        };
+      });
     });
-  });
 };
 
 export type DepartementDataDownloadPayload = {
