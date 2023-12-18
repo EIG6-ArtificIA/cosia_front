@@ -101,7 +101,11 @@ export const LegalTerms = () => {
       </p>
       <p>
         Si vous constatiez une erreur ou une omission dans les contenus du site CosIA (cosia.fr), nous
-        vous remercions de nous contacter à : cosia@ign.fr.
+        vous remercions de nous contacter à :{" "}
+        <a href="mailto:contact.geoservices@ign.fr?subject=[CoSIA] Retours site">
+          contact.geoservices@ign.fr
+        </a>
+        .
       </p>
 
       <h6>Cas d’usages</h6>
@@ -129,7 +133,7 @@ export const LegalTerms = () => {
       <h6>Nous contacter</h6>
       <p>
         Pour toutes questions, suggestions, précisions complémentaires, vous pouvez nous contacter à :{" "}
-        <a href="mailto:cosia@ign.fr">cosia@ign.fr</a>
+        <a href="mailto:contact.geoservices@ign.fr?subject=[CoSIA]">contact.geoservices@ign.fr</a>
       </p>
     </section>
   );

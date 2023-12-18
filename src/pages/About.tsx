@@ -43,7 +43,9 @@ export const About = () => {
           Je souhaite donner mon avis sur le prototype, remonter des bugs ou faire part de mes besoins :
         </b>
       </p>
-      <Button linkProps={{ to: "mailto:cosia@ign.fr" }}>Soumettre mes retours sur le prototype</Button>
+      <Button linkProps={{ to: "mailto:contact.geoservices@ign.fr?subject=[CoSIA] Retours prototype" }}>
+        Soumettre mes retours sur le prototype
+      </Button>
     </section>
   );
 };

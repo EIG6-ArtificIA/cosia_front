@@ -82,7 +82,7 @@ const router = createBrowserRouter([
           {
             iconId: "ri-mail-line",
             linkProps: {
-              to: `mailto:cosia@ign.fr`,
+              to: `mailto:contact.geoservices@ign.fr?subject=[CoSIA]`,
             },
             text: "Nous contacter",
           },

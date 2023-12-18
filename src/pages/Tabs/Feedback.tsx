@@ -22,7 +22,7 @@ const Feedback = () => {
       <p className={fr.cx("fr-mb-2w")}>
         <b>Je donne mon avis, je remonte des anomalies ou je fais part de mes besoins sur la donnée :</b>
       </p>
-      <Button linkProps={{ to: "https://forms.office.com/e/MVeBMBdusY" }}>
+      <Button linkProps={{ to: "mailto:contact.geoservices@ign.fr?subject=[CoSIA] Retours donnée" }}>
         Soumettre mes retours sur la donnée
       </Button>
       <p className={fr.cx("fr-mt-4w", "fr-mb-2w")}>
@@ -30,8 +30,11 @@ const Feedback = () => {
           Je donne mon avis, je remonte des anomalies ou je fais part de mes besoins sur le prototype :
         </b>
       </p>
-      <Button linkProps={{ to: "mailto:cosia@ign.fr?subject=Retours prototype" }} priority="secondary">
-        Soumettre mes retours sur la donnée
+      <Button
+        linkProps={{ to: "mailto:contact.geoservices@ign.fr?subject=[CoSIA] Retours prototype" }}
+        priority="secondary"
+      >
+        Soumettre mes retours sur le prototype
       </Button>
     </section>
   );

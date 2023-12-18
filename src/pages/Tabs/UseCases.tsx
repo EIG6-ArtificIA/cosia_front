@@ -69,7 +69,7 @@ export const UseCases = memo(() => {
       </p>
       <Button
         iconId="fr-icon-lightbulb-line"
-        linkProps={{ to: "https://forms.office.com/e/bLTb4d6iR8 " }}
+        linkProps={{ to: "mailto:contact.geoservices@ign.fr?subject=[CoSIA] Cas d'usage" }}
       >
         Proposer un cas d'usage
       </Button>

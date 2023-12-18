@@ -34,7 +34,8 @@ const SUCCESS_MESSAGE: MessageAndType = {
 };
 
 const ERROR_MESSAGE: MessageAndType = {
-  message: "Le téléchargement a échoué. Veuillez réessayer plus tard ou contactez-nous : cosia@ign.fr",
+  message:
+    "Le téléchargement a échoué. Veuillez réessayer plus tard ou contactez-nous : contact.geoservices@ign.fr",
   type: "error",
 };
 
