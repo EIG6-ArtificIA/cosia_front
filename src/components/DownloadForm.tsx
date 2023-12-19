@@ -161,8 +161,12 @@ const DownloadForm = () => {
               <i>
                 Taille du fichier Zip : {selectedDepartmentData.zipSize}
                 <br />
-                Taille du fichier décompressé : {selectedDepartmentData.fileSize}
-                <br />
+                {selectedDepartmentData.fileSize && (
+                  <>
+                    Taille du fichier décompressé : {selectedDepartmentData.fileSize}
+                    <br />
+                  </>
+                )}
               </i>
             </p>
           )}
