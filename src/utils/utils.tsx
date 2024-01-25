@@ -1,6 +1,6 @@
 //TODO to test
 
-export const isCorrectEmail = (email: string) => /^[\w\-.]+@[\w-]+\.[\w-]{2,}$/.test(email);
+export const isCorrectEmail = (email: string) => /^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
 
 export const getCookie = (name: string) => {
   if (!document.cookie || document.cookie === "") return;
