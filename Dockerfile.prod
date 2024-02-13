@@ -32,6 +32,8 @@ RUN apk add --no-cache bash
 # Make our shell script executable
 RUN chmod +x env.sh
 
+EXPOSE 8080
+
 USER nginx
 
 # Start Nginx server
