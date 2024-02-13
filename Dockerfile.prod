@@ -19,12 +19,12 @@ COPY conf /etc/nginx
 # Static build
 COPY --from=builder /app/build /usr/share/nginx/html/
 
-EXPOSE 80
-
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
 COPY .env .
+
+USER root
 
 # Add bash
 RUN apk add --no-cache bash
