@@ -23,7 +23,6 @@ COPY --from=builder /app/build /usr/share/nginx/html/
 WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
 COPY .env .
-RUN touch /usr/share/nginx/html/env-config.js
 
 USER root
 
@@ -31,7 +30,7 @@ USER root
 RUN apk add --no-cache bash
 
 # Make our shell script executable
-RUN chmod +x env.sh && chmod 777 /usr/share/nginx/html/env-config.js
+RUN chmod +x env.sh
 
 EXPOSE 8080
 
