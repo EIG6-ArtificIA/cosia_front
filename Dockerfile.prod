@@ -30,7 +30,7 @@ USER root
 RUN apk add --no-cache bash
 
 # Make our shell script executable
-RUN chmod +x env.sh
+RUN chmod +x env.sh && chmod 777 ./env-config.js
 
 EXPOSE 8080
 
