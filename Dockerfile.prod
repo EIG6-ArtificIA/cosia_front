@@ -32,7 +32,7 @@ RUN apk add --no-cache bash
 # Make our shell script executable
 RUN chmod +x env.sh
 
-RUN /bin/bash -c '/usr/share/nginx/html/env.sh'
+RUN /usr/share/nginx/html/env.sh
 
 EXPOSE 8080
 
