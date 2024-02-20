@@ -29,3 +29,4 @@ docker/yarn/*
 .env
 /public/env-config.js
 env-config.js
+/public/config/env-config.js
