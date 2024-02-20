@@ -28,4 +28,4 @@ done < .env
 
 echo "}" >> /tmp/env-config.js
 
-mv /tmp/env-config.js /usr/share/nginx/html/
+cp /tmp/env-config.js /usr/share/nginx/html/
