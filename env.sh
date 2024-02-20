@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Recreate config file
-# rm -rf ./env-config.js
+rm -rf ./env-config.js
 touch /tmp/env-config.js
 
 # Add assignment 
