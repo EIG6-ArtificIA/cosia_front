@@ -2,10 +2,10 @@
 
 # Recreate config file
 # rm -rf ./env-config.js
-# touch ./env-config.js
-chmod 777 ./env-config.js
+touch /mem/env-config.js
+
 # Add assignment 
-echo "window._env_ = {" >> ./env-config.js
+echo "window._env_ = {" >> /mem/env-config.js
 
 # Read each line in .env file
 # Each line represents key=value pairs
@@ -23,7 +23,9 @@ do
   [[ -z $value ]] && value=${varvalue}
   
   # Append configuration property to JS file
-  echo "  $varname: \"$value\"," >> ./env-config.js
+  echo "  $varname: \"$value\"," >> /mem/env-config.js
 done < .env
 
-echo "}" >> ./env-config.js
+echo "}" >> /mem/env-config.js
+
+mv /mem/env-config.js /usr/share/nginx/html/
