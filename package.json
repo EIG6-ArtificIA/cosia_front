@@ -1,6 +1,6 @@
 {
   "name": "cosia_front",
-  "version": "0.10.7",
+  "version": "0.10.8",
   "private": true,
   "scripts": {
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/config/ && BROWSER=none PORT=3001 react-scripts start",
@@ -26,7 +26,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "axios-case-converter": "^1.1.0",
-    "geocommuns-core": "^0.16.6",
+    "geocommuns-core": "^0.16.7",
     "ol": "^7.1.0",
     "powerhooks": "^0.26.2",
     "react": "^18.2.0",
